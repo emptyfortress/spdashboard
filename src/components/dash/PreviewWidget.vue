@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useStore } from '@/stores/store'
 import { GridItem, GridLayout } from 'vue-ts-responsive-grid-layout'
 
+const store = useStore()
 const box = ref([
 	{
 		x: 0,
@@ -17,7 +19,7 @@ const box = ref([
 
 <template lang="pug">
 GridLayout(
-	:layout.sync="box"
+	:layout.sync="store.layout"
 	:col-num="12"
 	:row-height="30"
 	:is-draggable="false"
@@ -29,7 +31,7 @@ GridLayout(
 	:use-css-transforms="true")
 
 	GridItem(
-		v-for="( item, index ) in box"
+		v-for="( item, index ) in store.layout"
 		:x="0"
 		:y="0"
 		:w="item.w"

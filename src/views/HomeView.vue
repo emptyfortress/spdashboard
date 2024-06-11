@@ -10,35 +10,10 @@ const router = useRouter()
 const store = useStore()
 const grid = templateRef('grid')
 
-const colNum = ref(12)
-const index = ref(1)
-const layout: any[] = reactive([
-	{
-		x: 0,
-		y: 0,
-		w: 3,
-		h: 3,
-		i: 0,
-		set: false,
-		data: { chart: 0, table: 2 },
-	},
-])
-
-const add = () => {
-	layout.push({
-		x: (layout.length * 3) % (colNum.value || 12),
-		y: layout.length + (colNum.value || 12), // puts it at the bottom
-		w: 3,
-		h: 3,
-		i: index.value,
-	})
-	index.value += 1
-}
-
 const remove = (e: number) => {
 	let temp = [...document.getElementsByClassName('vue-grid-item')]
 	temp.forEach((el) => el.classList.add('move'))
-	layout.splice(e, 1)
+	store.removeWidget(e)
 }
 const { width } = useElementSize(grid)
 
@@ -51,10 +26,10 @@ const edit = (e: any, d: number) => {
 <template lang="pug">
 q-page(padding)
 	.container
-		q-btn.fab(round color="primary" icon="mdi-plus" @click="add" size="lg") 
+		q-btn.fab(round color="primary" icon="mdi-plus" @click="store.addWidget" size="lg") 
 
 		GridLayout(ref="grid"
-			:layout.sync="layout"
+			:layout.sync="store.layout"
 			:col-num="12"
 			:row-height="30"
 			:is-draggable="true"
@@ -66,7 +41,7 @@ q-page(padding)
 			:show-close-button="false"
 			:use-css-transforms="true")
 
-			GridItem(v-for="( item, index ) in layout"
+			GridItem(v-for="( item, index ) in store.layout"
 				:x="item.x"
 				:y="item.y"
 				:w="item.w"
