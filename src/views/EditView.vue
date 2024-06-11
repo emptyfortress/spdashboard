@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import WidgetTree from '@/components/dash/WidgetTree.vue'
+import PreviewWidget from '@/components/dash/PreviewWidget.vue'
 import { useStore } from '@/stores/store'
 
 const store = useStore()
@@ -34,6 +35,8 @@ q-page()
 
 		template(v-slot:after)
 			.right(:style="calcWidth")
+				PreviewWidget
+				div fuck
 </template>
 
 <style scoped lang="scss">
@@ -56,10 +59,5 @@ q-page()
 	color: #666;
 	font-size: 0.9rem;
 	text-align: center;
-}
-.right {
-	background: pink;
-	margin-left: 0.5rem;
-	height: 400px;
 }
 </style>
