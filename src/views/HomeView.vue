@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import TheWelcome from '../components/TheWelcome.vue'
+import DashEdit from '@/components/DashEdit.vue'
 </script>
 
-<template>
-  <main>
-    <TheWelcome />
-  </main>
+<template lang="pug">
+q-page(padding)
+	.container
+		DashEdit
 </template>

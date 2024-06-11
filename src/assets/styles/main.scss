@@ -1,2 +1,40 @@
 @import '@/quasar-variables.scss';
 @import '@/assets/styles/myvariables.scss';
+
+body {
+	font-size: $font-size;
+	color: $text-color;
+	// background-color: #0000001a;
+	background-color: $bgMain;
+}
+
+.container {
+	padding-left: 1rem;
+	padding-right: 1rem;
+	max-width: 1200px;
+	margin: 0 auto;
+	// @media screen and (max-width: 1850px) {
+	// 	max-width: 1200px;
+	// 	margin: 0 auto;
+	// }
+	.zag {
+		font-size: 1.2rem;
+	}
+}
+.rel {
+	position: relative;
+}
+.q-drawer {
+	z-index: 10;
+	background: $bgMain;
+	.noti {
+		background: #f8f8f6;
+	}
+	.rd {
+		padding: 1rem;
+		box-shadow: -1px 0 3px rgba(0, 0, 0, 0.3);
+		&.speech {
+			background: $blue-grey-9;
+		}
+	}
+}

@@ -12,10 +12,15 @@
   },
   "dependencies": {
     "@quasar/extras": "^1.16.11",
+    "@vueuse/core": "^10.10.0",
+    "apexcharts": "^3.49.1",
     "pinia": "^2.1.7",
     "quasar": "^2.16.4",
     "vue": "^3.4.21",
-    "vue-router": "^4.3.0"
+    "vue-router": "^4.3.0",
+    "vue-ts-responsive-grid-layout": "^1.2.9",
+    "vue3-apexcharts": "^1.5.3",
+    "vuedraggable": "^4.1.0"
   },
   "devDependencies": {
     "@quasar/vite-plugin": "^1.7.0",
