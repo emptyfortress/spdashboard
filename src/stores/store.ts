@@ -35,6 +35,28 @@ export const useStore = defineStore('store', () => {
 	const removeWidget = (e: num) => {
 		layout.splice(e, 1)
 	}
+	const activeWidget = ref({
+		x: 0,
+		y: 0,
+		w: 3,
+		h: 3,
+		i: 0,
+		set: false,
+		data: { chart: 0, table: 2 },
+	})
 
-	return { container, containerPx, setContainer, layout, addWidget, removeWidget }
+	const setActiveWidget = (el: any) => {
+		activeWidget.value = el
+	}
+
+	return {
+		container,
+		containerPx,
+		setContainer,
+		layout,
+		addWidget,
+		removeWidget,
+		activeWidget,
+		setActiveWidget,
+	}
 })

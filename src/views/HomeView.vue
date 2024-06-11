@@ -17,8 +17,10 @@ const remove = (e: number) => {
 }
 const { width } = useElementSize(grid)
 
-const edit = (e: any, d: number) => {
+const edit = (item: any) => {
+	console.log(item)
 	store.setContainer(width.value)
+	store.setActiveWidget(item)
 	router.push('/edit')
 }
 </script>
@@ -41,7 +43,7 @@ q-page(padding)
 			:show-close-button="false"
 			:use-css-transforms="true")
 
-			GridItem(v-for="( item, index ) in store.layout"
+			GridItem(v-for="( item ) in store.layout"
 				:x="item.x"
 				:y="item.y"
 				:w="item.w"
@@ -51,7 +53,7 @@ q-page(padding)
 				:key="item.i")
 				q-card
 					q-card-section
-						q-btn(flat color="primary" label="Настроить" @click="edit(item, index)" size="sm") 
+						q-btn(flat color="primary" label="Настроить" @click="edit(item)" size="sm") 
 					q-icon.close(name="mdi-close" @click="remove(index)" dense)
 					q-icon.resize(name="mdi-resize-bottom-right" @click="" dense size="16px") 
 

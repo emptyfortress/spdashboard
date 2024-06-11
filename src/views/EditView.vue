@@ -36,7 +36,6 @@ q-page()
 		template(v-slot:after)
 			.right(:style="calcWidth")
 				PreviewWidget
-				div fuck
 </template>
 
 <style scoped lang="scss">
