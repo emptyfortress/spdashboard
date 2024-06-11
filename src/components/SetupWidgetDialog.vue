@@ -1,22 +1,16 @@
 <script setup lang="ts">
-import { ref, watchEffect } from 'vue'
+import { ref, onUpdated, onMounted } from 'vue'
 import { useStore } from '@/stores/store'
 
-const props = defineProps({
-	size: {
-		type: String,
-		required: true,
-		default: '1rem',
-	},
-})
+// const props = defineProps({
+// 	dialog: {
+// 		type: Boolean,
+// 		default: false,
+// 	},
+// })
 
-const store = useStore()
-const size = ref('')
 const modelValue = defineModel()
-
-watchEffect(() => {
-	size.value = props.size
-})
+const store = useStore()
 </script>
 
 <template lang="pug">
@@ -29,11 +23,11 @@ q-dialog(v-model="modelValue")
 
 		q-card-section Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum repellendus sit voluptate voluptas eveniet porro. Rerum blanditiis perferendis totam, ea at omnis vel numquam exercitationem aut, natus minima, porro labore.
 		q-card-section
-			.dig 5555 {{ size }}
+			// .dog 5555 {{ store.headsize }}
 </template>
 
 <style scoped lang="scss">
-.dig {
-	font-size: v-bind(size);
+.dog {
+	// font-size: v-bind(store.size + 'px');
 }
 </style>
