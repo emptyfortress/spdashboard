@@ -3,7 +3,9 @@ import { ref, reactive, computed } from 'vue'
 import { useStore } from '@/stores/store'
 import { GridItem, GridLayout } from 'vue-ts-responsive-grid-layout'
 import { templateRef, useElementSize } from '@vueuse/core'
-import { uid } from 'quasar'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
 
 const store = useStore()
 const grid = templateRef('grid')
@@ -38,6 +40,12 @@ const remove = (e: number) => {
 	temp.forEach((el) => el.classList.add('move'))
 	layout.splice(e, 1)
 }
+const { width } = useElementSize(grid)
+
+const edit = (e: any, d: number) => {
+	store.setContainer(width.value)
+	router.push('/edit')
+}
 </script>
 
 <template lang="pug">
@@ -66,16 +74,13 @@ GridLayout(ref="grid"
 		:key="item.i")
 		q-card
 			q-card-section
-				q-btn(flat color="primary" label="Настроить" @click="setup($event, item, index)" size="sm") 
+				q-btn(flat color="primary" label="Настроить" @click="edit(item, index)" size="sm") 
 			q-icon.close(name="mdi-close" @click="remove(index)" dense)
 			q-icon.resize(name="mdi-resize-bottom-right" @click="" dense size="16px") 
 
 </template>
 
 <style scoped lang="scss">
-// .dig {
-// 	font-size: v-bind('store.headsize');
-// }
 .fab {
 	position: fixed;
 	bottom: 2rem;

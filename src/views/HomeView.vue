@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import DashEdit from '@/components/DashEdit.vue'
+import DashEdit from '@/components/dash/DashEdit.vue'
 </script>
 
 <template lang="pug">

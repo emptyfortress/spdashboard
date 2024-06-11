@@ -1,26 +1,26 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
 import IconLogo from '@/components/icons/IconLogo.vue'
-import Test from '@/components/icons/Test.vue'
 </script>
 
 <template lang="pug">
 q-layout(view="hHh LpR fFf")
 	q-header.head
 		q-toolbar(shrink)
-			q-btn(dense flat round  @click="toggleLeftDrawer")
+			q-btn(dense flat round  @click="$router.push('/')")
 				IconLogo.logo
 
-			q-toolbar-title.gt-sm.cursor-pointer(@click="toggleLeftDrawer")
+			q-toolbar-title.gt-sm(@click="")
 				span.hd Речевая платформа Speech Drive
 			q-space
 
-		q-linear-progress(indeterminate color="accent" size="3px" v-show="isLoading")
+		// q-linear-progress(indeterminate color="accent" size="3px" v-show="isLoading")
 
 	// Drawer(:show="mystore.leftDrawer" v-if="!isOper")
 
 	q-page-container
-		router-view
+		router-view(v-slot="{ Component, route }")
+			transition(:name="route.meta.transition || 'fade'" :mode="route.meta.mode || 'out-in'")
+				component(:is="Component")
 </template>
 
 <style scoped lang="scss">

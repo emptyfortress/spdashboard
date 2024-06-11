@@ -16,16 +16,15 @@ const router = createRouter({
 	routes: [
 		{
 			path: '/',
+			name: 'home',
 			component: HomeView,
-			meta: { transition: 'slide-left', title: 'Speech Drive', requiresAuth: false },
+			meta: { title: 'Speech Drive', requiresAuth: false },
 		},
 		{
-			path: '/about',
-			name: 'about',
-			// route level code-splitting
-			// this generates a separate chunk (About.[hash].js) for this route
-			// which is lazy-loaded when the route is visited.
-			component: () => import('../views/AboutView.vue'),
+			path: '/edit',
+			name: 'edit',
+			component: () => import('@/views/EditView.vue'),
+			meta: { transition: 'page', title: 'Speech Drive', requiresAuth: false },
 		},
 	],
 })

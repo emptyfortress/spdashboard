@@ -1,5 +1,6 @@
 @import '@/quasar-variables.scss';
 @import '@/assets/styles/myvariables.scss';
+@import '@/assets/styles/animation.scss';
 
 body {
 	font-size: $font-size;
@@ -37,4 +38,17 @@ body {
 			background: $blue-grey-9;
 		}
 	}
+}
+.q-splitter--vertical > .q-splitter__separator {
+	width: 2px;
+	background: transparent;
+}
+.spli .q-splitter__separator {
+	width: 1px;
+	background: #ccc;
+}
+
+.q-splitter--vertical > .q-splitter__separator:hover,
+.q-splitter--vertical > .q-splitter__separator:active {
+	border-left: 2px dotted black;
 }
