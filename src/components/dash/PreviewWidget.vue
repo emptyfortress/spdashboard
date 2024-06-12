@@ -3,6 +3,9 @@ import { ref, computed } from 'vue'
 import { useStore } from '@/stores/store'
 import { GridItem, GridLayout } from 'vue-ts-responsive-grid-layout'
 import WidgetTabs from '@/components/dash/WidgetTabs.vue'
+import VueApexCharts from 'vue3-apexcharts'
+import { randomArray, randomNumber } from '@/utils/utils'
+import { sparkOptions } from '@/stores/graphOptions'
 
 const store = useStore()
 const over = ref(false)
@@ -20,6 +23,8 @@ const headsize = computed(() => {
 const subhead = computed(() => {
 	return store.activeWidget.design.subtitle.fontSize + 'rem'
 })
+
+const series = ref([{ name: 'Параметр', data: randomArray(7, 80, 5) }])
 </script>
 
 <template lang="pug">
@@ -56,14 +61,22 @@ GridLayout(
 				div {{ store.activeWidget.name}}
 
 			.cent(v-if="store.activeWidget.set && store.activeWidget.type == 'digit'")
-				div
-					.head 123 
-					.subhead {{ store.activeWidget.name}}
+				.head
+					span(v-if="store.activeWidget.design.title.data") 123 
+					span(v-else) {{ store.activeWidget.design.title.text}}
+				.subhead
+					span(v-if="store.activeWidget.design.subtitle.data") 123 
+					span(v-else) {{ store.activeWidget.design.subtitle.text}}
 
 			.cent(v-if="store.activeWidget && store.activeWidget.type == 'percent'")
-				div
-					.head 5%
-					.subhead {{ store.activeWidget.name}}
+				.head
+					span(v-if="store.activeWidget.design.title.data") 21%
+					span(v-else) {{ store.activeWidget.design.title.text}}
+				.subhead
+					span(v-if="store.activeWidget.design.subtitle.data") 12% 
+					span(v-else) {{ store.activeWidget.design.subtitle.text}}
+
+			VueApexCharts(v-if="store.activeWidget && store.activeWidget.type == 'spark'" type="area" height="100%" :options="sparkOptions" :series="series")
 
 transition(name="fade")
 	WidgetTabs(v-if="store.activeWidget.set" )
@@ -120,10 +133,7 @@ transition(name="fade")
 .cent {
 	width: 100%;
 	height: 100%;
-	// display: flex;
 	padding: 0.5rem;
-	// justify-content: center;
-	// align-items: center;
 }
 .empty {
 	font-size: 0.8rem;
