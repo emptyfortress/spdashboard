@@ -8,7 +8,7 @@ import { useRouter } from 'vue-router'
 const router = useRouter()
 
 const store = useStore()
-const grid = templateRef('grid')
+const grid = ref(null)
 
 const remove = (e: number) => {
 	let temp = [...document.getElementsByClassName('vue-grid-item')]

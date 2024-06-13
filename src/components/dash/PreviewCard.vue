@@ -42,7 +42,7 @@ const horizontal = ref(false)
 
 const rotate = () => {
 	horizontal.value = !horizontal.value
-	barChart.value.updateOptions({
+	barChart.value?.updateOptions({
 		plotOptions: {
 			bar: {
 				horizontal: horizontal.value,
@@ -84,14 +84,14 @@ const cols = [
 	},
 ]
 const rows = []
-const barChart = templateRef('barChart')
-const sparkChart = templateRef('sparkChart')
+const barChart = ref<any>(null)
+const sparkChart = ref<any>(null)
 
 watch(
 	() => store.refreshBar,
 	() => {
 		if (store.refreshBar == true) {
-			barChart.value.updateOptions({
+			barChart.value?.updateOptions({
 				colors: ['#ff0000'],
 			})
 			nextTick()

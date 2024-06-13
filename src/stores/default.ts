@@ -6,6 +6,7 @@ const defaultWidget = {
 	i: 0,
 	set: true,
 	type: '',
+	name: '',
 	design: {
 		title: {
 			text: 'Title',
