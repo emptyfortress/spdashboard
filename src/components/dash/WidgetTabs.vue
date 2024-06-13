@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import type { Ref } from 'vue'
-// import { useWidget } from '@/stores/widgetStore'
 import MySelect from '@/components/common/MySelect.vue'
 import ZagSetup from '@/components/dash/ZagSetup.vue'
+import { useStore } from '@/stores/store'
+const store = useStore()
 
 // const widget = useWidget()
 
@@ -27,13 +28,17 @@ const setRange = () => {
 const date = ref('2019/03/01')
 const quan = ref(10)
 const check = ref(false)
+
+const action = () => {
+	store.toggleBar()
+}
 </script>
 
 <template lang="pug">
 .q-mt-lg.q-ml-md
 	q-tabs(v-model="tab" align="left" active-color="primary" )
 		q-tab(name="data" label="Данные")
-		// q-tab(v-if="widget.currentWidget.type == 'table'" name="table" label="Таблица")
+		q-tab(v-if="store.activeWidget.type == 'table'" name="table" label="Таблица")
 		q-tab(name="zag" label="Заголовок")
 		q-tab(name="style" label="Оформление")
 		q-tab(name="color" label="Цвет")
@@ -77,6 +82,7 @@ const check = ref(false)
 			p Здесь настраиваем шрифты, легенды и тп
 		q-tab-panel(name="color")
 			p Здесь настраиваем темы и цвет
+			q-btn(unelevated color="primary" label="Color" @click="action") 
 </template>
 
 <style scoped lang="scss">

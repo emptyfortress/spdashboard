@@ -38,35 +38,18 @@ GridLayout(
 		:i="store.activeWidget.i"
 		:show-close-button="false"
 		)
-		// q-btn(v-if="widgetSet && dropWidget.type == 'gist'" flat round dense icon="mdi-rotate-left-variant" @click="rotate") 
-		// q-btn(v-if="widgetSet && dropWidget.type == 'pie'" flat round dense @click="switchPie") 
-		// 	q-icon(:name="pie == 'pie' ? 'mdi-chart-donut' : 'mdi-chart-pie'")
-		q-card.preview(flat @dragover.prevent="over = true" @dragleave.prevent="over = false" @drop="drop($event)"  :class="{over: over}")
-			q-icon.resize(name="mdi-resize-bottom-right" @click="" dense size="16px") 
-			PreviewCard
+		PreviewCard
 
 transition(name="fade")
-	WidgetTabs(v-if="store.activeWidget.set" )
+	div(v-if="store.activeWidget.set" )
+		WidgetTabs
+		q-card-actions.q-mt-md(align="center")
+			q-btn(flat color="primary" label="Отмена" @click="action") 
+			q-btn(flat color="primary" label="Применить" @click="action") 
+			q-btn(unelevated color="primary" label="Сохранить" @click="action") 
 </template>
 
 <style scoped lang="scss">
-.preview {
-	height: 100%;
-	overflow: hidden;
-	padding-top: 1rem;
-	&.over {
-		background: #dcffe4;
-	}
-	.vue-apexchart {
-		transform: translateY(6px);
-	}
-}
-.resize {
-	position: absolute;
-	right: 3px;
-	bottom: 3px;
-	cursor: pointer;
-}
 :deep(.vue-grid-item) {
 	touch-action: none;
 	position: relative;
@@ -75,13 +58,5 @@ transition(name="fade")
 	background: green !important;
 	opacity: 0.2;
 	z-index: -1;
-}
-.vue-grid-item {
-	position: relative;
-	.q-btn {
-		position: absolute;
-		top: 0;
-		right: -2rem;
-	}
 }
 </style>

@@ -12,6 +12,10 @@ export const useStore = defineStore('store', () => {
 	})
 
 	const layout: any[] = reactive([{ ...defaultWidget }])
+	const refreshBar = ref(false)
+	const toggleBar = () => {
+		refreshBar.value = !refreshBar.value
+	}
 
 	const addWidget = () => {
 		layout.push({
@@ -26,7 +30,7 @@ export const useStore = defineStore('store', () => {
 		})
 		index.value += 1
 	}
-	const removeWidget = (e: num) => {
+	const removeWidget = (e: number) => {
 		layout.splice(e, 1)
 	}
 	const activeWidget = ref({ ...defaultWidget })
@@ -38,11 +42,13 @@ export const useStore = defineStore('store', () => {
 	return {
 		container,
 		containerPx,
-		setContainer,
+		activeWidget,
 		layout,
+		refreshBar,
+		setContainer,
 		addWidget,
 		removeWidget,
-		activeWidget,
 		setActiveWidget,
+		toggleBar,
 	}
 })

@@ -4,18 +4,22 @@ const sparkOptions = {
 			enabled: true,
 		},
 	},
-	// title: {
-	// 	text: '',
-	// 	style: {
-	// 		fontSize: '24px',
-	// 	},
-	// },
-	// subtitle: {
-	// 	text: 'Spark chart',
-	// 	style: {
-	// 		fontSize: '14px',
-	// 	},
-	// },
+	// colors: ['#ff0000'],
+	fill: {
+		// colors: '#ff0000',
+		type: 'gradient',
+		gradient: {
+			shade: 'light',
+			type: 'vertical',
+			// shadeIntensity: 0.5,
+			// gradientToColors: 'yellow', // optional, if not defined - uses the shades of same color in series
+			inverseColors: false,
+			opacityFrom: 1,
+			opacityTo: 0,
+			stops: [0, 100],
+			colorStops: [],
+		},
+	},
 }
 const areaOptions = {
 	xaxis: {

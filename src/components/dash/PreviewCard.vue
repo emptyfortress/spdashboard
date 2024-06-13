@@ -1,11 +1,21 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, watch, nextTick } from 'vue'
 import { useStore } from '@/stores/store'
 import VueApexCharts from 'vue3-apexcharts'
 import { randomArray, randomNumber } from '@/utils/utils'
 import { sparkOptions, areaOptions, barOptions, donutOptions } from '@/stores/graphOptions'
+import { templateRef } from '@vueuse/core'
 
 const store = useStore()
+const over = ref(false)
+
+const drop = (evt: DragEvent) => {
+	over.value = false
+	let item = JSON.parse(evt.dataTransfer!.getData('item'))
+	store.activeWidget.set = true
+	store.activeWidget.type = item.type
+	store.activeWidget.name = item.text
+}
 
 const headsize = computed(() => {
 	return store.activeWidget.design.title.fontSize + 'rem'
@@ -29,9 +39,10 @@ const barSeries = ref([
 const donutSeries = randomArray(4, 20, 5)
 
 const horizontal = ref(false)
+
 const rotate = () => {
 	horizontal.value = !horizontal.value
-	barChart.value[0].updateOptions({
+	barChart.value.updateOptions({
 		plotOptions: {
 			bar: {
 				horizontal: horizontal.value,
@@ -39,7 +50,7 @@ const rotate = () => {
 		},
 	})
 }
-const pie = ref('pie')
+const pie = ref('donut')
 
 const switchPie = () => {
 	if (pie.value == 'donut') {
@@ -72,39 +83,83 @@ const cols = [
 		sortable: true,
 	},
 ]
+const rows = []
+const barChart = templateRef('barChart')
+const sparkChart = templateRef('sparkChart')
+
+watch(
+	() => store.refreshBar,
+	() => {
+		if (store.refreshBar == true) {
+			barChart.value.updateOptions({
+				colors: ['#ff0000'],
+			})
+			nextTick()
+			store.toggleBar()
+		}
+	}
+)
 </script>
 
 <template lang="pug">
-.cent(v-if="!store.activeWidget.set")
-	.empty Перетащите сюда виджет или его тип
+q-card.preview(flat @dragover.prevent="over = true" @dragleave.prevent="over = false" @drop="drop($event)"  :class="{over: over}")
+	q-icon.resize(name="mdi-resize-bottom-right" @click="" dense size="16px") 
 
-.cent(v-if="store.activeWidget.set && store.activeWidget.type == 'widget'")
-	div {{ store.activeWidget.name}}
+	q-btn(v-if="store.activeWidget && store.activeWidget.type == 'gist'" flat round dense icon="mdi-rotate-left-variant" @click="rotate") 
+	q-btn(v-if="store.activeWidget && store.activeWidget.type == 'pie'" flat round dense @click="switchPie") 
+		q-icon(:name="pie == 'pie' ? 'mdi-chart-donut' : 'mdi-chart-pie'")
 
-.cent(v-if="store.activeWidget.set && store.activeWidget.type == 'digit'")
-	.head
-		span(v-if="store.activeWidget.design.title.data") 123 
-		span(v-else) {{ store.activeWidget.design.title.text}}
-	.subhead
-		span(v-if="store.activeWidget.design.subtitle.data") 123 
-		span(v-else) {{ store.activeWidget.design.subtitle.text}}
+	.cent(v-if="!store.activeWidget.set")
+		.empty Перетащите сюда виджет или его тип
 
-.cent(v-if="store.activeWidget && store.activeWidget.type == 'percent'")
-	.head
-		span(v-if="store.activeWidget.design.title.data") 21%
-		span(v-else) {{ store.activeWidget.design.title.text}}
-	.subhead
-		span(v-if="store.activeWidget.design.subtitle.data") 12% 
-		span(v-else) {{ store.activeWidget.design.subtitle.text}}
+	.cent(v-if="store.activeWidget.set && store.activeWidget.type == 'widget'")
+		div {{ store.activeWidget.name}}
 
-VueApexCharts(v-if="store.activeWidget && store.activeWidget.type == 'spark'" type="area" height="100%" :options="sparkOptions" :series="series")
-VueApexCharts(v-if="store.activeWidget && store.activeWidget.type == 'chart'" type="area" height="100%" :options="areaOptions" :series="series")
-VueApexCharts(ref="barChart" v-if="store.activeWidget && store.activeWidget.type == 'gist'" type="bar" height="100%" :options="barOptions" :series="barSeries")
-VueApexCharts(v-if="store.activeWidget && store.activeWidget.type == 'pie'" :type="pie" height="100%" :options="donutOptions" :series="donutSeries" )
-// q-table(v-if="store.activeWidget && store.activeWidget.type == 'table'" flat :rows="rows" :columns="cols")
+	.cent(v-if="store.activeWidget.set && store.activeWidget.type == 'digit'")
+		.head
+			span(v-if="store.activeWidget.design.title.data") 123 
+			span(v-else) {{ store.activeWidget.design.title.text}}
+		.subhead
+			span(v-if="store.activeWidget.design.subtitle.data") 123 
+			span(v-else) {{ store.activeWidget.design.subtitle.text}}
+
+	.cent(v-if="store.activeWidget && store.activeWidget.type == 'percent'")
+		.head
+			span(v-if="store.activeWidget.design.title.data") 21%
+			span(v-else) {{ store.activeWidget.design.title.text}}
+		.subhead
+			span(v-if="store.activeWidget.design.subtitle.data") 12% 
+			span(v-else) {{ store.activeWidget.design.subtitle.text}}
+
+	VueApexCharts(ref="sparkChart" v-if="store.activeWidget && store.activeWidget.type == 'spark'" type="area" height="100%" :options="sparkOptions" :series="series")
+	VueApexCharts(v-if="store.activeWidget && store.activeWidget.type == 'chart'" type="area" height="100%" :options="areaOptions" :series="series")
+	VueApexCharts(ref="barChart" v-if="store.activeWidget && store.activeWidget.type == 'gist'" type="bar" height="100%" :options="barOptions" :series="barSeries")
+	VueApexCharts(v-if="store.activeWidget && store.activeWidget.type == 'pie' && pie == 'pie'" type="pie" height="100%" :options="donutOptions" :series="donutSeries" )
+	VueApexCharts(v-if="store.activeWidget && store.activeWidget.type == 'pie' && pie == 'donut'" type="donut" height="100%" :options="donutOptions" :series="donutSeries" )
+
+	q-table(v-if="store.activeWidget && store.activeWidget.type == 'table'" flat :rows="rows" :columns="cols")
 </template>
 
 <style scoped lang="scss">
+.preview {
+	height: 100%;
+	// overflow: hidden;
+	padding-top: 1rem;
+	&.over {
+		background: #dcffe4;
+	}
+	.q-btn {
+		position: absolute;
+		top: 0;
+		right: -2rem;
+	}
+}
+.resize {
+	position: absolute;
+	right: 3px;
+	bottom: 3px;
+	cursor: pointer;
+}
 .cent {
 	width: 100%;
 	height: 100%;
