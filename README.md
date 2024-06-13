@@ -1,18 +1,18 @@
 # speechDashboard
 
-This template should help get you started developing with Vue 3 in Vite.
+This is part of speech project and deal with custom dashboard feature 
 
-## Recommended IDE Setup
+## Technologies
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+- vue3
+- quasar
+- vite
+- typescript
 
-## Type Support for `.vue` Imports in TS
+## Причины
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+Обнаружился баг в vuejs - который не позволял делать v-bind в css при использовании модальных окон (возможно Teleport), из-за чего нельзя было интерактивно редактировать виджеты. Однако это обнаружилось позже, а сначала была попытка локализовать проблему в стороннем легком проекте.
 
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
 
 ## Project Setup
 
