@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import type { Ref } from 'vue'
 import MySelect from '@/components/common/MySelect.vue'
 import ZagSetup from '@/components/dash/ZagSetup.vue'
@@ -10,14 +10,69 @@ const store = useStore()
 
 const group = ref(null)
 const options = [
-	{ label: 'Звонки', value: 'calls' },
-	{ label: 'Категории', value: 'categ' },
-	{ label: 'Слова/словари/эмоции', value: 'words' },
-	{ label: 'Чек-листы', value: 'list' },
+	{
+		label: 'Звонки',
+		val: 'calls',
+		types: [
+			{ id: 0, label: 'Число', val: 'digit' },
+			{ id: 1, label: 'Sparkline', val: 'spark' },
+			{ id: 2, label: 'Area chart', val: 'chart' },
+		],
+		filter: [],
+		param: [],
+	},
+	{
+		label: 'Категории',
+		val: 'categ',
+		types: [
+			{ id: 0, label: 'Число', val: 'digit' },
+			{ id: 1, label: 'Sparkline', val: 'spark' },
+			{ id: 2, label: 'Area chart', val: 'chart' },
+			{ id: 3, label: 'Bar chart', val: 'bar' },
+			{ id: 5, label: 'Таблица', val: 'table' },
+		],
+		filter: [],
+		param: [],
+	},
+	{
+		label: 'Логические запросы',
+		val: 'logic',
+		types: [
+			{ id: 0, label: 'Число', val: 'digit' },
+			{ id: 1, label: 'Sparkline', val: 'spark' },
+			{ id: 2, label: 'Area chart', val: 'chart' },
+			{ id: 4, label: 'Pie chart', val: 'pie' },
+			{ id: 5, label: 'Таблица', val: 'table' },
+		],
+		filter: [],
+		param: [],
+	},
+	{
+		label: 'Слова/словари/эмоции',
+		val: 'words',
+		types: [
+			{ id: 0, label: 'Число', val: 'digit' },
+			{ id: 1, label: 'Sparkline', val: 'spark' },
+			{ id: 2, label: 'Area chart', val: 'chart' },
+		],
+		filter: [],
+		param: [],
+	},
+	{
+		label: 'Чек-листы',
+		val: 'list',
+		types: [
+			{ id: 3, label: 'Bar chart', val: 'bar' },
+			{ id: 4, label: 'Pie chart', val: 'pie' },
+			{ id: 5, label: 'Таблица', val: 'table' },
+		],
+		filter: [],
+		param: [],
+	},
 ]
 const operModel = ref('Все')
 const operator = ['Все', 'Катя', 'Маша', 'Миша']
-const tab = ref('zag')
+const tab = ref('data')
 const period = ['Последние 30 дней', 'Прошлый месяц', 'Текущий месяц', 'Сегодня']
 const perModel: Ref<Range | String> = ref('Последние 30 дней')
 
@@ -32,12 +87,37 @@ const check = ref(false)
 const action = () => {
 	store.toggleBar()
 }
+const active = ref()
+const type = ref()
+const types = [
+	{ id: 0, label: 'Число', val: 'digit' },
+	{ id: 1, label: 'Sparkline', val: 'spark' },
+	{ id: 2, label: 'Area chart', val: 'chart' },
+	{ id: 3, label: 'Bar chart', val: 'bar' },
+	{ id: 4, label: 'Pie chart', val: 'pie' },
+	{ id: 5, label: 'Таблица', val: 'table' },
+]
+
+const calcType = computed(() => {
+	let item = options.find((el) => el.val == active.value)
+	if (!!item) {
+		return item.types
+	}
+	return []
+})
+
+const setActive = (el: string) => {
+	active.value = el
+}
+const setActive1 = (el: string) => {
+	type.value = el
+}
 </script>
 
 <template lang="pug">
 .q-mt-lg.q-ml-md
 	q-tabs(v-model="tab" align="left" active-color="primary" )
-		q-tab(name="data" label="Данные")
+		q-tab(name="data" label="Настройка данных")
 		q-tab(v-if="store.activeWidget.type == 'table'" name="table" label="Таблица")
 		q-tab(name="zag" label="Заголовок")
 		q-tab(name="style" label="Оформление")
@@ -48,7 +128,21 @@ const action = () => {
 			.grid
 				div
 					.hd Источник данных
-					q-option-group(:options="options" type="radio" v-model="group")
+					q-list(dense)
+						q-item(clickable v-for="item in options" :key="item.id" @click="setActive(item.val)" :class="{active: item.val == active}") 
+							q-item-section(avatar)
+								q-radio(v-model="active" :val="item.val")
+							q-item-section
+								q-item-label {{ item.label }}
+				div
+					.hd Тип виджета
+					q-list(dense)
+						transition-group(name="slide-right")
+							q-item(clickable v-for="item in calcType" :key="item.id" @click="setActive1(item.val)" :class="{active: item.val == type}" ) 
+								q-item-section(avatar)
+									q-radio(v-model="type" :val="item.val")
+								q-item-section
+									q-item-label {{ item.label }}
 
 				div
 					.hd Дополнительные параметры
@@ -86,12 +180,14 @@ const action = () => {
 </template>
 
 <style scoped lang="scss">
+@import '@/assets/styles/myvariables.scss';
+
 .q-tab-panel {
 	min-height: 300px;
 }
 .grid {
 	display: grid;
-	grid-template-columns: auto 1fr;
+	grid-template-columns: 1fr 1fr 3fr;
 	column-gap: 3rem;
 }
 .hd {
@@ -111,5 +207,11 @@ const action = () => {
 	display: flex;
 	gap: 2rem;
 	align-items: center;
+}
+.active {
+	background: $bgSelection;
+}
+.q-item {
+	transition: all 0.3s ease;
 }
 </style>

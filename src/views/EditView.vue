@@ -2,6 +2,7 @@
 import { ref, computed } from 'vue'
 import WidgetTree from '@/components/dash/WidgetTree.vue'
 import PreviewWidget from '@/components/dash/PreviewWidget.vue'
+import WidgetTabs from '@/components/dash/WidgetTabs.vue'
 import { useStore } from '@/stores/store'
 
 const store = useStore()
@@ -17,7 +18,7 @@ const calcWidth = computed(() => {
 </script>
 
 <template lang="pug">
-q-page()
+q-page(padding)
 	.back(@click="$router.back()")
 		div
 			q-btn(flat round dense icon="mdi-arrow-left-circle-outline" size="lg") 
@@ -25,17 +26,17 @@ q-page()
 		.zg
 			q-icon(name="mdi-widgets-outline" size="26px")
 			span Конструктор виджетов
-			.tip Настройте виджет или выберите готовый из библиотеки
+			.tip Настройте или отредактируйте виджет
 		div
 
-	q-splitter.spli.q-mt-md(v-model="splitterModel" :limits="[0, 100]" :style="hei")
-		template(v-slot:before)
-			.q-px-md
-				WidgetTree
+	.right(:style="calcWidth")
+		PreviewWidget
 
-		template(v-slot:after)
-			.right(:style="calcWidth")
-				PreviewWidget
+	WidgetTabs
+	q-card-actions.q-mt-md(align="center")
+		q-btn(flat color="primary" label="Отмена" @click="action") 
+		q-btn(flat color="primary" label="Применить" @click="action") 
+		q-btn(unelevated color="primary" label="Сохранить" @click="action") 
 </template>
 
 <style scoped lang="scss">
@@ -58,5 +59,9 @@ q-page()
 	color: #666;
 	font-size: 0.9rem;
 	text-align: center;
+}
+.right {
+	// background: pink;
+	margin: 0 auto;
 }
 </style>

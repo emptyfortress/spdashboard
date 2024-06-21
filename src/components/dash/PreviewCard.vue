@@ -102,7 +102,7 @@ watch(
 </script>
 
 <template lang="pug">
-q-card.preview(flat @dragover.prevent="over = true" @dragleave.prevent="over = false" @drop="drop($event)"  :class="{over: over}")
+q-card.preview(flat)
 	q-icon.resize(name="mdi-resize-bottom-right" @click="" dense size="16px") 
 
 	q-btn(v-if="store.activeWidget && store.activeWidget.type == 'gist'" flat round dense icon="mdi-rotate-left-variant" @click="rotate") 
@@ -110,7 +110,7 @@ q-card.preview(flat @dragover.prevent="over = true" @dragleave.prevent="over = f
 		q-icon(:name="pie == 'pie' ? 'mdi-chart-donut' : 'mdi-chart-pie'")
 
 	.cent(v-if="!store.activeWidget.set")
-		.empty Перетащите сюда виджет или его тип
+		.empty  Widget preview
 
 	.cent(v-if="store.activeWidget.set && store.activeWidget.type == 'widget'")
 		div {{ store.activeWidget.name}}
@@ -143,11 +143,8 @@ q-card.preview(flat @dragover.prevent="over = true" @dragleave.prevent="over = f
 <style scoped lang="scss">
 .preview {
 	height: 100%;
-	// overflow: hidden;
+	overflow: hidden;
 	padding-top: 1rem;
-	&.over {
-		background: #dcffe4;
-	}
 	.q-btn {
 		position: absolute;
 		top: 0;
@@ -163,7 +160,7 @@ q-card.preview(flat @dragover.prevent="over = true" @dragleave.prevent="over = f
 .cent {
 	width: 100%;
 	height: 100%;
-	padding: 0.5rem;
+	display: grid;
 }
 .empty {
 	font-size: 0.8rem;
