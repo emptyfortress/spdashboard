@@ -4,7 +4,7 @@ const defaultWidget = {
 	w: 3,
 	h: 3,
 	i: 0,
-	set: true,
+	set: false,
 	type: '',
 	name: '',
 	design: {

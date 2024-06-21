@@ -34,6 +34,7 @@ export const useStore = defineStore('store', () => {
 		layout.splice(e, 1)
 	}
 	const activeWidget = ref({ ...defaultWidget })
+	// const activeWidget = ref(null)
 
 	const setActiveWidget = (el: any) => {
 		activeWidget.value = el
