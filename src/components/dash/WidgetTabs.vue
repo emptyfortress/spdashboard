@@ -5,6 +5,7 @@ import MySelect from '@/components/common/MySelect.vue'
 import ZagSetup from '@/components/dash/ZagSetup.vue'
 import { useStore } from '@/stores/store'
 import Filter from '@/components/dash/Filter.vue'
+import Parameter from '@/components/dash/Parameter.vue'
 
 const store = useStore()
 
@@ -107,6 +108,28 @@ const category = computed(() => {
 	if (active.value == 'logic') return false
 	return true
 })
+
+const quantity = computed(() => {
+	if (active.value == 'calls') return true
+	if (active.value == 'categ' && type.value == 'table') return true
+	if (active.value == 'logic' && type.value == 'table') return true
+	return false
+})
+const percent = computed(() => {
+	if (active.value == 'categ' && type.value == 'table') return true
+	if (active.value == 'logic' && type.value == 'table') return true
+	return false
+})
+const param = computed(() => {
+	if (active.value == 'calls') return true
+	if (active.value == 'categ' && type.value == 'table') return true
+	if (active.value == 'logic' && type.value == 'table') return true
+	return false
+})
+const top = computed(() => {
+	if (active.value == 'categ' && type.value == 'bar') return true
+	return
+})
 </script>
 
 <template lang="pug">
@@ -145,30 +168,7 @@ const category = computed(() => {
 
 				div
 					.hd Доп.параметры
-				
-				// div
-					.hd Дополнительные параметры
-					.option
-						component(:is="MySelect" filled bg="#ccc" label="Клиент" v-model="operModel")
-						component(:is="MySelect" filled bg="#ccc" label="Категория" v-model="operModel")
-						component(:is="MySelect" filled bg="#ccc" label="Группа" v-model="operModel")
-						component(:is="MySelect" filled bg="#ccc" label="Оператор" v-model="operModel")
-						component(:is="MySelect" filled bg="#ccc" label="Регион" v-model="operModel")
-						component(:is="MySelect" filled bg="#ccc" label="Чек-лист" v-model="operModel")
-						.row.items-end
-							component(:is="MySelect" filled bg="#ccc" label="Диапазон дат" v-model="perModel")
-							div
-								q-btn(flat round icon="mdi-calendar")
-									q-popup-proxy( cover transition-show="scale" transition-hide="scale")
-										q-date(v-model="date" range)
-											.row.items-center.justify-end.q-gutter-sm
-												q-btn(label="Cancel" color="primary" flat v-close-popup)
-												q-btn(label="OK" color="primary" flat v-close-popup @click="setRange")
-						.top
-							q-checkbox(v-model="check" label="Показать топ значения" dense)
-							q-input(dense filled v-model="quan" type="number" )
-							div штук
-
+					Parameter(v-if="active && type" :quantity="quantity" :percent="percent" :param="param" :top="top")
 
 		q-tab-panel(name="table")
 			p Здесь настраиваем таблицу

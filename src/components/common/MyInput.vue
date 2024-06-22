@@ -4,6 +4,7 @@ interface Props {
 	filled?: boolean
 	bg?: string
 	disable?: boolean
+	type?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -23,6 +24,7 @@ div
 		:outlined="!props.filled"
 		:bg-color="props.bg"
 		:disable="props.disable"
+		:type="props.type"
 		hide-bottom-space
 		dense
 		)

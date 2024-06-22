@@ -46,10 +46,10 @@ const date = ref('2019/03/01')
 						q-btn(label="Cancel" color="primary" flat v-close-popup)
 						q-btn(label="OK" color="primary" flat v-close-popup @click="setRange")
 
-component.q-mt-md(v-if="props.checklist" :is="MySelect" filled bg="#ccc" label="Чек-лист" v-model="checkModel")
-component.q-mt-md(v-if="props.operator" :is="MySelect" filled bg="#ccc" label="Оператор" v-model="operModel")
-component.q-mt-md(v-if="props.client" :is="MySelect" filled bg="#ccc" label="Клиент" v-model="clientModel")
-component.q-mt-md(v-if="props.category" :is="MySelect" filled bg="#ccc" label="Категория" v-model="catModel")
+MySelect.q-mt-md(v-if="props.checklist" filled bg="#ccc" label="Чек-лист" v-model="checkModel")
+MySelect.q-mt-md(v-if="props.operator" filled bg="#ccc" label="Оператор" v-model="operModel")
+MySelect.q-mt-md(v-if="props.client" filled bg="#ccc" label="Клиент" v-model="clientModel")
+MySelect.q-mt-md(v-if="props.category" filled bg="#ccc" label="Категория" v-model="catModel")
 
 </template>
 
