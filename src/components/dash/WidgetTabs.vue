@@ -67,7 +67,9 @@ const action = () => {
 	store.toggleBar()
 }
 const active = ref()
-const type = ref()
+
+// const type = ref()
+
 const types = [
 	{ id: 0, label: 'Число', val: 'digit' },
 	{ id: 1, label: 'Sparkline', val: 'spark' },
@@ -89,19 +91,19 @@ const setActive = (el: string) => {
 	active.value = el
 }
 const setActive1 = (el: string) => {
-	type.value = el
+	store.setType(el)
 }
 const checklist = computed(() => {
-	if (active.value == 'list' && type.value) return true
+	if (active.value == 'list' && store.type) return true
 })
 const client = computed(() => {
-	if (active.value == 'categ' && type.value == 'bar') return false
+	if (active.value == 'categ' && store.type == 'bar') return false
 	return true
 })
 const operator = computed(() => {
-	if (active.value == 'categ' && type.value == 'digit') return false
-	if (active.value == 'categ' && type.value == 'spark') return false
-	if (active.value == 'categ' && type.value == 'chart') return false
+	if (active.value == 'categ' && store.type == 'digit') return false
+	if (active.value == 'categ' && store.type == 'spark') return false
+	if (active.value == 'categ' && store.type == 'chart') return false
 	return true
 })
 const category = computed(() => {
@@ -111,23 +113,23 @@ const category = computed(() => {
 
 const quantity = computed(() => {
 	if (active.value == 'calls') return true
-	if (active.value == 'categ' && type.value == 'table') return true
-	if (active.value == 'logic' && type.value == 'table') return true
+	if (active.value == 'categ' && store.type == 'table') return true
+	if (active.value == 'logic' && store.type == 'table') return true
 	return false
 })
 const percent = computed(() => {
-	if (active.value == 'categ' && type.value == 'table') return true
-	if (active.value == 'logic' && type.value == 'table') return true
+	if (active.value == 'categ' && store.type == 'table') return true
+	if (active.value == 'logic' && store.type == 'table') return true
 	return false
 })
 const param = computed(() => {
 	if (active.value == 'calls') return true
-	if (active.value == 'categ' && type.value == 'table') return true
-	if (active.value == 'logic' && type.value == 'table') return true
+	if (active.value == 'categ' && store.type == 'table') return true
+	if (active.value == 'logic' && store.type == 'table') return true
 	return false
 })
 const top = computed(() => {
-	if (active.value == 'categ' && type.value == 'bar') return true
+	if (active.value == 'categ' && store.type == 'bar') return true
 	return
 })
 </script>
@@ -156,29 +158,29 @@ const top = computed(() => {
 					.hd Тип виджета
 					q-list(dense)
 						transition-group(name="slide-right")
-							q-item(clickable v-for="item in calcType" :key="item.id" @click="setActive1(item.val)" :class="{active: item.val == type}" ) 
+							q-item(clickable v-for="item in calcType" :key="item.id" @click="setActive1(item.val)" :class="{active: item.val == store.type}" ) 
 								q-item-section(avatar)
-									q-radio(v-model="type" :val="item.val")
+									q-radio(v-model="store.type" :val="item.val")
 								q-item-section
 									q-item-label {{ item.label }}
 
 				div
 					.hd Фильтры
-					Filter(v-if="active && type" :checklist="checklist" :operator="operator" :client="client" :category="category")
+					Filter(v-if="active && store.type" :checklist="checklist" :operator="operator" :client="client" :category="category")
 
 				div
 					.hd Доп.параметры
-					Parameter(v-if="active && type" :quantity="quantity" :percent="percent" :param="param" :top="top")
+					Parameter(v-if="active && store.type" :quantity="quantity" :percent="percent" :param="param" :top="top")
 
 		q-tab-panel(name="table")
 			p Здесь настраиваем таблицу
 		q-tab-panel(name="zag")
 			ZagSetup
-		q-tab-panel(name="style")
-			p Здесь настраиваем шрифты, легенды и тп
-		q-tab-panel(name="color")
-			p Здесь настраиваем темы и цвет
-			q-btn(unelevated color="primary" label="Color" @click="action") 
+		// q-tab-panel(name="style")
+		// 	p Здесь настраиваем шрифты, легенды и тп
+		// q-tab-panel(name="color")
+		// 	p Здесь настраиваем темы и цвет
+		// 	q-btn(unelevated color="primary" label="Color" @click="action") 
 </template>
 
 <style scoped lang="scss">

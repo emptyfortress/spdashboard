@@ -40,16 +40,23 @@ export const useStore = defineStore('store', () => {
 		activeWidget.value = el
 	}
 
+	const type = ref<string>()
+	const setType = (el: string) => {
+		type.value = el
+	}
+
 	return {
+		activeWidget,
+		setActiveWidget,
 		container,
 		containerPx,
-		activeWidget,
 		layout,
 		refreshBar,
+		type,
+		setType,
 		setContainer,
 		addWidget,
 		removeWidget,
-		setActiveWidget,
 		toggleBar,
 	}
 })
