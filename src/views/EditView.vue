@@ -32,11 +32,11 @@ q-page(padding)
 	.right(:style="calcWidth")
 		PreviewWidget
 
-	WidgetTabs
-	q-card-actions.q-mt-md(align="center")
-		q-btn(flat color="primary" label="Отмена" @click="") 
-		q-btn(flat color="primary" label="Применить" @click="") 
-		q-btn(unelevated color="primary" label="Сохранить" @click="") 
+		WidgetTabs
+		q-card-actions.q-mt-md(align="center")
+			q-btn(flat color="primary" label="Отмена" @click="") 
+			q-btn(flat color="primary" label="Применить" @click="") 
+			q-btn(unelevated color="primary" label="Сохранить" @click="") 
 </template>
 
 <style scoped lang="scss">

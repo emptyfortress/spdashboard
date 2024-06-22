@@ -138,8 +138,8 @@ const top = computed(() => {
 		q-tab(name="data" label="Настройка данных")
 		q-tab(v-if="store.activeWidget.type == 'table'" name="table" label="Таблица")
 		q-tab(name="zag" label="Заголовок")
-		q-tab(name="style" label="Оформление")
-		q-tab(name="color" label="Цвет")
+		// q-tab(name="style" label="Оформление")
+		// q-tab(name="color" label="Цвет")
 
 	q-tab-panels(v-model="tab" animated)
 		q-tab-panel(name="data")
@@ -215,5 +215,6 @@ const top = computed(() => {
 }
 .q-item {
 	transition: all 0.3s ease;
+	padding-left: 0;
 }
 </style>
