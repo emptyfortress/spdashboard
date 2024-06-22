@@ -15,6 +15,10 @@ const hei = computed(() => {
 const calcWidth = computed(() => {
 	return 'width: ' + store.container + 'px'
 })
+const apply = () => {
+	store.activeWidget.set = true
+	store.setActiveWidgetType()
+}
 </script>
 
 <template lang="pug">
@@ -34,8 +38,8 @@ q-page(padding)
 
 		WidgetTabs
 		q-card-actions.q-mt-md(align="center")
-			q-btn(flat color="primary" label="Отмена" @click="") 
-			q-btn(flat color="primary" label="Применить" @click="") 
+			q-btn(flat color="primary" label="Отмена" @click="$router.back()") 
+			q-btn(flat color="primary" label="Применить" @click="apply" :disable="!store.type") 
 			q-btn(unelevated color="primary" label="Сохранить" @click="") 
 </template>
 

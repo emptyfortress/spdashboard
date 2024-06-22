@@ -138,8 +138,8 @@ const top = computed(() => {
 .q-mt-lg.q-ml-md
 	q-tabs(v-model="tab" align="left" active-color="primary" )
 		q-tab(name="data" label="Настройка данных")
-		q-tab(v-if="store.activeWidget.type == 'table'" name="table" label="Таблица")
 		q-tab(name="zag" label="Заголовок")
+		q-tab(v-if="store.activeWidget.type == 'table'" name="table" label="Таблица")
 		// q-tab(name="style" label="Оформление")
 		// q-tab(name="color" label="Цвет")
 
@@ -172,15 +172,10 @@ const top = computed(() => {
 					.hd Доп.параметры
 					Parameter(v-if="active && store.type" :quantity="quantity" :percent="percent" :param="param" :top="top")
 
-		q-tab-panel(name="table")
-			p Здесь настраиваем таблицу
 		q-tab-panel(name="zag")
 			ZagSetup
-		// q-tab-panel(name="style")
-		// 	p Здесь настраиваем шрифты, легенды и тп
-		// q-tab-panel(name="color")
-		// 	p Здесь настраиваем темы и цвет
-		// 	q-btn(unelevated color="primary" label="Color" @click="action") 
+		q-tab-panel(name="table")
+			p Здесь настраиваем таблицу
 </template>
 
 <style scoped lang="scss">

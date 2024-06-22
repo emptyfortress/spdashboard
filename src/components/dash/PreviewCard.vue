@@ -7,15 +7,15 @@ import { sparkOptions, areaOptions, barOptions, donutOptions } from '@/stores/gr
 import { templateRef } from '@vueuse/core'
 
 const store = useStore()
-const over = ref(false)
+// const over = ref(false)
 
-const drop = (evt: DragEvent) => {
-	over.value = false
-	let item = JSON.parse(evt.dataTransfer!.getData('item'))
-	store.activeWidget.set = true
-	store.activeWidget.type = item.type
-	store.activeWidget.name = item.text
-}
+// const drop = (evt: DragEvent) => {
+// 	over.value = false
+// 	let item = JSON.parse(evt.dataTransfer!.getData('item'))
+// 	store.activeWidget.set = true
+// 	store.activeWidget.type = item.type
+// 	store.activeWidget.name = item.text
+// }
 
 const headsize = computed(() => {
 	return store.activeWidget.design.title.fontSize + 'rem'
@@ -133,7 +133,7 @@ q-card.preview(flat)
 
 	VueApexCharts(ref="sparkChart" v-if="store.activeWidget && store.activeWidget.type == 'spark'" type="area" height="100%" :options="sparkOptions" :series="series")
 	VueApexCharts(v-if="store.activeWidget && store.activeWidget.type == 'chart'" type="area" height="100%" :options="areaOptions" :series="series")
-	VueApexCharts(ref="barChart" v-if="store.activeWidget && store.activeWidget.type == 'gist'" type="bar" height="100%" :options="barOptions" :series="barSeries")
+	VueApexCharts(ref="barChart" v-if="store.activeWidget && store.activeWidget.type == 'bar'" type="bar" height="100%" :options="barOptions" :series="barSeries")
 	VueApexCharts(v-if="store.activeWidget && store.activeWidget.type == 'pie' && pie == 'pie'" type="pie" height="100%" :options="donutOptions" :series="donutSeries" )
 	VueApexCharts(v-if="store.activeWidget && store.activeWidget.type == 'pie' && pie == 'donut'" type="donut" height="100%" :options="donutOptions" :series="donutSeries" )
 
