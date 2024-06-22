@@ -4,9 +4,9 @@ import type { Ref } from 'vue'
 import MySelect from '@/components/common/MySelect.vue'
 import ZagSetup from '@/components/dash/ZagSetup.vue'
 import { useStore } from '@/stores/store'
-const store = useStore()
+import Filter from '@/components/dash/Filter.vue'
 
-// const widget = useWidget()
+const store = useStore()
 
 const group = ref(null)
 const options = [
@@ -14,12 +14,10 @@ const options = [
 		label: 'Звонки',
 		val: 'calls',
 		types: [
-			{ id: 0, label: 'Число', val: 'digit' },
-			{ id: 1, label: 'Sparkline', val: 'spark' },
-			{ id: 2, label: 'Area chart', val: 'chart' },
+			{ id: 0, label: 'Число', val: 'digit', filter: 1 },
+			{ id: 1, label: 'Sparkline', val: 'spark', filter: 1 },
+			{ id: 2, label: 'Area chart', val: 'chart', filter: 1 },
 		],
-		filter: [],
-		param: [],
 	},
 	{
 		label: 'Категории',
@@ -31,8 +29,6 @@ const options = [
 			{ id: 3, label: 'Bar chart', val: 'bar' },
 			{ id: 5, label: 'Таблица', val: 'table' },
 		],
-		filter: [],
-		param: [],
 	},
 	{
 		label: 'Логические запросы',
@@ -44,8 +40,6 @@ const options = [
 			{ id: 4, label: 'Pie chart', val: 'pie' },
 			{ id: 5, label: 'Таблица', val: 'table' },
 		],
-		filter: [],
-		param: [],
 	},
 	{
 		label: 'Слова/словари/эмоции',
@@ -55,8 +49,6 @@ const options = [
 			{ id: 1, label: 'Sparkline', val: 'spark' },
 			{ id: 2, label: 'Area chart', val: 'chart' },
 		],
-		filter: [],
-		param: [],
 	},
 	{
 		label: 'Чек-листы',
@@ -66,23 +58,9 @@ const options = [
 			{ id: 4, label: 'Pie chart', val: 'pie' },
 			{ id: 5, label: 'Таблица', val: 'table' },
 		],
-		filter: [],
-		param: [],
 	},
 ]
-const operModel = ref('Все')
-const operator = ['Все', 'Катя', 'Маша', 'Миша']
 const tab = ref('data')
-const period = ['Последние 30 дней', 'Прошлый месяц', 'Текущий месяц', 'Сегодня']
-const perModel: Ref<Range | String> = ref('Последние 30 дней')
-
-const setRange = () => {
-	let temp = Object.values(date.value)
-	perModel.value = temp[0] + ' -- ' + temp[1]
-}
-const date = ref('2019/03/01')
-const quan = ref(10)
-const check = ref(false)
 
 const action = () => {
 	store.toggleBar()
@@ -112,6 +90,23 @@ const setActive = (el: string) => {
 const setActive1 = (el: string) => {
 	type.value = el
 }
+const checklist = computed(() => {
+	if (active.value == 'list' && type.value) return true
+})
+const client = computed(() => {
+	if (active.value == 'categ' && type.value == 'bar') return false
+	return true
+})
+const operator = computed(() => {
+	if (active.value == 'categ' && type.value == 'digit') return false
+	if (active.value == 'categ' && type.value == 'spark') return false
+	if (active.value == 'categ' && type.value == 'chart') return false
+	return true
+})
+const category = computed(() => {
+	if (active.value == 'logic') return false
+	return true
+})
 </script>
 
 <template lang="pug">
@@ -145,6 +140,13 @@ const setActive1 = (el: string) => {
 									q-item-label {{ item.label }}
 
 				div
+					.hd Фильтры
+					Filter(v-if="active && type" :checklist="checklist" :operator="operator" :client="client" :category="category")
+
+				div
+					.hd Доп.параметры
+				
+				// div
 					.hd Дополнительные параметры
 					.option
 						component(:is="MySelect" filled bg="#ccc" label="Клиент" v-model="operModel")
@@ -187,7 +189,7 @@ const setActive1 = (el: string) => {
 }
 .grid {
 	display: grid;
-	grid-template-columns: 1fr 1fr 3fr;
+	grid-template-columns: 1fr 0.8fr 1fr 1fr;
 	column-gap: 3rem;
 }
 .hd {

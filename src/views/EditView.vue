@@ -34,9 +34,9 @@ q-page(padding)
 
 	WidgetTabs
 	q-card-actions.q-mt-md(align="center")
-		q-btn(flat color="primary" label="Отмена" @click="action") 
-		q-btn(flat color="primary" label="Применить" @click="action") 
-		q-btn(unelevated color="primary" label="Сохранить" @click="action") 
+		q-btn(flat color="primary" label="Отмена" @click="") 
+		q-btn(flat color="primary" label="Применить" @click="") 
+		q-btn(unelevated color="primary" label="Сохранить" @click="") 
 </template>
 
 <style scoped lang="scss">

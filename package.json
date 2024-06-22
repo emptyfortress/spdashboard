@@ -11,6 +11,7 @@
     "type-check": "vue-tsc --build --force"
   },
   "dependencies": {
+    "@formkit/auto-animate": "^0.8.2",
     "@quasar/extras": "^1.16.11",
     "@vueuse/core": "^10.10.0",
     "apexcharts": "^3.49.1",
