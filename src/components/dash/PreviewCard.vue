@@ -112,18 +112,16 @@ q-card.preview(flat)
 	.cent(v-if="!store.activeWidget.set")
 		.empty  Widget preview
 
-	.cent(v-if="store.activeWidget.set && store.activeWidget.type == 'widget'")
-		div {{ store.activeWidget.name}}
+	// .cent(v-if="store.activeWidget.set && store.activeWidget.type == 'widget'")
+	// 	div {{ store.activeWidget.name}}
 
 	.cent(v-if="store.activeWidget.set && store.activeWidget.type == 'digit'")
 		.head
 			span(v-if="store.activeWidget.design.title.data") 123 
-			span(v-else) {{ store.activeWidget.design.title.text}}
-		.subhead
-			span(v-if="store.activeWidget.design.subtitle.data") 123 
-			span(v-else) {{ store.activeWidget.design.subtitle.text}}
+		// .subhead
+		// 	span(v-if="store.activeWidget.design.subtitle.data") 123 
 
-	.cent(v-if="store.activeWidget && store.activeWidget.type == 'percent'")
+	// .cent(v-if="store.activeWidget && store.activeWidget.type == 'percent'")
 		.head
 			span(v-if="store.activeWidget.design.title.data") 21%
 			span(v-else) {{ store.activeWidget.design.title.text}}
@@ -161,12 +159,12 @@ q-card.preview(flat)
 	width: 100%;
 	height: 100%;
 	display: grid;
+	place-items: center;
 }
 .empty {
 	font-size: 0.8rem;
 	text-align: center;
 	color: #aaa;
-	margin: auto;
 }
 .head {
 	font-size: v-bind(headsize);

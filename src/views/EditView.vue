@@ -4,9 +4,11 @@ import WidgetTree from '@/components/dash/WidgetTree.vue'
 import PreviewWidget from '@/components/dash/PreviewWidget.vue'
 import WidgetTabs from '@/components/dash/WidgetTabs.vue'
 import { useStore } from '@/stores/store'
+import { useRouter } from 'vue-router'
 
 const store = useStore()
 const splitterModel = ref(16)
+const router = useRouter()
 
 const hei = computed(() => {
 	return 'height: ' + (window.innerHeight - 145) + 'px;'
@@ -15,16 +17,17 @@ const hei = computed(() => {
 const calcWidth = computed(() => {
 	return 'width: ' + store.container + 'px'
 })
-const apply = () => {
-	store.activeWidget.set = true
-	store.setActiveWidgetType()
+const back = () => {
+	router.back()
+	store.setType('')
+	store.activeWidget.set = false
 }
 </script>
 
 <template lang="pug">
 q-page(padding)
-	.back(@click="$router.back()")
-		div
+	.back
+		.cursor-pointer(@click="back")
 			q-btn(flat round dense icon="mdi-arrow-left-circle-outline" size="lg") 
 			span Назад
 		.zg
@@ -38,14 +41,12 @@ q-page(padding)
 
 		WidgetTabs
 		q-card-actions.q-mt-md(align="center")
-			q-btn(flat color="primary" label="Отмена" @click="$router.back()") 
-			q-btn(flat color="primary" label="Применить" @click="apply" :disable="!store.type") 
-			q-btn(unelevated color="primary" label="Сохранить" @click="") 
+			q-btn(flat color="primary" label="Отмена" @click="back") 
+			q-btn(flat color="primary" label="Сохранить" @click="") 
 </template>
 
 <style scoped lang="scss">
 .back {
-	cursor: pointer;
 	display: flex;
 	justify-content: space-between;
 }

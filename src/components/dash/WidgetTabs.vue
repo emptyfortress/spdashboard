@@ -68,8 +68,6 @@ const action = () => {
 }
 const active = ref()
 
-// const type = ref()
-
 const types = [
 	{ id: 0, label: 'Число', val: 'digit' },
 	{ id: 1, label: 'Sparkline', val: 'spark' },
@@ -132,6 +130,11 @@ const top = computed(() => {
 	if (active.value == 'categ' && store.type == 'bar') return true
 	return
 })
+
+const apply = () => {
+	store.activeWidget.set = true
+	store.setActiveWidgetType()
+}
 </script>
 
 <template lang="pug">
@@ -172,6 +175,9 @@ const top = computed(() => {
 					.hd Доп.параметры
 					Parameter(v-if="active && store.type" :quantity="quantity" :percent="percent" :param="param" :top="top")
 
+			.text-right
+				q-btn(unelevated color='primary' label='Применить' @click='apply' :disable='!store.type') 
+
 		q-tab-panel(name="zag")
 			ZagSetup
 		q-tab-panel(name="table")
@@ -188,6 +194,9 @@ const top = computed(() => {
 	display: grid;
 	grid-template-columns: 1fr 0.8fr 1fr 1fr;
 	column-gap: 3rem;
+}
+.center {
+	margin-top: 1rem;
 }
 .hd {
 	font-size: 1rem;
