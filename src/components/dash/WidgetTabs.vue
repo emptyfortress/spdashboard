@@ -61,7 +61,7 @@ const options = [
 		],
 	},
 ]
-const tab = ref('data')
+const tab = ref('zag')
 
 const action = () => {
 	store.toggleBar()

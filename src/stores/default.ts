@@ -9,6 +9,7 @@ const defaultWidget = {
 	name: '',
 	design: {
 		title: {
+			use: true,
 			text: 'Title',
 			data: true,
 			useDefault: true,
@@ -17,16 +18,21 @@ const defaultWidget = {
 			fontStyle: 'normal',
 			align: 'left',
 			fontColor: '#333',
+			translateX: 0,
+			translateY: 0,
 		},
 		subtitle: {
+			use: true,
 			text: 'Subtitle',
-			data: true,
+			data: false,
 			useDefault: true,
 			fontSize: 0.8,
 			fontWeight: 400,
 			fontStyle: 'normal',
 			align: 'left',
 			fontColor: '#333',
+			translateX: 0,
+			translateY: 0,
 		},
 	},
 }

@@ -31,10 +31,12 @@ const fontColor = ref()
 <template lang="pug">
 .grid2
 	div
-		MyInput(filled bg="#ccc" label="Заголовок" v-model="store.activeWidget.design.title.text" :disable="zagData")
+		q-checkbox(v-model="store.activeWidget.design.title.use" dense label="Заголовок")
+		MyInput.q-my-sm(filled bg="#ccc" v-model="store.activeWidget.design.title.text" :disable="!store.activeWidget.design.title.use")
 		q-checkbox(v-model="store.activeWidget.design.title.data" dense label="Показывать данные вместо заголовка")
 	div
-		MyInput(filled bg="#ccc" label="Подзаголовок" v-model="store.activeWidget.design.subtitle.text" :disable="podzagData")
+		q-checkbox(v-model="store.activeWidget.design.subtitle.use" dense label="Подзаголовок")
+		MyInput.q-my-sm(filled bg="#ccc" v-model="store.activeWidget.design.subtitle.text" :disable="podzagData")
 		q-checkbox(v-model="store.activeWidget.design.subtitle.data" dense label="Показывать данные вместо подзаголовка")
 
 	fieldset
@@ -49,6 +51,10 @@ const fontColor = ref()
 			q-select(v-model="store.activeWidget.design.title.fontStyle" dense filled bg-color="#ccc" :options="sOptions" :disable="store.activeWidget.design.title.useDefault")
 			label Выравнивание
 			q-select(v-model="store.activeWidget.design.title.align" dense filled bg-color="#ccc" :options="aOptions" :disable="store.activeWidget.design.title.useDefault")
+			label Сдвиг по X:
+			q-slider(v-model="store.activeWidget.design.title.translateX" label :min="-100" :max="100" :step="1" :disable="store.activeWidget.design.title.useDefault")
+			label Сдвиг по Y:
+			q-slider(v-model="store.activeWidget.design.title.translateY" label :min="-100" :max="300" :step="1" :disable="store.activeWidget.design.title.useDefault")
 			label Цвет шрифта
 			q-input(dense filled bg-color="#ccc" v-model="store.activeWidget.design.title.fontColor" :disable="store.activeWidget.design.title.useDefault")
 				template(v-slot:append)
@@ -68,12 +74,18 @@ const fontColor = ref()
 			q-select(v-model="store.activeWidget.design.subtitle.fontStyle" dense filled bg-color="#ccc" :options="sOptions" )
 			label Выравнивание
 			q-select(v-model="store.activeWidget.design.subtitle.align" dense filled bg-color="#ccc" :options="aOptions" )
+			label Сдвиг по X:
+			q-slider(v-model="store.activeWidget.design.subtitle.translateX" label :min="-100" :max="100" :step="1" :disable="store.activeWidget.design.title.useDefault")
+			label Сдвиг по Y:
+			q-slider(v-model="store.activeWidget.design.subtitle.translateY" label :min="-100" :max="300" :step="1" :disable="store.activeWidget.design.title.useDefault")
 			label Цвет шрифта
 			q-input(dense filled bg-color="#ccc" v-model="store.activeWidget.design.subtitle.fontColor" )
 				template(v-slot:append)
 					q-icon(name="mdi-eyedropper-variant" class="cursor-pointer")
 						q-popup-proxy(cover transition-show="scale" transition-hide="scale")
 							q-color(v-model="store.activeWidget.design.subtitle.fontColor")
+.text-right.q-mt-md
+	q-btn(unelevated color='primary' label='Применить' @click='apply') 
 </template>
 
 <style scoped lang="scss">

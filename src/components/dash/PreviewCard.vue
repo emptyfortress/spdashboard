@@ -99,6 +99,18 @@ watch(
 		}
 	}
 )
+const headTranslateX = computed(() => {
+	return store.activeWidget.design.title.translateX + '%'
+})
+const headTranslateY = computed(() => {
+	return store.activeWidget.design.title.translateY + 'px'
+})
+const subheadTranslateX = computed(() => {
+	return store.activeWidget.design.subtitle.translateX + '%'
+})
+const subheadTranslateY = computed(() => {
+	return store.activeWidget.design.subtitle.translateY + 'px'
+})
 </script>
 
 <template lang="pug">
@@ -115,11 +127,14 @@ q-card.preview(flat)
 	// .cent(v-if="store.activeWidget.set && store.activeWidget.type == 'widget'")
 	// 	div {{ store.activeWidget.name}}
 
-	.cent(v-if="store.activeWidget.set && store.activeWidget.type == 'digit'")
-		.head
-			span(v-if="store.activeWidget.design.title.data") 123 
-		// .subhead
-		// 	span(v-if="store.activeWidget.design.subtitle.data") 123 
+	div(v-if="store.activeWidget.set && store.activeWidget.type == 'digit'")
+		.head(v-if="store.activeWidget.design.title.use")
+			span(v-if="store.activeWidget.design.title.data") 123
+			span(v-else) {{ store.activeWidget.design.title.text}}
+
+		.subhead(v-if="store.activeWidget.design.subtitle.use")
+			span(v-if="store.activeWidget.design.subtitle.data") 123 
+			span(v-else) {{ store.activeWidget.design.subtitle.text}}
 
 	// .cent(v-if="store.activeWidget && store.activeWidget.type == 'percent'")
 		.head
@@ -142,7 +157,7 @@ q-card.preview(flat)
 .preview {
 	height: 100%;
 	overflow: hidden;
-	padding-top: 1rem;
+	// padding-top: 1rem;
 	.q-btn {
 		position: absolute;
 		top: 0;
@@ -173,6 +188,7 @@ q-card.preview(flat)
 	text-align: v-bind('store.activeWidget.design.title.align');
 	font-style: v-bind('store.activeWidget.design.title.fontStyle');
 	color: v-bind('store.activeWidget.design.title.fontColor');
+	transform: translate(v-bind(headTranslateX), v-bind(headTranslateY));
 }
 .subhead {
 	font-size: v-bind(subhead);
@@ -181,5 +197,6 @@ q-card.preview(flat)
 	text-align: v-bind('store.activeWidget.design.subtitle.align');
 	font-style: v-bind('store.activeWidget.design.subtitle.fontStyle');
 	color: v-bind('store.activeWidget.design.subtitle.fontColor');
+	transform: translate(v-bind(subheadTranslateX), v-bind(subheadTranslateY));
 }
 </style>
