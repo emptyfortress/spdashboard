@@ -32,7 +32,7 @@ const defaultWidget = {
 			align: 'left',
 			fontColor: '#333',
 			translateX: 0,
-			translateY: 0,
+			translateY: 20,
 		},
 	},
 }

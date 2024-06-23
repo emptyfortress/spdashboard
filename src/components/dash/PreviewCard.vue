@@ -85,7 +85,7 @@ const cols = [
 ]
 const rows = []
 const barChart = ref<any>(null)
-const sparkChart = ref<any>(null)
+// const sparkChart = ref<any>(null)
 
 watch(
 	() => store.refreshBar,
@@ -110,6 +110,9 @@ const subheadTranslateX = computed(() => {
 })
 const subheadTranslateY = computed(() => {
 	return store.activeWidget.design.subtitle.translateY + 'px'
+})
+const padtop = computed(() => {
+	return store.activeWidget.design.title.use ? '2rem' : '0'
 })
 </script>
 
@@ -144,11 +147,19 @@ q-card.preview(flat)
 			span(v-if="store.activeWidget.design.subtitle.data") 12% 
 			span(v-else) {{ store.activeWidget.design.subtitle.text}}
 
-	VueApexCharts(ref="sparkChart" v-if="store.activeWidget && store.activeWidget.type == 'spark'" type="area" height="100%" :options="sparkOptions" :series="series")
+	VueApexCharts(v-if="store.activeWidget && store.activeWidget.type == 'spark'" type="area" height="100%" :options="sparkOptions" :series="series")
 	VueApexCharts(v-if="store.activeWidget && store.activeWidget.type == 'chart'" type="area" height="100%" :options="areaOptions" :series="series")
 	VueApexCharts(ref="barChart" v-if="store.activeWidget && store.activeWidget.type == 'bar'" type="bar" height="100%" :options="barOptions" :series="barSeries")
 	VueApexCharts(v-if="store.activeWidget && store.activeWidget.type == 'pie' && pie == 'pie'" type="pie" height="100%" :options="donutOptions" :series="donutSeries" )
 	VueApexCharts(v-if="store.activeWidget && store.activeWidget.type == 'pie' && pie == 'donut'" type="donut" height="100%" :options="donutOptions" :series="donutSeries" )
+
+	template(v-if="store.activeWidget.set")
+		.head(v-if="store.activeWidget.design.title.use")
+			span(v-if="store.activeWidget.design.title.data") 123
+			span(v-else) {{ store.activeWidget.design.title.text}}
+		.subhead(v-if="store.activeWidget.design.subtitle.use")
+			span(v-if="store.activeWidget.design.subtitle.data") 123
+			span(v-else) {{ store.activeWidget.design.subtitle.text}}
 
 	q-table(v-if="store.activeWidget && store.activeWidget.type == 'table'" flat :rows="rows" :columns="cols")
 </template>
@@ -157,11 +168,17 @@ q-card.preview(flat)
 .preview {
 	height: 100%;
 	overflow: hidden;
-	// padding-top: 1rem;
+	padding-top: v-bind(padtop);
 	.q-btn {
 		position: absolute;
 		top: 0;
 		right: -2rem;
+	}
+	.head,
+	.subhead {
+		position: absolute;
+		top: 0;
+		left: 0;
 	}
 }
 .resize {

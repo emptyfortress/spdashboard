@@ -18,7 +18,6 @@ const remove = (e: number) => {
 const { width } = useElementSize(grid)
 
 const edit = (item: any) => {
-	console.log(item)
 	store.setContainer(width.value)
 	store.setActiveWidget(item)
 	router.push('/edit')
