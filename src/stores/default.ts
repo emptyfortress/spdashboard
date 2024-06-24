@@ -18,8 +18,8 @@ const defaultWidget = {
 			fontStyle: 'normal',
 			align: 'left',
 			fontColor: '#333',
-			translateX: 0,
-			translateY: 0,
+			translateX: 30,
+			translateY: 10,
 		},
 		subtitle: {
 			use: true,
@@ -31,8 +31,8 @@ const defaultWidget = {
 			fontStyle: 'normal',
 			align: 'left',
 			fontColor: '#333',
-			translateX: 0,
-			translateY: 20,
+			translateX: 40,
+			translateY: 35,
 		},
 	},
 }

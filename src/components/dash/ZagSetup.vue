@@ -52,10 +52,10 @@ const calcHeight = computed(() => {
 			q-select(v-model="store.activeWidget.design.title.fontWeight" dense filled bg-color="#ccc" :options="wOptions" :disable="store.activeWidget.design.title.useDefault")
 			label Стиль
 			q-select(v-model="store.activeWidget.design.title.fontStyle" dense filled bg-color="#ccc" :options="sOptions" :disable="store.activeWidget.design.title.useDefault")
-			label Сдвиг по X:
-			q-slider(v-model="store.activeWidget.design.title.translateX" label :min="0" :max="calcWidth" :step="1" :disable="store.activeWidget.design.title.useDefault")
-			label Сдвиг по Y:
-			q-slider(v-model="store.activeWidget.design.title.translateY" label :min="0" :max="calcHeight" :step="1" :disable="store.activeWidget.design.title.useDefault")
+			label(v-if="store.type !=='table'") Сдвиг по X:
+			q-slider(v-if="store.type !=='table'" v-model="store.activeWidget.design.title.translateX" label :min="0" :max="calcWidth" :step="1" :disable="store.activeWidget.design.title.useDefault")
+			label(v-if="store.type !=='table'") Сдвиг по Y:
+			q-slider(v-if="store.type !=='table'" v-model="store.activeWidget.design.title.translateY" label :min="0" :max="calcHeight" :step="1" :disable="store.activeWidget.design.title.useDefault")
 			label Цвет шрифта
 			q-input(dense filled bg-color="#ccc" v-model="store.activeWidget.design.title.fontColor" :disable="store.activeWidget.design.title.useDefault")
 				template(v-slot:append)
@@ -73,10 +73,10 @@ const calcHeight = computed(() => {
 			q-select(v-model="store.activeWidget.design.subtitle.fontWeight" dense filled bg-color="#ccc" :options="wOptions" )
 			label Стиль
 			q-select(v-model="store.activeWidget.design.subtitle.fontStyle" dense filled bg-color="#ccc" :options="sOptions" )
-			label Сдвиг по X:
-			q-slider(v-model="store.activeWidget.design.subtitle.translateX" label :min="0" :max="calcWidth" :step="1" :disable="store.activeWidget.design.subtitle.useDefault")
-			label Сдвиг по Y:
-			q-slider(v-model="store.activeWidget.design.subtitle.translateY" label :min="0" :max="calcHeight" :step="1" :disable="store.activeWidget.design.subtitle.useDefault")
+			label(v-if="store.type !=='table'") Сдвиг по X:
+			q-slider(v-if="store.type !=='table'" v-model="store.activeWidget.design.subtitle.translateX" label :min="0" :max="calcWidth" :step="1" :disable="store.activeWidget.design.subtitle.useDefault")
+			label(v-if="store.type !=='table'") Сдвиг по Y:
+			q-slider(v-if="store.type !=='table'" v-model="store.activeWidget.design.subtitle.translateY" label :min="0" :max="calcHeight" :step="1" :disable="store.activeWidget.design.subtitle.useDefault")
 			label Цвет шрифта
 			q-input(dense filled bg-color="#ccc" v-model="store.activeWidget.design.subtitle.fontColor" )
 				template(v-slot:append)

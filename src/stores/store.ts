@@ -13,8 +13,8 @@ export const useStore = defineStore('store', () => {
 	const cols = ref([
 		{
 			name: 'col1',
-			required: true,
-			label: 'Колонка 1',
+			required: false,
+			label: 'АНТ',
 			align: 'left',
 			field: 'col1',
 			sortable: true,
@@ -22,7 +22,7 @@ export const useStore = defineStore('store', () => {
 		{
 			name: 'col2',
 			required: false,
-			label: 'Колонка 2',
+			label: 'Тишина',
 			align: 'left',
 			field: 'col2',
 			sortable: true,
@@ -30,7 +30,7 @@ export const useStore = defineStore('store', () => {
 		{
 			name: 'col3',
 			required: false,
-			label: 'Колонка 3',
+			label: '% речи клиента',
 			align: 'left',
 			field: 'col3',
 			sortable: true,
@@ -38,22 +38,14 @@ export const useStore = defineStore('store', () => {
 		{
 			name: 'col4',
 			required: false,
-			label: 'Колонка 4',
+			label: '% речи оператора',
 			align: 'left',
 			field: 'col4',
 			sortable: true,
 		},
-		{
-			name: 'col5',
-			required: false,
-			label: 'Колонка 5',
-			align: 'left',
-			field: 'col5',
-			sortable: true,
-		},
 	])
 
-	const visible = ref(['col1', 'col2'])
+	const visible = ref(['col1', 'col2', 'col3'])
 
 	const pagination = ref({
 		sortBy: 'col1',

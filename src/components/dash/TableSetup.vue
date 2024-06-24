@@ -14,7 +14,7 @@ const list = ref([
 const quan = ref(3)
 const pages = ref(false)
 const order = ref('up')
-const sort = ref('Колонка 1')
+const sort = ref('АНТ')
 </script>
 
 <template lang="pug">

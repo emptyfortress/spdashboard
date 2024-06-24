@@ -67,12 +67,13 @@ const subheadTranslateY = computed(() => {
 	return store.activeWidget.design.subtitle.translateY + 'px'
 })
 const padtop = computed(() => {
+	if (store.type == 'table') return '.5rem'
 	return store.activeWidget.design.title.use ? '2rem' : '0'
 })
 </script>
 
 <template lang="pug">
-q-card.preview(flat)
+q-card.preview(flat :class="{stat: store.type == 'table'}")
 	q-icon.resize(name="mdi-resize-bottom-right" @click="" dense size="16px") 
 
 	q-btn(v-if="store.activeWidget && store.activeWidget.type == 'gist'" flat round dense icon="mdi-rotate-left-variant" @click="rotate") 
@@ -97,7 +98,7 @@ q-card.preview(flat)
 	VueApexCharts(v-if="store.activeWidget && store.activeWidget.type == 'pie' && pie == 'pie'" type="pie" height="100%" :options="donutOptions" :series="donutSeries" )
 	VueApexCharts(v-if="store.activeWidget && store.activeWidget.type == 'pie' && pie == 'donut'" type="donut" height="100%" :options="donutOptions" :series="donutSeries" )
 
-	template(v-if="store.activeWidget.set")
+	template(v-if="store.activeWidget.set && store.type !== 'table'")
 		.head(v-if="store.activeWidget.design.title.use")
 			span(v-if="store.activeWidget.design.title.data") 123
 			span(v-else) {{ store.activeWidget.design.title.text}}
@@ -105,8 +106,15 @@ q-card.preview(flat)
 			span(v-if="store.activeWidget.design.subtitle.data") 123
 			span(v-else) {{ store.activeWidget.design.subtitle.text}}
 
-	q-table(
-		v-if="store.activeWidget && store.activeWidget.type == 'table'"
+	template(v-if="store.activeWidget.set && store.type == 'table'")
+		.head1(v-if="store.activeWidget.design.title.use")
+			span(v-if="store.activeWidget.design.title.data") 123
+			span(v-else) {{ store.activeWidget.design.title.text}}
+		.subhead1(v-if="store.activeWidget.design.subtitle.use")
+			span(v-if="store.activeWidget.design.subtitle.data") 123
+			span(v-else) {{ store.activeWidget.design.subtitle.text}}
+
+	q-table(v-if="store.activeWidget && store.activeWidget.type == 'table'"
 		flat
 		:rows="rows"
 		:columns="store.cols"
@@ -131,6 +139,25 @@ q-card.preview(flat)
 		top: 0;
 		left: 0;
 	}
+}
+.head1 {
+	font-size: v-bind(headsize);
+	font-weight: v-bind('store.activeWidget.design.title.fontWeight');
+	line-height: 0.9;
+	text-align: v-bind('store.activeWidget.design.title.align');
+	font-style: v-bind('store.activeWidget.design.title.fontStyle');
+	color: v-bind('store.activeWidget.design.title.fontColor');
+	padding-left: 0.4rem;
+}
+.subhead1 {
+	font-size: v-bind(subhead);
+	font-weight: v-bind('store.activeWidget.design.subtitle.fontWeight');
+	line-height: 0.9;
+	text-align: v-bind('store.activeWidget.design.subtitle.align');
+	font-style: v-bind('store.activeWidget.design.subtitle.fontStyle');
+	color: v-bind('store.activeWidget.design.subtitle.fontColor');
+	margin-top: 0.2rem;
+	padding-left: 0.4rem;
 }
 .resize {
 	position: absolute;
