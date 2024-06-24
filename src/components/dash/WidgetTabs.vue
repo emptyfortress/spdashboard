@@ -112,19 +112,19 @@ const category = computed(() => {
 
 const quantity = computed(() => {
 	if (active.value == 'calls') return true
-	if (active.value == 'categ' && store.type == 'table') return true
-	if (active.value == 'logic' && store.type == 'table') return true
+	if (active.value == 'logic') return false
+	if (active.value == 'categ' && store.type == 'table') return false
 	return false
 })
 const percent = computed(() => {
-	if (active.value == 'categ' && store.type == 'table') return true
-	if (active.value == 'logic' && store.type == 'table') return true
+	if (active.value == 'logic') return false
+	if (active.value == 'categ' && store.type == 'table') return false
 	return false
 })
 const param = computed(() => {
 	if (active.value == 'calls') return true
-	if (active.value == 'categ' && store.type == 'table') return true
-	if (active.value == 'logic' && store.type == 'table') return true
+	if (active.value == 'logic') return false
+	if (active.value == 'categ' && store.type == 'table') return false
 	return false
 })
 const top = computed(() => {
