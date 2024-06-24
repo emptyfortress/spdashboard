@@ -111,7 +111,7 @@ const category = computed(() => {
 })
 
 const quantity = computed(() => {
-	if (active.value == 'calls') return true
+	if (active.value == 'calls' && store.type == 'digit') return false
 	if (active.value == 'logic') return false
 	if (active.value == 'categ' && store.type == 'table') return false
 	return false

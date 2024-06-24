@@ -67,6 +67,7 @@ const subheadTranslateY = computed(() => {
 	return store.activeWidget.design.subtitle.translateY + 'px'
 })
 const padtop = computed(() => {
+	if (!store.activeWidget.set) return '0'
 	if (store.type == 'table') return '.5rem'
 	return store.activeWidget.design.title.use ? '2rem' : '0'
 })
