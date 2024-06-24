@@ -83,8 +83,8 @@ const calcHeight = computed(() => {
 					q-icon(name="mdi-eyedropper-variant" class="cursor-pointer")
 						q-popup-proxy(cover transition-show="scale" transition-hide="scale")
 							q-color(v-model="store.activeWidget.design.subtitle.fontColor")
-.text-right.q-mt-md
-	q-btn(unelevated color='primary' label='Применить' @click='') 
+// .text-right.q-mt-md
+// 	q-btn(unelevated color='primary' label='Применить' @click='') 
 </template>
 
 <style scoped lang="scss">

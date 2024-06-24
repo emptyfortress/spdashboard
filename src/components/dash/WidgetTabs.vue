@@ -3,6 +3,7 @@ import { ref, computed } from 'vue'
 import type { Ref } from 'vue'
 import MySelect from '@/components/common/MySelect.vue'
 import ZagSetup from '@/components/dash/ZagSetup.vue'
+import TableSetup from '@/components/dash/TableSetup.vue'
 import { useStore } from '@/stores/store'
 import Filter from '@/components/dash/Filter.vue'
 import Parameter from '@/components/dash/Parameter.vue'
@@ -181,7 +182,7 @@ const apply = () => {
 		q-tab-panel(name="zag")
 			ZagSetup
 		q-tab-panel(name="table")
-			p Здесь настраиваем таблицу
+			TableSetup
 </template>
 
 <style scoped lang="scss">

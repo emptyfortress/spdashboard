@@ -7,15 +7,6 @@ import { sparkOptions, areaOptions, barOptions, donutOptions } from '@/stores/gr
 import { templateRef } from '@vueuse/core'
 
 const store = useStore()
-// const over = ref(false)
-
-// const drop = (evt: DragEvent) => {
-// 	over.value = false
-// 	let item = JSON.parse(evt.dataTransfer!.getData('item'))
-// 	store.activeWidget.set = true
-// 	store.activeWidget.type = item.type
-// 	store.activeWidget.name = item.text
-// }
 
 const headsize = computed(() => {
 	return store.activeWidget.design.title.fontSize + 'rem'
@@ -57,48 +48,12 @@ const switchPie = () => {
 		pie.value = 'pie'
 	} else pie.value = 'donut'
 }
-const cols = [
-	{
-		name: 'name',
-		required: true,
-		label: 'Колонка 1',
-		align: 'left',
-		field: 'name',
-		sortable: true,
-	},
-	{
-		name: 'total',
-		required: false,
-		label: 'Колонка 2',
-		align: 'right',
-		field: 'total',
-		sortable: true,
-	},
-	{
-		name: 'good',
-		required: false,
-		label: 'Колонка 3',
-		align: 'right',
-		field: 'good',
-		sortable: true,
-	},
+const rows = [
+	{ id: 0, col1: 'data', col2: 'data', col3: 'data', col4: 'data', col5: 'data' },
+	{ id: 1, col1: 'data', col2: 'data', col3: 'data', col4: 'data', col5: 'data' },
 ]
-const rows = []
 const barChart = ref<any>(null)
-// const sparkChart = ref<any>(null)
 
-watch(
-	() => store.refreshBar,
-	() => {
-		if (store.refreshBar == true) {
-			barChart.value?.updateOptions({
-				colors: ['#ff0000'],
-			})
-			nextTick()
-			store.toggleBar()
-		}
-	}
-)
 const headTranslateX = computed(() => {
 	return store.activeWidget.design.title.translateX + '%'
 })
@@ -127,9 +82,6 @@ q-card.preview(flat)
 	.cent(v-if="!store.activeWidget.set")
 		.empty  Widget preview
 
-	// .cent(v-if="store.activeWidget.set && store.activeWidget.type == 'widget'")
-	// 	div {{ store.activeWidget.name}}
-
 	div(v-if="store.activeWidget.set && store.activeWidget.type == 'digit'")
 		.head(v-if="store.activeWidget.design.title.use")
 			span(v-if="store.activeWidget.design.title.data") 123
@@ -137,14 +89,6 @@ q-card.preview(flat)
 
 		.subhead(v-if="store.activeWidget.design.subtitle.use")
 			span(v-if="store.activeWidget.design.subtitle.data") 123 
-			span(v-else) {{ store.activeWidget.design.subtitle.text}}
-
-	// .cent(v-if="store.activeWidget && store.activeWidget.type == 'percent'")
-		.head
-			span(v-if="store.activeWidget.design.title.data") 21%
-			span(v-else) {{ store.activeWidget.design.title.text}}
-		.subhead
-			span(v-if="store.activeWidget.design.subtitle.data") 12% 
 			span(v-else) {{ store.activeWidget.design.subtitle.text}}
 
 	VueApexCharts(v-if="store.activeWidget && store.activeWidget.type == 'spark'" type="area" height="100%" :options="sparkOptions" :series="series")
@@ -161,7 +105,7 @@ q-card.preview(flat)
 			span(v-if="store.activeWidget.design.subtitle.data") 123
 			span(v-else) {{ store.activeWidget.design.subtitle.text}}
 
-	q-table(v-if="store.activeWidget && store.activeWidget.type == 'table'" flat :rows="rows" :columns="cols")
+	q-table(v-if="store.activeWidget && store.activeWidget.type == 'table'" flat :rows="rows" :columns="store.cols" :pagination="store.pagination")
 </template>
 
 <style scoped lang="scss">

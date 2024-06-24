@@ -10,6 +10,54 @@ export const useStore = defineStore('store', () => {
 	const containerPx = computed(() => {
 		return container.value + 'px'
 	})
+	const cols = ref([
+		{
+			name: 'col1',
+			required: true,
+			label: 'Колонка 1',
+			align: 'left',
+			field: 'col1',
+			sortable: true,
+		},
+		{
+			name: 'col2',
+			required: false,
+			label: 'Колонка 2',
+			align: 'left',
+			field: 'col2',
+			sortable: true,
+		},
+		{
+			name: 'col3',
+			required: false,
+			label: 'Колонка 3',
+			align: 'left',
+			field: 'col3',
+			sortable: true,
+		},
+		{
+			name: 'col4',
+			required: false,
+			label: 'Колонка 4',
+			align: 'left',
+			field: 'col4',
+			sortable: true,
+		},
+		{
+			name: 'col5',
+			required: false,
+			label: 'Колонка 5',
+			align: 'left',
+			field: 'col5',
+			sortable: true,
+		},
+	])
+	const pagination = ref({
+		sortBy: 'col1',
+		descending: false,
+		page: 1,
+		rowsPerPage: 3,
+	})
 
 	const layout: any[] = reactive([{ ...defaultWidget }])
 	const refreshBar = ref(false)
@@ -58,6 +106,8 @@ export const useStore = defineStore('store', () => {
 		layout,
 		refreshBar,
 		type,
+		cols,
+		pagination,
 		setType,
 		setContainer,
 		addWidget,
