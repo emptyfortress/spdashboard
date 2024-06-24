@@ -135,6 +135,9 @@ const top = computed(() => {
 const apply = () => {
 	store.activeWidget.set = true
 	store.setActiveWidgetType()
+	if (store.type == 'table') {
+		tab.value = 'table'
+	}
 }
 </script>
 
