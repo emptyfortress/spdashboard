@@ -105,7 +105,14 @@ q-card.preview(flat)
 			span(v-if="store.activeWidget.design.subtitle.data") 123
 			span(v-else) {{ store.activeWidget.design.subtitle.text}}
 
-	q-table(v-if="store.activeWidget && store.activeWidget.type == 'table'" flat :rows="rows" :columns="store.cols" :pagination="store.pagination")
+	q-table(
+		v-if="store.activeWidget && store.activeWidget.type == 'table'"
+		flat
+		:rows="rows"
+		:columns="store.cols"
+		:visible-columns="store.visible"
+		:key="store.tabcount"
+		:pagination="store.pagination")
 </template>
 
 <style scoped lang="scss">

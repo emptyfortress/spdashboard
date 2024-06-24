@@ -52,12 +52,16 @@ export const useStore = defineStore('store', () => {
 			sortable: true,
 		},
 	])
+
+	const visible = ref(['col1', 'col2'])
+
 	const pagination = ref({
 		sortBy: 'col1',
 		descending: false,
 		page: 1,
 		rowsPerPage: 3,
 	})
+	const tabcount = ref(0)
 
 	const layout: any[] = reactive([{ ...defaultWidget }])
 	const refreshBar = ref(false)
@@ -108,6 +112,8 @@ export const useStore = defineStore('store', () => {
 		type,
 		cols,
 		pagination,
+		visible,
+		tabcount,
 		setType,
 		setContainer,
 		addWidget,
