@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, reactive } from 'vue'
 import { useStore } from '@/stores/store'
 import { GridItem, GridLayout } from 'vue-ts-responsive-grid-layout'
 import PreviewCard from '@/components/dash/PreviewCard.vue'
@@ -14,11 +14,12 @@ const store = useStore()
 // 	store.activeWidget.type = item.type
 // 	store.activeWidget.name = item.text
 // }
+const layout = reactive([store.activeWidget])
 </script>
 
 <template lang="pug">
 GridLayout(
-	:layout.sync="store.layout"
+	:layout.sync="layout"
 	:col-num="12"
 	:row-height="30"
 	:is-draggable="false"

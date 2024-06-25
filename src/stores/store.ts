@@ -55,6 +55,9 @@ export const useStore = defineStore('store', () => {
 	})
 
 	const layout: any[] = reactive([{ ...defaultWidget }])
+
+	// const layoutActive
+
 	const refreshBar = ref(false)
 	const toggleBar = () => {
 		refreshBar.value = !refreshBar.value

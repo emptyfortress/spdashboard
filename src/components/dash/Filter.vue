@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import type { Ref } from 'vue'
 import MySelect from '@/components/common/MySelect.vue'
+import MyInput from '@/components/common/MyInput.vue'
 
 const props = defineProps({
 	operator: {
@@ -31,6 +32,7 @@ const setRange = () => {
 const operModel = ref('Все')
 const clientModel = ref('Все')
 const catModel = ref('Все')
+const wordModel = ref('')
 const checkModel = ref('--')
 const date = ref('2019/03/01')
 </script>
@@ -49,7 +51,8 @@ const date = ref('2019/03/01')
 MySelect.q-mt-md(v-if="props.checklist" filled bg="#ccc" label="Чек-лист" v-model="checkModel")
 MySelect.q-mt-md(v-if="props.operator" filled bg="#ccc" label="Оператор" v-model="operModel")
 MySelect.q-mt-md(v-if="props.client" filled bg="#ccc" label="Клиент" v-model="clientModel")
-MySelect.q-mt-md(v-if="props.category" filled bg="#ccc" label="Категория" v-model="catModel")
+// MySelect.q-mt-md(v-if="props.category" filled bg="#ccc" label="Категория" v-model="catModel")
+MyInput.q-mt-md(v-if="props.category" filled bg="#ccc" label="Слова и события" v-model="wordModel")
 
 </template>
 

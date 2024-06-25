@@ -22,11 +22,9 @@ const sort = ref('АНТ')
 .grd
 	div
 		p Порядок и видимость колонок
-		draggable(
-			:list="store.cols"
+		draggable(:list="store.cols"
 			item-key="name"
-			ghost-class="ghost"
-			)
+			ghost-class="ghost")
 
 			template(#item="{ element }")
 				.list-group-item

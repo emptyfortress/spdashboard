@@ -74,7 +74,7 @@ const padtop = computed(() => {
 </script>
 
 <template lang="pug">
-q-card.preview(flat :class="{stat: store.type == 'table'}")
+q-card.preview(:class="{stat: store.type == 'table'}")
 	q-icon.resize(name="mdi-resize-bottom-right" @click="" dense size="16px") 
 
 	q-btn(v-if="store.activeWidget && store.activeWidget.type == 'gist'" flat round dense icon="mdi-rotate-left-variant" @click="rotate") 
