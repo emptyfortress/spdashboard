@@ -21,6 +21,10 @@ const props = defineProps({
 		type: Boolean,
 		default: false,
 	},
+	word: {
+		type: Boolean,
+		default: false,
+	},
 })
 
 const perModel: Ref<Range | String> = ref('Последние 30 дней')
@@ -51,8 +55,8 @@ const date = ref('2019/03/01')
 MySelect.q-mt-md(v-if="props.checklist" filled bg="#ccc" label="Чек-лист" v-model="checkModel")
 MySelect.q-mt-md(v-if="props.operator" filled bg="#ccc" label="Оператор" v-model="operModel")
 MySelect.q-mt-md(v-if="props.client" filled bg="#ccc" label="Клиент" v-model="clientModel")
-// MySelect.q-mt-md(v-if="props.category" filled bg="#ccc" label="Категория" v-model="catModel")
-MyInput.q-mt-md(v-if="props.category" filled bg="#ccc" label="Слова и события" v-model="wordModel")
+MySelect.q-mt-md(v-if="props.category" filled bg="#ccc" label="Категория" v-model="catModel")
+MyInput.q-mt-md(v-if="props.word" filled bg="#ccc" label="Слова и события" v-model="wordModel")
 
 </template>
 

@@ -107,7 +107,12 @@ const operator = computed(() => {
 })
 const category = computed(() => {
 	if (active.value == 'logic') return false
+	if (active.value == 'words') return false
 	return true
+})
+const word = computed(() => {
+	if (active.value == 'words') return true
+	return false
 })
 
 const quantity = computed(() => {
@@ -173,7 +178,7 @@ const apply = () => {
 
 				div
 					.hd Фильтры
-					Filter(v-if="active && store.type" :checklist="checklist" :operator="operator" :client="client" :category="category")
+					Filter(v-if="active && store.type" :checklist="checklist" :operator="operator" :client="client" :category="category" :word="word")
 
 				div
 					.hd Доп.параметры
