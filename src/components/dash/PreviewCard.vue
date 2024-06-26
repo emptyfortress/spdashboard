@@ -5,6 +5,7 @@ import VueApexCharts from 'vue3-apexcharts'
 import { randomArray, randomNumber } from '@/utils/utils'
 import { sparkOptions, areaOptions, barOptions, donutOptions } from '@/stores/graphOptions'
 import { templateRef } from '@vueuse/core'
+import GistForTable from '@/components/dash/GistForTable.vue'
 
 const store = useStore()
 
@@ -115,12 +116,26 @@ q-card.preview(:class="{stat: store.type == 'table'}")
 			span(v-if="store.activeWidget.design.subtitle.data") 123
 			span(v-else) {{ store.activeWidget.design.subtitle.text}}
 
-	q-table(v-if="store.activeWidget && store.activeWidget.type == 'table'"
+	q-table(v-if="store.active == 'categ' && store.activeWidget.type == 'table'"
 		flat
 		:rows="rows"
-		:columns="store.calcList"
+		:columns="store.cols"
 		:visible-columns="store.visible"
 		:pagination="store.pagination")
+
+	q-table(v-if="store.active == 'list' && store.activeWidget.type == 'table'"
+		flat
+		:rows="rows"
+		:columns="store.cols1"
+		:visible-columns="store.visible"
+		:pagination="store.pagination")
+
+		template(v-slot:body-cell-col2="props")
+			q-td
+				GistForTable
+				// VueApexCharts(type="bar" height="100%" :options="barOptions" :series="barSeries")
+
+
 
 </template>
 

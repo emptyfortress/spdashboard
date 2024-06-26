@@ -15,7 +15,7 @@ export const useStore = defineStore('store', () => {
 			id: 0,
 			name: 'col0',
 			required: false,
-			label: 'Категория Продажи',
+			label: 'Категория',
 			align: 'left',
 			field: 'col0',
 			sortable: true,
@@ -124,6 +124,7 @@ export const useStore = defineStore('store', () => {
 	])
 
 	const active = ref()
+
 	const calcList = computed(() => {
 		return active.value == 'list' ? cols1.value : cols.value
 	})
