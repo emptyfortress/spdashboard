@@ -118,10 +118,10 @@ q-card.preview(:class="{stat: store.type == 'table'}")
 	q-table(v-if="store.activeWidget && store.activeWidget.type == 'table'"
 		flat
 		:rows="rows"
-		:columns="store.cols"
+		:columns="store.calcList"
 		:visible-columns="store.visible"
-		:key="store.tabcount"
 		:pagination="store.pagination")
+
 </template>
 
 <style scoped lang="scss">

@@ -7,14 +7,18 @@ import MySelect from '@/components/common/MySelect.vue'
 
 const store = useStore()
 
-const list = ref([
-	{ col1: 'data', col2: 'data', col3: 'data', col4: 'data', col5: 'data' },
-	{ col1: 'data', col2: 'data', col3: 'data', col4: 'data', col5: 'data' },
-])
+// const list = ref([
+// 	{ col0: 'data', col1: 'data', col2: 'data', col3: 'data', col4: 'data', col5: 'data' },
+// 	{ col0: 'data', col1: 'data', col2: 'data', col3: 'data', col4: 'data', col5: 'data' },
+// ])
 const quan = ref(3)
 const pages = ref(false)
 const order = ref('up')
 const sort = ref('АНТ')
+const catvis = ref(true)
+const dis = computed(() => {
+	return '.dis'
+})
 </script>
 
 <template lang="pug">
@@ -22,13 +26,14 @@ const sort = ref('АНТ')
 .grd
 	div
 		p Порядок и видимость колонок
-		draggable(:list="store.cols"
+		draggable(:list="store.calcList"
 			item-key="name"
+			:filter="dis"
 			ghost-class="ghost")
 
 			template(#item="{ element }")
-				.list-group-item
-					q-checkbox(v-model="store.visible" :val="element.name" :label="element.label" dense checked-icon="mdi-eye" unchecked-icon="mdi-eye-off")
+				.list-group-item(:class="{dis: element.id < 9}")
+					q-checkbox(v-model="store.visible" :val="element.name" :label="element.label" dense checked-icon="mdi-eye" unchecked-icon="mdi-eye-off" :disable="element.id < 9")
 
 	.sort
 		p Сортировка

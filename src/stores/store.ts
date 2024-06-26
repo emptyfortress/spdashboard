@@ -12,6 +12,16 @@ export const useStore = defineStore('store', () => {
 	})
 	const cols = ref([
 		{
+			id: 0,
+			name: 'col0',
+			required: false,
+			label: 'Категория Продажи',
+			align: 'left',
+			field: 'col0',
+			sortable: true,
+		},
+		{
+			id: 10,
 			name: 'col1',
 			required: false,
 			label: 'АНТ',
@@ -20,6 +30,7 @@ export const useStore = defineStore('store', () => {
 			sortable: true,
 		},
 		{
+			id: 11,
 			name: 'col2',
 			required: false,
 			label: 'Тишина',
@@ -28,6 +39,7 @@ export const useStore = defineStore('store', () => {
 			sortable: true,
 		},
 		{
+			id: 12,
 			name: 'col3',
 			required: false,
 			label: '% речи клиента',
@@ -36,6 +48,7 @@ export const useStore = defineStore('store', () => {
 			sortable: true,
 		},
 		{
+			id: 13,
 			name: 'col4',
 			required: false,
 			label: '% речи оператора',
@@ -44,8 +57,78 @@ export const useStore = defineStore('store', () => {
 			sortable: true,
 		},
 	])
+	const cols1 = ref([
+		{
+			id: 0,
+			name: 'col0',
+			required: false,
+			label: 'Оператор',
+			align: 'left',
+			field: 'col0',
+			sortable: true,
+		},
+		{
+			id: 1,
+			name: 'col1',
+			required: false,
+			label: 'Оценка',
+			align: 'left',
+			field: 'col1',
+			sortable: true,
+		},
+		{
+			id: 2,
+			name: 'col2',
+			required: false,
+			label: 'Оценка по вехам',
+			align: 'left',
+			field: 'col2',
+			sortable: true,
+		},
+		{
+			id: 10,
+			name: 'col3',
+			required: false,
+			label: 'АНТ',
+			align: 'left',
+			field: 'col3',
+			sortable: true,
+		},
+		{
+			id: 11,
+			name: 'col4',
+			required: false,
+			label: 'Тишина',
+			align: 'left',
+			field: 'col4',
+			sortable: true,
+		},
+		{
+			id: 12,
+			name: 'col5',
+			required: false,
+			label: '% речи клиента',
+			align: 'left',
+			field: 'col5',
+			sortable: true,
+		},
+		{
+			id: 13,
+			name: 'col6',
+			required: false,
+			label: '% речи оператора',
+			align: 'left',
+			field: 'col6',
+			sortable: true,
+		},
+	])
 
-	const visible = ref(['col1', 'col2', 'col3'])
+	const active = ref()
+	const calcList = computed(() => {
+		return active.value == 'list' ? cols1.value : cols.value
+	})
+
+	const visible = ref(['col0', 'col1', 'col2', 'col3'])
 
 	const pagination = ref({
 		sortBy: 'col1',
@@ -55,8 +138,6 @@ export const useStore = defineStore('store', () => {
 	})
 
 	const layout: any[] = reactive([{ ...defaultWidget }])
-
-	// const layoutActive
 
 	const refreshBar = ref(false)
 	const toggleBar = () => {
@@ -80,7 +161,6 @@ export const useStore = defineStore('store', () => {
 		layout.splice(e, 1)
 	}
 	const activeWidget = ref({ ...defaultWidget })
-	// const activeWidget = ref(null)
 
 	const setActiveWidget = (el: any) => {
 		activeWidget.value = el
@@ -105,6 +185,9 @@ export const useStore = defineStore('store', () => {
 		refreshBar,
 		type,
 		cols,
+		cols1,
+		active,
+		calcList,
 		pagination,
 		visible,
 		setType,

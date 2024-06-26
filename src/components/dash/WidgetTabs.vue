@@ -88,6 +88,7 @@ const calcType = computed(() => {
 
 const setActive = (el: string) => {
 	active.value = el
+	store.active = el
 }
 const setActive1 = (el: string) => {
 	store.setType(el)
