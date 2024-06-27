@@ -4,11 +4,13 @@ import { useStore } from '@/stores/store'
 import { GridItem, GridLayout } from 'vue-ts-responsive-grid-layout'
 import { templateRef, useElementSize } from '@vueuse/core'
 import { useRouter } from 'vue-router'
+import { useDash } from '@/stores/dash'
 
 const router = useRouter()
 
 const store = useStore()
 const grid = ref(null)
+const dash = useDash()
 
 const remove = (e: number) => {
 	let temp = [...document.getElementsByClassName('vue-grid-item')]
@@ -22,11 +24,19 @@ const edit = (item: any) => {
 	store.setActiveWidget(item)
 	router.push('/edit')
 }
+const back = () => {
+	router.push('/')
+}
 </script>
 
 <template lang="pug">
-q-page(padding)
+q-page
 	.container
+		q-tabs(v-model="dash.tabs" active-color="primary")
+			q-tab(:name="dash.activePanel.name" :label="dash.activePanel.label")
+			q-btn.q-ml-xl(flat color="primary" label="Отмена" @click="back") 
+			q-btn(unelevated color="primary" label="Сохранить" @click="back") 
+
 		q-btn.fab(round color="primary" icon="mdi-plus" @click="store.addWidget" size="lg") 
 
 		GridLayout(ref="grid"

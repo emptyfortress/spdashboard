@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '@/views/HomeView.vue'
+import DashView from '@/views/DashView.vue'
 
 declare module 'vue-router' {
 	interface RouteMeta {
@@ -17,7 +17,13 @@ const router = createRouter({
 		{
 			path: '/',
 			name: 'home',
-			component: HomeView,
+			component: DashView,
+			meta: { title: 'Speech Drive', requiresAuth: false },
+		},
+		{
+			path: '/new',
+			name: 'new',
+			component: () => import('@/views/HomeView.vue'),
 			meta: { title: 'Speech Drive', requiresAuth: false },
 		},
 		{
