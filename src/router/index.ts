@@ -21,10 +21,11 @@ const router = createRouter({
 			meta: { title: 'Speech Drive', requiresAuth: false },
 			children: [
 				{
-					path: 'test',
-					name: 'test',
-					component: () => import('@/components/Test.vue'),
+					path: ':id',
+					name: 'dash',
+					component: () => import('@/components/Dashboard.vue'),
 					meta: { title: 'Speech Drive', requiresAuth: false },
+					props: true,
 				},
 			],
 		},

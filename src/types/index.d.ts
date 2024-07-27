@@ -1,3 +1,14 @@
+interface Panel {
+	label: string
+	descr: string
+	name: string
+	gap: number
+	radius: number
+	flat: boolean
+	marg: boolean
+	def: boolean
+	to: string
+}
 interface Widget {
 	x: number
 	y: number
