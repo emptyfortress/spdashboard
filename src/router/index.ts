@@ -19,6 +19,14 @@ const router = createRouter({
 			name: 'home',
 			component: DashView,
 			meta: { title: 'Speech Drive', requiresAuth: false },
+			children: [
+				{
+					path: 'test',
+					name: 'test',
+					component: () => import('@/components/Test.vue'),
+					meta: { title: 'Speech Drive', requiresAuth: false },
+				},
+			],
 		},
 		{
 			path: '/new',

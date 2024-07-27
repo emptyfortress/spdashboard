@@ -149,7 +149,7 @@ const apply = () => {
 
 <template lang="pug">
 .q-mt-lg.q-ml-md
-	q-tabs(v-model="tab" align="left" active-color="primary" )
+	q-tab(v-model="tab" align="left" active-color="primary" )
 		q-tab(name="data" label="Настройка данных")
 		q-tab(name="zag" label="Заголовок")
 		q-tab(v-if="store.activeWidget.type == 'table'" name="table" label="Таблица")

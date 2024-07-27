@@ -32,7 +32,7 @@ const back = () => {
 <template lang="pug">
 q-page
 	.container
-		q-tabs(v-model="dash.tabs" active-color="primary")
+		q-tab(v-model="dash.tab" active-color="primary")
 			q-tab(:name="dash.activePanel.name" :label="dash.activePanel.label")
 			q-btn.q-ml-xl(flat color="primary" label="Отмена" @click="back") 
 			q-btn(unelevated color="primary" label="Сохранить" @click="back") 

@@ -3,10 +3,20 @@ import { ref } from 'vue'
 import { useDash } from '@/stores/dash'
 import { uid } from 'quasar'
 
+// const props = defineProps({
+// 	propertyName: {
+// 		type: String,
+// 		required: true,
+// 		default:
+// 	}
+// })
+
 const modelValue = defineModel()
 const dash = useDash()
+const ind = ref(2)
 
 const panel = ref('Моя панель')
+
 const descr = ref('Здесь описание')
 const gap = ref(8)
 const radius = ref(4)
@@ -57,8 +67,10 @@ q-dialog(v-model="modelValue")
 			q-checkbox.q-mt-md(v-model="flat" dense label="Тень от карточек")
 			q-checkbox.q-mt-md(v-model="marg" dense label="Поля на странице (глобальная настройка)")
 			q-checkbox.q-mt-md(v-model="def" dense label="Панель по умолчанию")
-		q-card-actions.q-ma-md(align="right")
+		q-card-actions.q-ma-md
 			q-btn(flat color="primary" label="Отмена" v-close-popup) 
+			q-space
+			q-btn(flat color="primary" label="Настроить виджеты" v-close-popup) 
 			q-btn(unelevated color="primary" label="Сохранить" @click="create") 
 </template>
 

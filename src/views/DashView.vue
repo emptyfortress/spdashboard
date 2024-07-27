@@ -17,7 +17,6 @@ interface Panel {
 }
 
 const dash = useDash()
-// const tabs = ref('home')
 const router = useRouter()
 
 const dialog = ref(false)
@@ -25,7 +24,7 @@ const toggleDialog = () => {
 	dialog.value = !dialog.value
 }
 const create = (e: Panel) => {
-	dash.tabs = e.name
+	dash.tab = e.name
 }
 const edit = () => {
 	// dash.setActivePanel(active)
@@ -36,10 +35,13 @@ const edit = () => {
 <template lang="pug">
 q-page
 	.container
-		q-tabs(v-model="dash.tabs" active-color="primary")
-			q-tab(:name="panel.name" :label="panel.label" v-for="panel in dash.panels" :key="panel.id")
+		q-tabs(v-model="dash.tab" active-color="primary")
+			q-route-tab(:name="panel.name" :label="panel.label" v-for="panel in dash.panels" :key="panel.name" :to='panel.to')
+
 			q-btn.q-ml-xl(flat round icon="mdi-plus" @click="toggleDialog" dense) 
 			q-btn(flat round icon="mdi-pencil-outline" @click="edit" dense) 
+
+		router-view
 
 	CreatePanelDialog(v-model="dialog" @create="create")
 </template>
