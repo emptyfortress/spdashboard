@@ -30,7 +30,7 @@ const back = () => {
 </script>
 
 <template lang="pug">
-q-page
+// q-page
 	.container
 		q-tab(v-model="dash.tab" active-color="primary")
 			q-tab(:name="dash.activePanel.name" :label="dash.activePanel.label")
@@ -39,32 +39,32 @@ q-page
 
 		q-btn.fab(round color="primary" icon="mdi-plus" @click="store.addWidget" size="lg") 
 
-		GridLayout(ref="grid"
-			:layout.sync="store.layout"
-			:col-num="12"
-			:row-height="30"
-			:is-draggable="true"
-			:is-resizable="true"
-			:is-bounded="true"
-			:is-mirrored="false"
-			:vertical-compact="true"
-			:margin="[10, 10]"
-			:show-close-button="false"
-			:use-css-transforms="true")
+GridLayout(ref="grid"
+	:layout.sync="store.layout"
+	:col-num="12"
+	:row-height="30"
+	:is-draggable="true"
+	:is-resizable="true"
+	:is-bounded="true"
+	:is-mirrored="false"
+	:vertical-compact="true"
+	:margin="[10, 10]"
+	:show-close-button="false"
+	:use-css-transforms="true")
 
-			GridItem(v-for="( item ) in store.layout"
-				:x="item.x"
-				:y="item.y"
-				:w="item.w"
-				:h="item.h"
-				:i="item.i"
-				:show-close-button="false"
-				:key="item.i")
-				q-card
-					q-card-section
-						q-btn(flat color="primary" label="Настроить" @click="edit(item)" size="sm") 
-					q-icon.close(name="mdi-close" @click="remove(index)" dense)
-					q-icon.resize(name="mdi-resize-bottom-right" @click="" dense size="16px") 
+	GridItem(v-for="( item ) in store.layout"
+		:x="item.x"
+		:y="item.y"
+		:w="item.w"
+		:h="item.h"
+		:i="item.i"
+		:show-close-button="false"
+		:key="item.i")
+		q-card
+			q-card-section
+				q-btn(flat color="primary" label="Настроить" @click="edit(item)" size="sm") 
+			q-icon.close(name="mdi-close" @click="remove(index)" dense)
+			q-icon.resize(name="mdi-resize-bottom-right" @click="" dense size="16px") 
 
 </template>
 

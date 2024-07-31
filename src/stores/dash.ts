@@ -7,7 +7,7 @@ export const useDash = defineStore('dash', () => {
 	const index = ref(0)
 
 	const to = computed(() => {
-		return '/' + index.value
+		return '/dash/' + index.value
 	})
 
 	const panels = ref([
@@ -20,7 +20,7 @@ export const useDash = defineStore('dash', () => {
 			flat: false,
 			marg: true,
 			def: true,
-			to: '/',
+			to: '/dash/0',
 		},
 	])
 

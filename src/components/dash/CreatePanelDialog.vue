@@ -2,6 +2,10 @@
 import { ref } from 'vue'
 import { useDash } from '@/stores/dash'
 import { uid } from 'quasar'
+import { useRouter, useRoute } from 'vue-router'
+
+const router = useRouter()
+const route = useRoute()
 
 const props = defineProps({
 	newpanel: {
@@ -54,6 +58,10 @@ const remove = () => {
 const def = ref(false)
 const setDefault1 = () => {
 	console.log(def.value)
+}
+const setWidget = () => {
+	const url = route.path + '/edit'
+	router.push(url)
 }
 </script>
 
@@ -110,7 +118,7 @@ q-dialog(v-model="modelValue")
 			q-btn(v-if='props.newpanel | dash.panels.length == 1' flat color="primary" label="Отмена" v-close-popup) 
 			q-btn(v-else flat color="negative" label="Удалить" @click='remove') 
 			q-space
-			q-btn(flat color="primary" label="Настроить виджеты" @click='') 
+			q-btn(:disable='props.newpanel' flat color="primary" label="Настроить виджеты" @click='setWidget') 
 			q-btn(unelevated color="primary" label="Сохранить" @click="save") 
 </template>
 
