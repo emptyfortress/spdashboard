@@ -54,9 +54,10 @@ const remove = () => {
 	modelValue.value = false
 }
 const setDefault = () => {
+	dash.panels.value.map((item) => {
+		item.def = false
+	})
 	dash.activePanel.def = !dash.activePanel.def
-	// def.value = !def.value
-	console.log(111)
 }
 </script>
 
@@ -107,7 +108,7 @@ q-dialog(v-model="modelValue")
 				q-checkbox.q-mt-md(v-model="flat" dense label="Тень от карточек")
 				q-checkbox.q-mt-md(v-model="marg" dense label="Поля на странице (глобальная настройка)")
 
-				q-checkbox.q-mt-md(:model-value="dash.activePanel.def" @update:model-value='setDefault' dense label="Панель по умолчанию" :disable='dash.panels.length == 1')
+				q-checkbox.q-mt-md(:model-value="dash.activePanel.def" @update:model-value='dash.setDefaultPanel(dash.activePanel.def)' dense label="Панель по умолчанию" :disable='dash.panels.length == 1')
 
 		q-card-actions.q-ma-md
 			q-btn(v-if='props.newpanel | dash.panels.length == 1' flat color="primary" label="Отмена" v-close-popup) 

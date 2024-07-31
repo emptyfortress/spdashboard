@@ -24,13 +24,7 @@ export const useDash = defineStore('dash', () => {
 		},
 	])
 
-	const defPanel = ref('home')
-
 	const activePanel = ref(panels.value[0])
-
-	// const defPanel = computed(() => {
-	// 	return activePanel.value.def
-	// })
 
 	const setActivePanel = (e: Panel) => {
 		activePanel.value = e
@@ -48,16 +42,24 @@ export const useDash = defineStore('dash', () => {
 		setActivePanel(panels.value[0])
 	}
 
-	// watch(defPanel, (val) => {
-	// 	if (val) {
-	// 		panels.value.map((item) => (item.def = false))
-	// 	}
-	// })
+	const setDefaultPanel = () => {
+		panels.value.map((item) => {
+			item.def = false
+		})
+		activePanel.value.def = !activePanel.value.def
+
+		const ind = panels.value.findIndex((item) => {
+			item.name == activePanel.value.name
+		})
+
+		panels.value.unshift(panels.value.splice(ind, 1)[0])
+	}
 
 	return {
 		panels,
 		activePanel,
 		setActivePanel,
+		setDefaultPanel,
 		addPanel,
 		removePanel,
 	}
