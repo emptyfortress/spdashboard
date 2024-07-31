@@ -22,8 +22,6 @@ const radius = ref(4)
 const flat = ref(true)
 const marg = ref(true)
 
-const def = ref(false)
-
 const emit = defineEmits(['remove'])
 
 const create = () => {
@@ -53,11 +51,9 @@ const remove = () => {
 	dash.removePanel()
 	modelValue.value = false
 }
-const setDefault = () => {
-	dash.panels.value.map((item) => {
-		item.def = false
-	})
-	dash.activePanel.def = !dash.activePanel.def
+const def = ref(false)
+const setDefault1 = () => {
+	console.log(def.value)
 }
 </script>
 
@@ -86,7 +82,7 @@ q-dialog(v-model="modelValue")
 				q-checkbox.q-mt-md(v-model="flat" dense label="Тень от виджетов")
 				q-checkbox.q-mt-md(v-model="marg" dense label="Поля на странице (глобальная настройка)")
 
-				q-checkbox.q-mt-md(:model-value="def" @update:model-value='setDefault' dense label="Панель по умолчанию")
+				q-checkbox.q-mt-md(v-model="def" dense label="Панель по умолчанию")
 
 		template(v-else)
 			q-card-section.row.items-top.q-pb-none

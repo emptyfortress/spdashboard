@@ -34,6 +34,19 @@ export const useDash = defineStore('dash', () => {
 		index.value += 1
 		e.to = to.value
 		panels.value.push(e)
+		router.push(e.to)
+		setActivePanel(e)
+
+		if (e.def == true) {
+			const ind = panels.value.findIndex((item) => {
+				item.name == activePanel.value.name
+			})
+			panels.value.map((item) => {
+				item.def = false
+			})
+			e.def = true
+			panels.value.unshift(panels.value.splice(ind, 1)[0])
+		}
 	}
 
 	const removePanel = () => {
