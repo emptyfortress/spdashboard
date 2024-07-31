@@ -21,9 +21,10 @@ const gap = ref(8)
 const radius = ref(4)
 const flat = ref(true)
 const marg = ref(true)
+
 const def = ref(false)
 
-const emit = defineEmits(['create'])
+const emit = defineEmits(['remove'])
 
 const create = () => {
 	const id = uid()
@@ -39,13 +40,24 @@ const create = () => {
 		to: '',
 	}
 	dash.addPanel(temp)
-	emit('create', temp)
 	modelValue.value = false
 }
 
-// const edit = () => {
-// 	console.log(111)
-// }
+const save = () => {
+	if (props.newpanel) {
+		create()
+	} else modelValue.value = false
+}
+
+const remove = () => {
+	dash.removePanel()
+	modelValue.value = false
+}
+const setDefault = () => {
+	dash.activePanel.def = !dash.activePanel.def
+	// def.value = !def.value
+	console.log(111)
+}
 </script>
 
 <template lang="pug">
@@ -70,9 +82,10 @@ q-dialog(v-model="modelValue")
 				q-input(v-model="gap" dense type="number" outlined bg-color="white")
 				.label Радиус скругления, px
 				q-input(v-model="radius" dense type="number" outlined bg-color="white")
-				q-checkbox.q-mt-md(v-model="flat" dense label="Тень от карточек")
+				q-checkbox.q-mt-md(v-model="flat" dense label="Тень от виджетов")
 				q-checkbox.q-mt-md(v-model="marg" dense label="Поля на странице (глобальная настройка)")
-				q-checkbox.q-mt-md(v-model="def" dense label="Панель по умолчанию")
+
+				q-checkbox.q-mt-md(:model-value="def" @update:model-value='setDefault' dense label="Панель по умолчанию")
 
 		template(v-else)
 			q-card-section.row.items-top.q-pb-none
@@ -93,14 +106,15 @@ q-dialog(v-model="modelValue")
 				q-input(v-model="radius" dense type="number" outlined bg-color="white")
 				q-checkbox.q-mt-md(v-model="flat" dense label="Тень от карточек")
 				q-checkbox.q-mt-md(v-model="marg" dense label="Поля на странице (глобальная настройка)")
-				q-checkbox.q-mt-md(v-model="def" dense label="Панель по умолчанию")
+
+				q-checkbox.q-mt-md(:model-value="dash.activePanel.def" @update:model-value='setDefault' dense label="Панель по умолчанию" :disable='dash.panels.length == 1')
 
 		q-card-actions.q-ma-md
 			q-btn(v-if='props.newpanel | dash.panels.length == 1' flat color="primary" label="Отмена" v-close-popup) 
-			q-btn(v-else flat color="negative" label="Удалить" v-close-popup) 
+			q-btn(v-else flat color="negative" label="Удалить" @click='remove') 
 			q-space
 			q-btn(flat color="primary" label="Настроить виджеты" @click='') 
-			q-btn(unelevated color="primary" label="Сохранить" @click="create") 
+			q-btn(unelevated color="primary" label="Сохранить" @click="save") 
 </template>
 
 <style scoped lang="scss">

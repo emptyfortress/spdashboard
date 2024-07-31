@@ -21,6 +21,13 @@ const router = createRouter({
 			meta: { title: 'Speech Drive', requiresAuth: false },
 			children: [
 				{
+					path: '',
+					name: 'mainpanel',
+					component: () => import('@/components/MainPanel.vue'),
+					meta: { title: 'Speech Drive', requiresAuth: false },
+					props: true,
+				},
+				{
 					path: ':id',
 					name: 'dash',
 					component: () => import('@/components/Dashboard.vue'),

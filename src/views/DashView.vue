@@ -12,11 +12,9 @@ const toggleDialog = () => {
 	dialog.value = !dialog.value
 }
 
-const create = (e: Panel) => {
-	console.log(e)
-	// dash.tab = e.name
+const remove = () => {
+	console.log(dash.activePanel)
 }
-
 const setActivePanel = (e: Panel) => {
 	dash.setActivePanel(e)
 }
@@ -44,7 +42,7 @@ q-page
 
 		router-view
 
-	CreatePanelDialog(v-model="dialog" @create="create" :newpanel='newpanel')
+	CreatePanelDialog(v-model="dialog" :newpanel='newpanel' @remove='remove')
 
 	.setup
 		q-btn(flat round icon="mdi-cog-outline" @click="toggleDialog" dense) 
