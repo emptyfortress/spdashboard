@@ -1,10 +1,11 @@
-import { ref, computed, watch } from 'vue'
+import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import { useRouter } from 'vue-router'
 
 export const useDash = defineStore('dash', () => {
 	const router = useRouter()
 	const index = ref(0)
+	const lastRoute = ref('/dash/0')
 
 	const to = computed(() => {
 		return '/dash/' + index.value
@@ -66,11 +67,13 @@ export const useDash = defineStore('dash', () => {
 		})
 
 		panels.value.unshift(panels.value.splice(ind, 1)[0])
+		lastRoute.value = activePanel.value.to
 	}
 
 	return {
 		panels,
 		activePanel,
+		lastRoute,
 		setActivePanel,
 		setDefaultPanel,
 		addPanel,

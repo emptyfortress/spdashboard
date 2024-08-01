@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import DashView from '@/views/DashView.vue'
+import { useDash } from '@/stores/dash'
 
 declare module 'vue-router' {
 	interface RouteMeta {
@@ -16,11 +17,17 @@ const router = createRouter({
 	routes: [
 		{
 			path: '/',
-			redirect: '/dash/0',
 			name: 'home',
 			component: DashView,
 			meta: { title: 'Speech Drive', requiresAuth: false },
 			children: [
+				{
+					path: 'dash/0',
+					name: 'default',
+					component: () => import('@/components/DefaultDashboard.vue'),
+					meta: { title: 'Speech Drive', requiresAuth: false },
+					props: true,
+				},
 				{
 					path: 'dash/:id',
 					name: 'dash',
@@ -50,6 +57,12 @@ const router = createRouter({
 		// 	meta: { transition: 'page', title: 'Speech Drive', requiresAuth: false },
 		// },
 	],
+})
+
+// redirect to lastRoute - default panel
+router.beforeEach((to) => {
+	const dash = useDash()
+	if (to.path == '/') return dash.lastRoute
 })
 
 export default router
