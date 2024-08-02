@@ -3,6 +3,9 @@ const sparkOptions = {
 		sparkline: {
 			enabled: true,
 		},
+		animations: {
+			enabled: false,
+		},
 	},
 	fill: {
 		type: 'gradient',
