@@ -59,7 +59,6 @@ const router = createRouter({
 	],
 })
 
-// redirect to lastRoute - default panel
 router.beforeEach((to) => {
 	const dash = useDash()
 	if (to.path == '/') return dash.lastRoute
