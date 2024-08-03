@@ -16,8 +16,9 @@ const dash = useDash()
 const layout = ref([
 	// { x: 0, y: 0, w: 2, h: 2, i: '0', static: false },
 	// { x: 2, y: 0, w: 2, h: 4, i: '1', static: true },
-	{ x: 0, y: 0, w: 3, h: 3, i: '0' },
-	{ x: 3, y: 0, w: 4, h: 5, i: '1' },
+	{ x: 0, y: 0, w: 3, h: 3, i: 0 },
+	{ x: 3, y: 0, w: 4, h: 5, i: 1 },
+	{ x: 3, y: 0, w: 5, h: 4, i: 1 },
 ])
 
 const grid = ref(null)
@@ -38,7 +39,8 @@ const calcW = (w: number) => {
 </script>
 
 <template lang="pug">
-grid-layout(:layout.sync="layout"
+
+// grid-layout(:layout.sync="layout"
 	:col-num="12"
 	:row-height="30"
 	:is-draggable="false"
@@ -66,12 +68,13 @@ grid-layout(:layout.sync="layout"
 		q-card
 			VueApexCharts(type="area" :height='calcH(item.h)' :options="sparkOptions" :series="series1")
 
-// .all(ref='grid')
-// 	div(v-for="item in layout" :key='item.i' :style='calcStyle(item.w, item.h)')
-// 		q-card()
-// 			VueApexCharts(type="area" :height='calcH(item.h)' :options="sparkOptions" :series="series1")
+.all(ref='grid')
+	div(v-for="item in layout" :key='item.i' :style='calcStyle(item.w, item.h)')
+		q-card()
+			VueApexCharts(type="area" :height='calcH(item.h)' :options="sparkOptions" :series="series2")
 
-// GridLayout(ref="grid"
+
+// GridLayout(ref="grid" 
 	:layout.sync="layout"
 	:col-num="12"
 	:row-height="30"
@@ -113,10 +116,16 @@ grid-layout(:layout.sync="layout"
 <style scoped lang="scss">
 .all {
 	margin-top: 1rem;
-	display: flex;
-	align-items: start;
-	justify-content: start;
-	gap: 10px;
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	// justify-items: start;
+	// align-items: stretch;
+	column-gap: 1rem;
+	row-gap: 0.5rem;
+	// display: flex;
+	// align-items: start;
+	// justify-content: start;
+	// gap: 10px;
 }
 .q-card {
 	width: 100%;
