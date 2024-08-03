@@ -1,5 +1,9 @@
 <script setup lang="ts">
+// import { RouterLink, RouterView } from 'vue-router'
 import IconLogo from '@/components/icons/IconLogo.vue'
+// import { useRouter } from 'vue-router'
+//
+// const router = useRouter()
 </script>
 
 <template lang="pug">

@@ -17,8 +17,7 @@ const layout = ref([
 	// { x: 0, y: 0, w: 2, h: 2, i: '0', static: false },
 	// { x: 2, y: 0, w: 2, h: 4, i: '1', static: true },
 	{ x: 0, y: 0, w: 3, h: 3, i: 0 },
-	{ x: 3, y: 0, w: 4, h: 5, i: 1 },
-	{ x: 3, y: 0, w: 5, h: 4, i: 1 },
+	{ x: 3, y: 0, w: 4, h: 4, i: 1 },
 ])
 
 const grid = ref(null)
@@ -36,42 +35,51 @@ const calcH = (h: number) => {
 const calcW = (w: number) => {
 	return (width.value / 12) * w
 }
+const layoutUpdatedEvent = () => {
+	console.log(111)
+}
+const movedEvent = () => {
+	console.log(222)
+}
 </script>
 
 <template lang="pug">
+.test
+	grid-layout(
+		:layout.sync="layout"
+		:col-num="12"
+		:row-height="30"
+		:is-draggable="true"
+		:is-resizable="true"
+		:vertical-compact="true"
+		:use-css-transforms="true"
+		@layout-created="layoutCreatedEvent"
+		@layout-before-mount="layoutBeforeMountEvent"
+		@layout-mounted="layoutMountedEvent"
+		@layout-ready="layoutReadyEvent"
+		@layout-updated="layoutUpdatedEvent")
 
-// grid-layout(:layout.sync="layout"
-	:col-num="12"
-	:row-height="30"
-	:is-draggable="false"
-	:is-resizable="false"
-	:vertical-compact="true"
-	:use-css-transforms="true"
-	@layout-created="layoutCreatedEvent"
-	@layout-before-mount="layoutBeforeMountEvent"
-	@layout-mounted="layoutMountedEvent"
-	@layout-ready="layoutReadyEvent"
-	@layout-updated="layoutUpdatedEvent")
+		grid-item(v-for="item in layout"
+			:x="item.x"
+			:y="item.y"
+			:w="item.w"
+			:h="item.h"
+			:i="item.i"
+			@resize="resizeEvent"
+			@move="moveEvent"
+			@resized="resizedEvent"
+			@container-resized="containerResizedEvent"
+			@moved="movedEvent")
 
-	grid-item(v-for="item in layout"
-		:x="item.x"
-		:y="item.y"
-		:w="item.w"
-		:h="item.h"
-		:i="item.i"
-		@resize="resizeEvent"
-		@move="moveEvent"
-		@resized="resizedEvent"
-		@container-resized="containerResizedEvent"
-		@moved="movedEvent")
+			q-card
+				VueApexCharts(type="area" :height='calcH(item.h)' :options="sparkOptions" :series="series1")
 
-		q-card
-			VueApexCharts(type="area" :height='calcH(item.h)' :options="sparkOptions" :series="series1")
-
-.all(ref='grid')
+// .all(ref='grid')
 	div(v-for="item in layout" :key='item.i' :style='calcStyle(item.w, item.h)')
 		q-card()
 			VueApexCharts(type="area" :height='calcH(item.h)' :options="sparkOptions" :series="series2")
+			// VueApexCharts(v-if='item.i == 0' type="area" :height='calcH(item.h)' :options="sparkOptions" :series="series2")
+			// VueApexCharts(v-if='item.i == 1' type="area" :height='calcH(item.h)' :options="sparkOptions1" :series="series1")
 
 
 // GridLayout(ref="grid" 
@@ -117,7 +125,7 @@ const calcW = (w: number) => {
 .all {
 	margin-top: 1rem;
 	display: grid;
-	grid-template-columns: repeat(4, 1fr);
+	grid-template-columns: repeat(7, 1fr);
 	// justify-items: start;
 	// align-items: stretch;
 	column-gap: 1rem;
@@ -131,5 +139,12 @@ const calcW = (w: number) => {
 	width: 100%;
 	height: 100%;
 	z-index: 1001;
+}
+.test {
+	background: yellow;
+}
+:deep(.vue-grid-item) {
+	touch-action: none;
+	position: relative;
 }
 </style>

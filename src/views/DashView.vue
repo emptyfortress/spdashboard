@@ -51,10 +51,11 @@ q-page
 
 		router-view
 
-	CreatePanelDialog(v-model="dialog" :newpanel='newpanel' @remove='remove')
 
 	.setup(v-if="route.name !== 'edit'")
 		q-btn(flat round icon="mdi-cog-outline" @click="toggleDialog" dense) 
+
+	CreatePanelDialog(v-model="dialog" :newpanel='newpanel' @remove='remove')
 </template>
 
 <style scoped lang="scss">
