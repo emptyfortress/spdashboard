@@ -8,15 +8,16 @@ interface Panel {
 	marg: boolean
 	def: boolean
 	to: string
+	widgets: Widget[]
 }
 interface Widget {
 	x: number
 	y: number
 	w: number
 	h: number
-	i: string
+	i: nuber
 	set?: boolean
-	name: string
+	name?: string
 	type?: string
 	icon?: string
 	drag?: boolean

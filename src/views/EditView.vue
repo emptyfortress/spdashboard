@@ -39,7 +39,7 @@ q-page(padding)
 	.right(:style="calcWidth")
 		PreviewWidget
 
-		WidgetTabs
+		// WidgetTabs
 		q-card-actions.q-mt-md(align="center")
 			q-btn(flat color="primary" label="Отмена" @click="back") 
 			q-btn(flat color="primary" label="Сохранить" @click="") 
@@ -66,7 +66,7 @@ q-page(padding)
 	text-align: center;
 }
 .right {
-	// background: pink;
+	background: pink;
 	margin: 0 auto;
 }
 </style>

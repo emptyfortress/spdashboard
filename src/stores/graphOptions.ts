@@ -4,7 +4,7 @@ const sparkOptions = {
 			enabled: true,
 		},
 		animations: {
-			enabled: false,
+			enabled: true,
 		},
 	},
 	fill: {
@@ -69,35 +69,35 @@ const sparkOptions1 = {
 	},
 }
 
-// const areaOptions = {
-// 	xaxis: {
-// 		type: 'datetime',
-// 		categories: [
-// 			'2022-03-04',
-// 			'2022-03-11',
-// 			'2022-03-18',
-// 			'2022-03-24',
-// 			'2022-04-01',
-// 			'2022-04-08',
-// 			'2022-04-14',
-// 		],
-// 	},
-// 	chart: {
-// 		zoom: {
-// 			enabled: false,
-// 		},
-// 	},
-// 	yaxis: {
-// 		opposite: true,
-// 	},
-// }
-// const barOptions = {
-// 	plotOptions: {
-// 		bar: {
-// 			horizontal: false,
-// 		},
-// 	},
-// }
-// const donutOptions = {}
+const areaOptions = {
+	xaxis: {
+		type: 'datetime',
+		categories: [
+			'2022-03-04',
+			'2022-03-11',
+			'2022-03-18',
+			'2022-03-24',
+			'2022-04-01',
+			'2022-04-08',
+			'2022-04-14',
+		],
+	},
+	chart: {
+		zoom: {
+			enabled: false,
+		},
+	},
+	yaxis: {
+		opposite: true,
+	},
+}
+const barOptions = {
+	plotOptions: {
+		bar: {
+			horizontal: false,
+		},
+	},
+}
+const donutOptions = {}
 
-export { sparkOptions, sparkOptions1 }
+export { sparkOptions, sparkOptions1, areaOptions, barOptions, donutOptions }

@@ -18,7 +18,6 @@
     "pinia": "^2.1.7",
     "quasar": "^2.16.4",
     "vue": "^3.4.21",
-    "vue-grid-layout-v3": "^3.0.3",
     "vue-router": "^4.3.0",
     "vue-ts-responsive-grid-layout": "^1.2.9",
     "vue3-apexcharts": "^1.5.3",

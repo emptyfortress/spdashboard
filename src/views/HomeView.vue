@@ -64,7 +64,7 @@ GridLayout(ref="grid"
 			q-card-section
 				q-btn(flat color="primary" label="Настроить" @click="edit(item)" size="sm") 
 			q-icon.close(name="mdi-close" @click="remove(index)" dense)
-			q-icon.resize(name="mdi-resize-bottom-right" @click="" dense size="16px") 
+			// q-icon.resize(name="mdi-resize-bottom-right" @click="" dense size="16px") 
 
 </template>
 

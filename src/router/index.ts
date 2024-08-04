@@ -21,27 +21,27 @@ const router = createRouter({
 			component: DashView,
 			meta: { title: 'Speech Drive', requiresAuth: false },
 			children: [
+				// {
+				// 	path: 'dash/0',
+				// 	name: 'default',
+				// 	component: () => import('@/components/DefaultDashboard.vue'),
+				// 	meta: { title: 'Speech Drive', requiresAuth: false },
+				// 	props: true,
+				// },
 				{
-					path: 'dash/0',
-					name: 'default',
+					path: 'dash/:id',
+					name: 'dash',
 					component: () => import('@/components/DefaultDashboard.vue'),
 					meta: { title: 'Speech Drive', requiresAuth: false },
 					props: true,
 				},
-				{
-					path: 'dash/:id',
-					name: 'dash',
-					component: () => import('@/components/Dashboard.vue'),
-					meta: { title: 'Speech Drive', requiresAuth: false },
-					props: true,
-				},
-				{
-					path: 'dash/:id/edit',
-					name: 'edit',
-					component: () => import('@/views/HomeView.vue'),
-					// component: () => import('@/views/HomeView.vue'),
-					meta: { title: 'Speech Drive', requiresAuth: false },
-				},
+				// {
+				// 	path: 'dash/:id/edit',
+				// 	name: 'edit',
+				// 	component: () => import('@/views/EditView.vue'),
+				// 	// component: () => import('@/views/HomeView.vue'),
+				// 	meta: { title: 'Speech Drive', requiresAuth: false },
+				// },
 			],
 		},
 		// {
@@ -50,12 +50,12 @@ const router = createRouter({
 		// 	component: () => import('@/views/HomeView.vue'),
 		// 	meta: { title: 'Speech Drive', requiresAuth: false },
 		// },
-		// {
-		// 	path: '/edit',
-		// 	name: 'edit',
-		// 	component: () => import('@/views/EditView.vue'),
-		// 	meta: { transition: 'page', title: 'Speech Drive', requiresAuth: false },
-		// },
+		{
+			path: '/edit',
+			name: 'edit',
+			component: () => import('@/views/EditView.vue'),
+			meta: { transition: 'page', title: 'Speech Drive', requiresAuth: false },
+		},
 	],
 })
 

@@ -1,4 +1,4 @@
-import { ref, computed } from 'vue'
+import { ref, reactive, computed } from 'vue'
 import { defineStore } from 'pinia'
 import { useRouter } from 'vue-router'
 
@@ -22,6 +22,10 @@ export const useDash = defineStore('dash', () => {
 			marg: true,
 			def: true,
 			to: '/dash/0',
+			widgets: [
+				{ x: 0, y: 0, w: 3, h: 4, i: 0 },
+				{ x: 3, y: 0, w: 4, h: 4, i: 1 },
+			],
 		},
 	])
 
@@ -70,13 +74,29 @@ export const useDash = defineStore('dash', () => {
 		lastRoute.value = activePanel.value.to
 	}
 
+	const editMode = ref(false)
+	const toggleEditMode = () => {
+		editMode.value = !editMode.value
+	}
+
+	// widget logic *********************************
+	// const removeWidget = ((ind: number) => {
+	// 	activePanel.value.findIndex((e: any) => {
+	// 		e.i == ind
+	//
+	// 	})
+	// })
+
 	return {
 		panels,
 		activePanel,
 		lastRoute,
+		// layout,
+		editMode,
 		setActivePanel,
 		setDefaultPanel,
 		addPanel,
 		removePanel,
+		toggleEditMode,
 	}
 })

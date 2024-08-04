@@ -40,6 +40,7 @@ const create = () => {
 		marg: marg.value,
 		def: def.value,
 		to: '',
+		widgets: [],
 	}
 	dash.addPanel(temp)
 	modelValue.value = false
@@ -59,9 +60,9 @@ const def = ref(false)
 const setDefault1 = () => {
 	console.log(def.value)
 }
-const setWidget = () => {
-	const url = route.path + '/edit'
-	router.push(url)
+const edit = () => {
+	dash.toggleEditMode()
+	modelValue.value = false
 }
 </script>
 
@@ -118,7 +119,7 @@ q-dialog(v-model="modelValue")
 			q-btn(v-if='props.newpanel | dash.panels.length == 1' flat color="primary" label="Отмена" v-close-popup) 
 			q-btn(v-else flat color="negative" label="Удалить" @click='remove') 
 			q-space
-			q-btn(:disable='props.newpanel' flat color="primary" label="Настроить виджеты" @click='setWidget') 
+			q-btn(:disable='props.newpanel' flat color="primary" label="Настроить виджеты" @click='edit') 
 			q-btn(unelevated color="primary" label="Сохранить" @click="save") 
 </template>
 

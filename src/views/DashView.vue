@@ -13,9 +13,6 @@ const toggleDialog = () => {
 	dialog.value = !dialog.value
 }
 
-const remove = () => {
-	console.log(dash.activePanel)
-}
 const setActivePanel = (e: Panel) => {
 	dash.setActivePanel(e)
 }
@@ -36,24 +33,28 @@ watch(dialog, (val) => {
 const back = () => {
 	router.back()
 }
+
+const editMode = ref(true)
+const toggleEditMode = () => {
+	editMode.value = !editMode.value
+}
 </script>
 
 <template lang="pug">
 q-page
 	.container
-		q-tabs(active-color="primary" v-if='route.name !== "edit"')
+		.save(v-if='dash.editMode')
+			q-btn(flat color="primary" label="Отмена" @click="dash.toggleEditMode") 
+			q-btn(unelevated color="primary" label="Сохранить" @click="") 
+
+		q-tabs(v-else active-color="primary")
 			q-route-tab(:name="panel.name" :label="panel.label" v-for="panel in dash.panels" :key="panel.name" :to='panel.to' @click='setActivePanel(panel)')
 			q-btn.q-ml-lg(flat round icon="mdi-plus" @click="addpanelDialog" dense) 
 
-		.save(v-else)
-			q-btn(flat color="primary" label="Отмена" @click="back") 
-			q-btn(unelevated color="primary" label="Сохранить" @click="") 
-
 		router-view
 
-
 	.setup(v-if="route.name !== 'edit'")
-		q-btn(flat round icon="mdi-cog-outline" @click="toggleDialog" dense) 
+		q-btn(flat round icon="mdi-pencil-outline" @click="toggleDialog" dense) 
 
 	CreatePanelDialog(v-model="dialog" :newpanel='newpanel' @remove='remove')
 </template>
@@ -66,6 +67,6 @@ q-page
 }
 .save {
 	padding-top: 0.5rem;
-	text-align: right;
+	text-align: center;
 }
 </style>
