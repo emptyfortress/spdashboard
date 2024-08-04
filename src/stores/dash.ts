@@ -23,8 +23,8 @@ export const useDash = defineStore('dash', () => {
 			def: true,
 			to: '/dash/0',
 			widgets: [
-				{ x: 0, y: 0, w: 3, h: 4, i: 0 },
-				{ x: 3, y: 0, w: 4, h: 4, i: 1 },
+				{ x: 0, y: 0, w: 3, h: 3, i: 0 },
+				{ x: 3, y: 0, w: 3, h: 3, i: 1 },
 			],
 		},
 	])
@@ -74,17 +74,28 @@ export const useDash = defineStore('dash', () => {
 		lastRoute.value = activePanel.value.to
 	}
 
-	const editMode = ref(false)
+	const editMode = ref(true)
 	const toggleEditMode = () => {
 		editMode.value = !editMode.value
 	}
 
 	// widget logic *********************************
-	const removeWidget = (ind: number) => {
-		let tmp = activePanel.value.widgets.findIndex((e: any) => {
-			e.i == ind
+	const removeWidget = (i: number) => {
+		let idx = activePanel.value.widgets.findIndex((e: any) => {
+			return e.i == i
 		})
-		activePanel.value.widgets.splice(tmp, 1)
+		activePanel.value.widgets.splice(idx, 1)
+	}
+	let widgetIndex = 2
+	const addWidget = () => {
+		activePanel.value.widgets.push({
+			x: (activePanel.value.widgets.length * 3) % 12,
+			y: activePanel.value.widgets.length + 12, // puts it at the bottom
+			w: 3,
+			h: 3,
+			i: widgetIndex,
+		})
+		widgetIndex += 1
 	}
 
 	return {
@@ -98,5 +109,6 @@ export const useDash = defineStore('dash', () => {
 		removePanel,
 		toggleEditMode,
 		removeWidget,
+		addWidget,
 	}
 })
