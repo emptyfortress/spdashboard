@@ -49,7 +49,7 @@ grid-layout(
 		:i="item.i"
 		)
 		Chart(v-if='show')
-		q-btn(v-if='dash.editMode' unelevated color="accent" label="Настроить" @click="goToEdit") 
+		q-btn(v-if='dash.editMode' color="accent" label="Настроить" @click="goToEdit") 
 		q-icon.close(v-if='dash.editMode' name="mdi-close" @click='remove(item)')
 
 </template>
