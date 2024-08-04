@@ -50,7 +50,7 @@ grid-layout(
 		)
 		Chart(v-if='show')
 		q-btn(v-if='dash.editMode' color="accent" label="Настроить" @click="goToEdit") 
-		q-icon.close(v-if='dash.editMode' name="mdi-close" @click='remove(item)')
+		q-icon.close(v-if='dash.editMode' name="mdi-close" @click='dash.removeWidget(item.i)')
 
 </template>
 
@@ -65,6 +65,9 @@ grid-layout(
 		z-index: 2;
 		transform: translate(-50%, -50%);
 	}
+}
+:deep(.vue-grid-placeholder) {
+	background: green;
 }
 .setup {
 	position: fixed;

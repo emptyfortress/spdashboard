@@ -80,23 +80,23 @@ export const useDash = defineStore('dash', () => {
 	}
 
 	// widget logic *********************************
-	// const removeWidget = ((ind: number) => {
-	// 	activePanel.value.findIndex((e: any) => {
-	// 		e.i == ind
-	//
-	// 	})
-	// })
+	const removeWidget = (ind: number) => {
+		let tmp = activePanel.value.widgets.findIndex((e: any) => {
+			e.i == ind
+		})
+		activePanel.value.widgets.splice(tmp, 1)
+	}
 
 	return {
 		panels,
 		activePanel,
 		lastRoute,
-		// layout,
 		editMode,
 		setActivePanel,
 		setDefaultPanel,
 		addPanel,
 		removePanel,
 		toggleEditMode,
+		removeWidget,
 	}
 })

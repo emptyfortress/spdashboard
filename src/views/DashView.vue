@@ -44,7 +44,7 @@ const toggleEditMode = () => {
 q-page
 	.container
 		.save(v-if='dash.editMode')
-			q-btn(color="primary" icon='mdi-plus' label="Добавить виджет" @click="dash.toggleEditMode") 
+			q-btn(color="primary" icon='mdi-plus' label="Добавить виджет" @click="") 
 			q-btn(color="primary" label="Сохранить панель" @click="") 
 
 		q-tabs(v-else active-color="primary")
