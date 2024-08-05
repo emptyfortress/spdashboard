@@ -16,9 +16,9 @@ interface Widget {
 	w: number
 	h: number
 	i: nuber
+	type: string
 	set?: boolean
 	name?: string
-	type?: string
 	icon?: string
 	drag?: boolean
 	design?: any

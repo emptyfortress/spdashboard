@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import WidgetTree from '@/components/dash/WidgetTree.vue'
 import PreviewWidget from '@/components/dash/PreviewWidget.vue'
 import WidgetTabs from '@/components/dash/WidgetTabs.vue'
 import { useStore } from '@/stores/store'
@@ -25,7 +24,7 @@ const back = () => {
 </script>
 
 <template lang="pug">
-q-page(padding)
+q-page
 	.back
 		.cursor-pointer(@click="back")
 			q-btn(flat round dense icon="mdi-arrow-left-circle-outline" size="lg") 

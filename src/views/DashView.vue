@@ -34,7 +34,6 @@ const back = () => {
 	router.back()
 }
 
-const editMode = ref(true)
 const toggleEditMode = () => {
 	editMode.value = !editMode.value
 }
@@ -56,7 +55,7 @@ q-page
 	.setup(v-if="route.name !== 'edit'")
 		q-btn(flat round icon="mdi-pencil-outline" @click="toggleDialog" dense) 
 
-	CreatePanelDialog(v-model="dialog" :newpanel='newpanel' @remove='remove')
+	CreatePanelDialog(v-model="dialog" :newpanel='newpanel')
 </template>
 
 <style scoped lang="scss">
