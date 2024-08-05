@@ -26,8 +26,6 @@ const radius = ref(4)
 const flat = ref(true)
 const marg = ref(true)
 
-const emit = defineEmits(['remove'])
-
 const create = () => {
 	const id = uid()
 	let temp = {
@@ -57,9 +55,6 @@ const remove = () => {
 	modelValue.value = false
 }
 const def = ref(false)
-const setDefault1 = () => {
-	console.log(def.value)
-}
 const edit = () => {
 	dash.toggleEditMode()
 	modelValue.value = false

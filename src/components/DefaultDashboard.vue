@@ -1,9 +1,12 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, reactive } from 'vue'
 import { GridLayout, GridItem } from 'vue3-grid-layout-next'
 import { useDash } from '@/stores/dash'
+import { useStore } from '@/stores/store'
 import Chart from '@/components/dash/Chart.vue'
 import { useRouter, useRoute } from 'vue-router'
+import { useElementSize } from '@vueuse/core'
+import { useWidget } from '@/stores/widgets'
 
 const props = defineProps({
 	id: {
@@ -16,6 +19,8 @@ const router = useRouter()
 const route = useRoute()
 
 const dash = useDash()
+const store = useStore()
+const widget = useWidget()
 
 const show = ref(false)
 onMounted(() => {
@@ -23,15 +28,19 @@ onMounted(() => {
 		show.value = true
 	}, 10)
 })
-const goToEdit = () => {
+const grid = ref(null)
+const { width } = useElementSize(grid)
+
+const edit = (item: any) => {
+	widget.setContainer(width.value)
+	widget.setActiveWidget(item)
 	router.push('/edit')
 }
-
-const remove = (item: any) => {}
 </script>
 
 <template lang="pug">
-grid-layout(
+div {{ width }}
+grid-layout(ref='grid'
 	:layout.sync="dash.activePanel.widgets"
 	:col-num="12"
 	:row-height="30"
@@ -47,9 +56,10 @@ grid-layout(
 		:w="item.w"
 		:h="item.h"
 		:i="item.i"
+		:key='item.i'
 		)
-		Chart(v-if='show')
-		q-btn(v-if='dash.editMode' color="accent" label="Настроить" @click="goToEdit") 
+		Chart(v-if='show' :item='item')
+		q-btn(v-if='dash.editMode' color="accent" label="Настроить" @click="edit(item)") 
 		q-icon.close(v-if='dash.editMode' name="mdi-close" @click='dash.removeWidget(item.i)')
 
 </template>

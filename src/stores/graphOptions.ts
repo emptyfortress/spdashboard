@@ -7,32 +7,6 @@ const sparkOptions = {
 			enabled: true,
 		},
 	},
-	fill: {
-		type: 'gradient',
-		gradient: {
-			shade: 'light',
-			type: 'vertical',
-			inverseColors: false,
-			opacityFrom: 1,
-			opacityTo: 0,
-			stops: [0, 100],
-			colorStops: [],
-		},
-	},
-	title: {
-		text: '234',
-		offsetX: 0,
-		style: {
-			fontSize: '24px',
-		},
-	},
-	subtitle: {
-		text: 'Вызовы',
-		offsetX: 0,
-		style: {
-			fontSize: '14px',
-		},
-	},
 }
 
 const sparkOptions1 = {

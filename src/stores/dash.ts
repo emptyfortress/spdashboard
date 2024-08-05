@@ -23,8 +23,8 @@ export const useDash = defineStore('dash', () => {
 			def: true,
 			to: '/dash/0',
 			widgets: [
-				{ x: 0, y: 0, w: 3, h: 3, i: 0 },
-				{ x: 3, y: 0, w: 3, h: 3, i: 1 },
+				{ x: 0, y: 0, w: 3, h: 3, i: 0, type: 'spark' },
+				{ x: 3, y: 0, w: 3, h: 3, i: 1, type: 'number' },
 			],
 		},
 	])
@@ -74,7 +74,7 @@ export const useDash = defineStore('dash', () => {
 		lastRoute.value = activePanel.value.to
 	}
 
-	const editMode = ref(true)
+	const editMode = ref(false)
 	const toggleEditMode = () => {
 		editMode.value = !editMode.value
 	}
@@ -94,6 +94,7 @@ export const useDash = defineStore('dash', () => {
 			w: 3,
 			h: 3,
 			i: widgetIndex,
+			type: 'none',
 		})
 		widgetIndex += 1
 	}

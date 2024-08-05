@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { ref, computed, reactive } from 'vue'
-import { useStore } from '@/stores/store'
+import { useWidget } from '@/stores/widgets'
 import { GridItem, GridLayout } from 'vue-ts-responsive-grid-layout'
 import PreviewCard from '@/components/dash/PreviewCard.vue'
 
-const store = useStore()
+const widget = useWidget()
 // const over = ref(false)
 //
 // const drop = (evt: DragEvent) => {
@@ -14,7 +14,7 @@ const store = useStore()
 // 	store.activeWidget.type = item.type
 // 	store.activeWidget.name = item.text
 // }
-const layout = reactive([store.activeWidget])
+const layout = reactive([widget.activeWidget])
 </script>
 
 <template lang="pug">
@@ -33,9 +33,9 @@ GridLayout(
 	GridItem(
 		:x="0"
 		:y="0"
-		:w="store.activeWidget.w"
-		:h="store.activeWidget.h"
-		:i="store.activeWidget.i"
+		:w="widget.activeWidget.w"
+		:h="widget.activeWidget.h"
+		:i="widget.activeWidget.i"
 		:show-close-button="false"
 		)
 		PreviewCard

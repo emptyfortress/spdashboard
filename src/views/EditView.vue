@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import PreviewWidget from '@/components/dash/PreviewWidget.vue'
-import WidgetTabs from '@/components/dash/WidgetTabs.vue'
+// import WidgetTabs from '@/components/dash/WidgetTabs.vue'
 import { useStore } from '@/stores/store'
 import { useRouter } from 'vue-router'
+import { useWidget } from '@/stores/widgets'
 
+const widget = useWidget()
 const store = useStore()
 const splitterModel = ref(16)
 const router = useRouter()
@@ -14,7 +16,7 @@ const hei = computed(() => {
 })
 
 const calcWidth = computed(() => {
-	return 'width: ' + store.container + 'px'
+	return 'width: ' + widget.container + 'px'
 })
 const back = () => {
 	router.back()
@@ -36,6 +38,7 @@ q-page
 		div
 
 	.right(:style="calcWidth")
+		div {{ widget.container }}
 		PreviewWidget
 
 		// WidgetTabs
