@@ -7,6 +7,7 @@ import Chart from '@/components/dash/Chart.vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useElementSize } from '@vueuse/core'
 import { useWidget } from '@/stores/widgets'
+import PreviewCard1 from '@/components/dash/PreviewCard1.vue'
 
 const props = defineProps({
 	id: {
@@ -57,13 +58,18 @@ grid-layout(ref='grid'
 		:i="item.i"
 		:key='item.i'
 		)
-		Chart(v-if='show' :item='item')
+		PreviewCard1(:item='item')
+		// Chart(v-if='show' :item='item')
 		q-btn(v-if='dash.editMode' color="accent" label="Настроить" @click="edit(item)") 
 		q-icon.close(v-if='dash.editMode' name="mdi-close" @click='dash.removeWidget(item.i)')
 
 </template>
 
 <style scoped lang="scss">
+// .q-card {
+// 	width: 100%;
+// 	height: 100%;
+// }
 :deep(.vue-grid-item) {
 	touch-action: none;
 	position: relative;

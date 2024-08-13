@@ -3,6 +3,7 @@ import { ref, computed } from 'vue'
 import { useStore } from '@/stores/store'
 import VueApexCharts from 'vue3-apexcharts'
 import { sparkOptions, sparkOptions1 } from '@/stores/graphOptions'
+import PreviewCard from '@/components/dash/PreviewCard.vue'
 
 const props = defineProps<{
 	item: Widget
@@ -31,16 +32,17 @@ const subheadTranslateY = computed(() => {
 </script>
 
 <template lang="pug">
-q-card.chart
-	.head(v-if="props.item.design.title.use")
-		span(v-if="props.item.design.title.data") 123
-		span(v-else) {{ props.item.design.title.text}}
-
-	.subhead(v-if="props.item.design.subtitle.use")
-		span(v-if="props.item.design.subtitle.data") 123 
-		span(v-else) {{ props.item.design.subtitle.text}}
-
-	VueApexCharts(v-if='props.item.type == "spark"' type="area" height='100%' :options="sparkOptions" :series="series1")
+PreviewCard
+// q-card.chart
+// 	.head(v-if="props.item.design.title.use")
+// 		span(v-if="props.item.design.title.data") 123
+// 		span(v-else) {{ props.item.design.title.text}}
+//
+// 	.subhead(v-if="props.item.design.subtitle.use")
+// 		span(v-if="props.item.design.subtitle.data") 123 
+// 		span(v-else) {{ props.item.design.subtitle.text}}
+//
+// 	VueApexCharts(v-if='props.item.type == "spark"' type="area" height='100%' :options="sparkOptions" :series="series1")
 </template>
 
 <style scoped lang="scss">
