@@ -20,8 +20,14 @@ const calcWidth = computed(() => {
 })
 const back = () => {
 	router.back()
-	store.setType('')
-	store.activeWidget.set = false
+	widget.setType('')
+	widget.activeWidget.set = false
+}
+
+const save = () => {
+	router.back()
+	widget.setType('')
+	// widget.activeWidget.set = false
 }
 </script>
 
@@ -43,7 +49,7 @@ q-page
 		WidgetTabs
 		q-card-actions.q-mt-md(align="center")
 			q-btn(flat color="primary" label="Отмена" @click="back") 
-			q-btn(flat color="primary" label="Сохранить" @click="") 
+			q-btn(flat color="primary" label="Сохранить" @click="save") 
 </template>
 
 <style scoped lang="scss">

@@ -1,0 +1,55 @@
+const defPanel = [
+	{
+		label: 'Панель 1',
+		name: 'home',
+		descr: 'Это первая панель',
+		gap: 0.5,
+		radius: 4,
+		flat: false,
+		marg: true,
+		def: true,
+		to: '/dash/0',
+		widgets: [
+			{
+				x: 0,
+				y: 0,
+				w: 3,
+				h: 3,
+				i: 0,
+				type: 'spark',
+				set: true,
+				name: '',
+				design: {
+					title: {
+						use: true,
+						text: 'Title',
+						data: true,
+						useDefault: true,
+						fontSize: 1.7,
+						fontWeight: 600,
+						fontStyle: 'normal',
+						align: 'left',
+						fontColor: '#333',
+						translateX: 30,
+						translateY: 10,
+					},
+					subtitle: {
+						use: true,
+						text: 'Subtitle',
+						data: false,
+						useDefault: true,
+						fontSize: 0.8,
+						fontWeight: 400,
+						fontStyle: 'normal',
+						align: 'left',
+						fontColor: '#333',
+						translateX: 40,
+						translateY: 35,
+					},
+				},
+			},
+		],
+	},
+]
+
+export { defPanel }

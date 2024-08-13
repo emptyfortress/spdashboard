@@ -1,6 +1,7 @@
 import { ref, reactive, computed } from 'vue'
 import { defineStore } from 'pinia'
 import { useRouter } from 'vue-router'
+import { defPanel } from '@/stores/start'
 
 export const useDash = defineStore('dash', () => {
 	const router = useRouter()
@@ -11,60 +12,7 @@ export const useDash = defineStore('dash', () => {
 		return '/dash/' + index.value
 	})
 
-	const panels = ref([
-		{
-			label: 'Панель 1',
-			name: 'home',
-			descr: 'Это первая панель',
-			gap: 0.5,
-			radius: 4,
-			flat: false,
-			marg: true,
-			def: true,
-			to: '/dash/0',
-			widgets: [
-				{
-					x: 0,
-					y: 0,
-					w: 3,
-					h: 3,
-					i: 0,
-					type: 'spark',
-					set: true,
-					name: '',
-					design: {
-						title: {
-							use: true,
-							text: 'Title',
-							data: true,
-							useDefault: true,
-							fontSize: 1.7,
-							fontWeight: 600,
-							fontStyle: 'normal',
-							align: 'left',
-							fontColor: '#333',
-							translateX: 30,
-							translateY: 10,
-						},
-						subtitle: {
-							use: true,
-							text: 'Subtitle',
-							data: false,
-							useDefault: true,
-							fontSize: 0.8,
-							fontWeight: 400,
-							fontStyle: 'normal',
-							align: 'left',
-							fontColor: '#333',
-							translateX: 40,
-							translateY: 35,
-						},
-					},
-				},
-				// { x: 3, y: 0, w: 3, h: 3, i: 1, type: 'number', set: false },
-			],
-		},
-	])
+	const panels = ref(defPanel)
 
 	const activePanel = ref(panels.value[0])
 
@@ -111,7 +59,7 @@ export const useDash = defineStore('dash', () => {
 		lastRoute.value = activePanel.value.to
 	}
 
-	const editMode = ref(true)
+	const editMode = ref(false)
 	const toggleEditMode = () => {
 		editMode.value = !editMode.value
 	}
@@ -166,6 +114,10 @@ export const useDash = defineStore('dash', () => {
 		widgetIndex += 1
 	}
 
+	// function $reset() {
+	// 	panels.value = defPanel
+	// }
+	//
 	return {
 		panels,
 		activePanel,
@@ -178,5 +130,6 @@ export const useDash = defineStore('dash', () => {
 		toggleEditMode,
 		removeWidget,
 		addWidget,
+		// $reset,
 	}
 })
