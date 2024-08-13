@@ -33,16 +33,18 @@ const back = () => {
 	dash.toggleEditMode()
 	location.reload()
 }
+const save = () => {
+	dash.toggleEditMode()
+}
 </script>
 
 <template lang="pug">
 q-page
 	.container
 		.save(v-if='dash.editMode')
-			// q-btn(flat color="primary" label="Отмена" @click="dash.toggleEditMode") 
 			q-btn(flat color="primary" label="Отмена" @click="back") 
 			q-btn(color="primary" icon='mdi-plus' label="Добавить виджет" @click="dash.addWidget") 
-			q-btn(color="primary" label="Сохранить панель" @click="") 
+			q-btn(color="primary" label="Сохранить панель" @click="save") 
 
 		q-tabs(v-else active-color="primary")
 			q-route-tab(:name="panel.name" :label="panel.label" v-for="panel in dash.panels" :key="panel.name" :to='panel.to' @click='setActivePanel(panel)')

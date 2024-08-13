@@ -4,8 +4,10 @@ import draggable from 'vuedraggable'
 import { useStore } from '@/stores/store'
 import MyInput from '@/components/common/MyInput.vue'
 import MySelect from '@/components/common/MySelect.vue'
+import { useWidget } from '@/stores/widgets'
 
 const store = useStore()
+const widget = useWidget()
 
 // const list = ref([
 // 	{ col0: 'data', col1: 'data', col2: 'data', col3: 'data', col4: 'data', col5: 'data' },
@@ -26,14 +28,14 @@ const dis = computed(() => {
 .grd
 	div
 		p Порядок и видимость колонок
-		draggable(:list="store.calcList"
+		draggable(:list="widget.calcList"
 			item-key="name"
 			:filter="dis"
 			ghost-class="ghost")
 
 			template(#item="{ element }")
 				.list-group-item(:class="{dis: element.id < 9}")
-					q-checkbox(v-model="store.visible" :val="element.name" :label="element.label" dense checked-icon="mdi-eye" unchecked-icon="mdi-eye-off" :disable="element.id < 9")
+					q-checkbox(v-model="widget.visible" :val="element.name" :label="element.label" dense checked-icon="mdi-eye" unchecked-icon="mdi-eye-off" :disable="element.id < 9")
 
 	.sort
 		p Сортировка

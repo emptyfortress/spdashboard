@@ -83,8 +83,8 @@ onMounted(() => {
 </script>
 
 <template lang="pug">
-q-card.preview(:class="{stat: store.type == 'table'}")
-	q-icon.resize(name="mdi-resize-bottom-right" @click="" dense size="16px") 
+q-card.preview(:class="{stat: widget.type == 'table'}")
+	q-icon.resize(name="mdi-resize-bottom-right" dense size="16px") 
 
 	q-btn(v-if="widget.activeWidget.type == 'bar'" flat round dense icon="mdi-rotate-left-variant" @click="rotate") 
 
@@ -130,15 +130,15 @@ q-card.preview(:class="{stat: store.type == 'table'}")
 	q-table(v-if="widget.active == 'categ' && widget.activeWidget.type == 'table'"
 		flat
 		:rows="rows"
-		:columns="store.cols"
-		:visible-columns="store.visible"
-		:pagination="store.pagination")
+		:columns="widget.cols"
+		:visible-columns="widget.visible"
+		:pagination="widget.pagination")
 
-	q-table(v-if="widget.active == 'list' && store.activeWidget.type == 'table'"
+	q-table(v-if="widget.active == 'list' && widget.activeWidget.type == 'table'"
 		flat
 		:rows="rows"
-		:columns="store.cols1"
-		:visible-columns="store.visible"
+		:columns="widget.cols1"
+		:visible-columns="widget.visible"
 		:pagination="widget.pagination")
 
 		template(v-slot:body-cell-col2="props")

@@ -1,8 +1,7 @@
 <script setup lang="ts">
-import { ref, onMounted, reactive } from 'vue'
+import { ref, onMounted, reactive, watch } from 'vue'
 import { GridLayout, GridItem } from 'vue3-grid-layout-next'
 import { useDash } from '@/stores/dash'
-import { useStore } from '@/stores/store'
 import Chart from '@/components/dash/Chart.vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useElementSize } from '@vueuse/core'
@@ -20,7 +19,6 @@ const router = useRouter()
 const route = useRoute()
 
 const dash = useDash()
-const store = useStore()
 const widget = useWidget()
 
 const show = ref(false)
@@ -59,17 +57,12 @@ grid-layout(ref='grid'
 		:key='item.i'
 		)
 		PreviewCard1(:item='item')
-		// Chart(v-if='show' :item='item')
 		q-btn(v-if='dash.editMode' color="accent" label="Настроить" @click="edit(item)") 
 		q-icon.close(v-if='dash.editMode' name="mdi-close" @click='dash.removeWidget(item.i)')
 
 </template>
 
 <style scoped lang="scss">
-// .q-card {
-// 	width: 100%;
-// 	height: 100%;
-// }
 :deep(.vue-grid-item) {
 	touch-action: none;
 	position: relative;

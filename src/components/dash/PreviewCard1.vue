@@ -16,10 +16,10 @@ const store = useStore()
 const widget = useWidget()
 
 const headsize = computed(() => {
-	return store.activeWidget.design.title.fontSize + 'rem'
+	return widget.activeWidget.design.title.fontSize + 'rem'
 })
 const subhead = computed(() => {
-	return store.activeWidget.design.subtitle.fontSize + 'rem'
+	return widget.activeWidget.design.subtitle.fontSize + 'rem'
 })
 
 const series = ref([{ name: 'Параметр', data: randomArray(7, 80, 5) }])
@@ -62,21 +62,21 @@ const rows = [
 const barChart = ref<any>(null)
 
 const headTranslateX = computed(() => {
-	return store.activeWidget.design.title.translateX + '%'
+	return widget.activeWidget.design.title.translateX + '%'
 })
 const headTranslateY = computed(() => {
-	return store.activeWidget.design.title.translateY + 'px'
+	return widget.activeWidget.design.title.translateY + 'px'
 })
 const subheadTranslateX = computed(() => {
-	return store.activeWidget.design.subtitle.translateX + '%'
+	return widget.activeWidget.design.subtitle.translateX + '%'
 })
 const subheadTranslateY = computed(() => {
-	return store.activeWidget.design.subtitle.translateY + 'px'
+	return widget.activeWidget.design.subtitle.translateY + 'px'
 })
 const padtop = computed(() => {
-	if (!store.activeWidget.set) return '0'
-	if (store.type == 'table') return '.5rem'
-	return store.activeWidget.design.title.use ? '2rem' : '0'
+	if (!widget.activeWidget.set) return '0'
+	if (widget.type == 'table') return '.5rem'
+	return widget.activeWidget.design.title.use ? '2rem' : '0'
 })
 const show = ref(false)
 onMounted(() => {
@@ -87,8 +87,8 @@ onMounted(() => {
 </script>
 
 <template lang="pug">
-q-card.preview(:class="{stat: store.type == 'table'}")
-	// q-icon.resize(name="mdi-resize-bottom-right" @click="" dense size="16px") 
+q-card.preview(:class="{stat: widget.type == 'table'}")
+	// q-icon.resize(name="mdi-resize-bottom-right" dense size="16px") 
 
 	q-btn(v-if="props.item.type == 'bar'" flat round dense icon="mdi-rotate-left-variant" @click="rotate") 
 
@@ -134,23 +134,21 @@ q-card.preview(:class="{stat: store.type == 'table'}")
 	q-table(v-if="widget.active == 'categ' && props.item.type == 'table'"
 		flat
 		:rows="rows"
-		:columns="store.cols"
-		:visible-columns="store.visible"
-		:pagination="store.pagination")
+		:columns="widget.cols"
+		:visible-columns="widget.visible"
+		:pagination="widget.pagination")
 
-	q-table(v-if="store.active == 'list' && store.activeWidget.type == 'table'"
+	q-table(v-if="widget.active == 'list' && widget.activeWidget.type == 'table'"
 		flat
 		:rows="rows"
-		:columns="store.cols1"
-		:visible-columns="store.visible"
-		:pagination="store.pagination")
+		:columns="widget.cols1"
+		:visible-columns="widget.visible"
+		:pagination="widget.pagination")
 
 		template(v-slot:body-cell-col2="props")
 			q-td
 				GistForTable
 				// VueApexCharts(type="bar" height="100%" :options="barOptions" :series="barSeries")
-
-
 
 </template>
 
@@ -173,20 +171,20 @@ q-card.preview(:class="{stat: store.type == 'table'}")
 }
 .head1 {
 	font-size: v-bind(headsize);
-	font-weight: v-bind('store.activeWidget.design.title.fontWeight');
+	font-weight: v-bind('widget.activeWidget.design.title.fontWeight');
 	line-height: 0.9;
-	text-align: v-bind('store.activeWidget.design.title.align');
-	font-style: v-bind('store.activeWidget.design.title.fontStyle');
-	color: v-bind('store.activeWidget.design.title.fontColor');
+	text-align: v-bind('widget.activeWidget.design.title.align');
+	font-style: v-bind('widget.activeWidget.design.title.fontStyle');
+	color: v-bind('widget.activeWidget.design.title.fontColor');
 	padding-left: 0.4rem;
 }
 .subhead1 {
 	font-size: v-bind(subhead);
-	font-weight: v-bind('store.activeWidget.design.subtitle.fontWeight');
+	font-weight: v-bind('widget.activeWidget.design.subtitle.fontWeight');
 	line-height: 0.9;
-	text-align: v-bind('store.activeWidget.design.subtitle.align');
-	font-style: v-bind('store.activeWidget.design.subtitle.fontStyle');
-	color: v-bind('store.activeWidget.design.subtitle.fontColor');
+	text-align: v-bind('widget.activeWidget.design.subtitle.align');
+	font-style: v-bind('widget.activeWidget.design.subtitle.fontStyle');
+	color: v-bind('widget.activeWidget.design.subtitle.fontColor');
 	margin-top: 0.2rem;
 	padding-left: 0.4rem;
 }
@@ -209,20 +207,20 @@ q-card.preview(:class="{stat: store.type == 'table'}")
 }
 .head {
 	font-size: v-bind(headsize);
-	font-weight: v-bind('store.activeWidget.design.title.fontWeight');
+	font-weight: v-bind('widget.activeWidget.design.title.fontWeight');
 	line-height: 0.9;
-	text-align: v-bind('store.activeWidget.design.title.align');
-	font-style: v-bind('store.activeWidget.design.title.fontStyle');
-	color: v-bind('store.activeWidget.design.title.fontColor');
+	text-align: v-bind('widget.activeWidget.design.title.align');
+	font-style: v-bind('widget.activeWidget.design.title.fontStyle');
+	color: v-bind('widget.activeWidget.design.title.fontColor');
 	transform: translate(v-bind(headTranslateX), v-bind(headTranslateY));
 }
 .subhead {
 	font-size: v-bind(subhead);
-	font-weight: v-bind('store.activeWidget.design.subtitle.fontWeight');
+	font-weight: v-bind('widget.activeWidget.design.subtitle.fontWeight');
 	line-height: 0.9;
-	text-align: v-bind('store.activeWidget.design.subtitle.align');
-	font-style: v-bind('store.activeWidget.design.subtitle.fontStyle');
-	color: v-bind('store.activeWidget.design.subtitle.fontColor');
+	text-align: v-bind('widget.activeWidget.design.subtitle.align');
+	font-style: v-bind('widget.activeWidget.design.subtitle.fontStyle');
+	color: v-bind('widget.activeWidget.design.subtitle.fontColor');
 	transform: translate(v-bind(subheadTranslateX), v-bind(subheadTranslateY));
 }
 </style>
