@@ -1,11 +1,11 @@
 const defaultWidget = {
 	x: 0,
 	y: 0,
-	w: 3,
-	h: 3,
+	w: 5,
+	h: 5,
 	i: 0,
-	set: false,
-	type: '',
+	set: true,
+	type: 'table',
 	name: '',
 	design: {
 		title: {

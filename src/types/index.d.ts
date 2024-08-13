@@ -10,18 +10,47 @@ interface Panel {
 	to: string
 	widgets: Widget[]
 }
+interface Design {
+	title: {
+		use: boolean
+		text: string
+		data: boolean
+		useDefault: boolean
+		fontSize: number
+		fontWeight: number
+		fontStyle: string
+		align: string
+		fontColor: string
+		translateX: number
+		translateY: number
+	}
+	subtitle: {
+		use: boolean
+		text: string
+		data: boolean
+		useDefault: boolean
+		fontSize: number
+		fontWeight: number
+		fontStyle: string
+		align: string
+		fontColor: string
+		translateX: number
+		translateY: number
+	}
+}
+
 interface Widget {
 	x: number
 	y: number
 	w: number
 	h: number
-	i: nuber
+	i: number
 	type: string
-	set?: boolean
-	name?: string
+	set: boolean
+	name: string
 	icon?: string
 	drag?: boolean
-	design?: any
+	design: Design
 }
 type Anketa = {
 	id: Number

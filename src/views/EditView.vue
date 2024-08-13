@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import PreviewWidget from '@/components/dash/PreviewWidget.vue'
-// import WidgetTabs from '@/components/dash/WidgetTabs.vue'
+import WidgetTabs from '@/components/dash/WidgetTabs.vue'
 import { useStore } from '@/stores/store'
 import { useRouter } from 'vue-router'
 import { useWidget } from '@/stores/widgets'
@@ -38,10 +38,9 @@ q-page
 		div
 
 	.right(:style="calcWidth")
-		div {{ widget.container }}
 		PreviewWidget
 
-		// WidgetTabs
+		WidgetTabs
 		q-card-actions.q-mt-md(align="center")
 			q-btn(flat color="primary" label="Отмена" @click="back") 
 			q-btn(flat color="primary" label="Сохранить" @click="") 
@@ -68,7 +67,7 @@ q-page
 	text-align: center;
 }
 .right {
-	background: pink;
+	// background: pink;
 	margin: 0 auto;
 }
 </style>

@@ -5,15 +5,6 @@ import { GridItem, GridLayout } from 'vue-ts-responsive-grid-layout'
 import PreviewCard from '@/components/dash/PreviewCard.vue'
 
 const widget = useWidget()
-// const over = ref(false)
-//
-// const drop = (evt: DragEvent) => {
-// 	over.value = false
-// 	let item = JSON.parse(evt.dataTransfer!.getData('item'))
-// 	store.activeWidget.set = true
-// 	store.activeWidget.type = item.type
-// 	store.activeWidget.name = item.text
-// }
 const layout = reactive([widget.activeWidget])
 </script>
 

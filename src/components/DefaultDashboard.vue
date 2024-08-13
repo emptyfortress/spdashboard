@@ -39,7 +39,6 @@ const edit = (item: any) => {
 </script>
 
 <template lang="pug">
-div {{ width }}
 grid-layout(ref='grid'
 	:layout.sync="dash.activePanel.widgets"
 	:col-num="12"

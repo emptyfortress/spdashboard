@@ -1,13 +1,15 @@
 <script setup lang="ts">
-import { ref, computed, watch, nextTick } from 'vue'
+import { ref, computed, watch, onMounted } from 'vue'
 import { useStore } from '@/stores/store'
 import VueApexCharts from 'vue3-apexcharts'
 import { randomArray, randomNumber } from '@/utils/utils'
 import { sparkOptions, areaOptions, barOptions, donutOptions } from '@/stores/graphOptions'
 import { templateRef } from '@vueuse/core'
 import GistForTable from '@/components/dash/GistForTable.vue'
+import { useWidget } from '@/stores/widgets'
 
 const store = useStore()
+const widget = useWidget()
 
 const headsize = computed(() => {
 	return store.activeWidget.design.title.fontSize + 'rem'
@@ -72,51 +74,60 @@ const padtop = computed(() => {
 	if (store.type == 'table') return '.5rem'
 	return store.activeWidget.design.title.use ? '2rem' : '0'
 })
+const show = ref(false)
+onMounted(() => {
+	setTimeout(() => {
+		show.value = true
+	}, 10)
+})
 </script>
 
 <template lang="pug">
 q-card.preview(:class="{stat: store.type == 'table'}")
 	q-icon.resize(name="mdi-resize-bottom-right" @click="" dense size="16px") 
 
-	q-btn(v-if="store.activeWidget && store.activeWidget.type == 'gist'" flat round dense icon="mdi-rotate-left-variant" @click="rotate") 
-	q-btn(v-if="store.activeWidget && store.activeWidget.type == 'pie'" flat round dense @click="switchPie") 
+	q-btn(v-if="widget.activeWidget.type == 'bar'" flat round dense icon="mdi-rotate-left-variant" @click="rotate") 
+
+	q-btn(v-if="widget.activeWidget.type == 'pie'" flat round dense @click="switchPie") 
 		q-icon(:name="pie == 'pie' ? 'mdi-chart-donut' : 'mdi-chart-pie'")
 
-	.cent(v-if="!store.activeWidget.set")
+	// .cent(v-if="!widget.activeWidget.set")
 		.empty  Widget preview
 
-	div(v-if="store.activeWidget.set && store.activeWidget.type == 'digit'")
-		.head(v-if="store.activeWidget.design.title.use")
-			span(v-if="store.activeWidget.design.title.data") 123
-			span(v-else) {{ store.activeWidget.design.title.text}}
+	div(v-if="widget.activeWidget.type == 'digit'")
+		.head(v-if="widget.activeWidget.design.title.use")
+			span(v-if="widget.activeWidget.design.title.data") 123
+			span(v-else) {{ widget.activeWidget.design.title.text}}
 
-		.subhead(v-if="store.activeWidget.design.subtitle.use")
-			span(v-if="store.activeWidget.design.subtitle.data") 123 
-			span(v-else) {{ store.activeWidget.design.subtitle.text}}
+		.subhead(v-if="widget.activeWidget.design.subtitle.use")
+			span(v-if="widget.activeWidget.design.subtitle.data") 123 
+			span(v-else) {{ widget.activeWidget.design.subtitle.text}}
 
-	VueApexCharts(v-if="store.activeWidget && store.activeWidget.type == 'spark'" type="area" height="100%" :options="sparkOptions" :series="series")
-	VueApexCharts(v-if="store.activeWidget && store.activeWidget.type == 'chart'" type="area" height="100%" :options="areaOptions" :series="series")
-	VueApexCharts(ref="barChart" v-if="store.activeWidget && store.activeWidget.type == 'bar'" type="bar" height="100%" :options="barOptions" :series="barSeries")
-	VueApexCharts(v-if="store.activeWidget && store.activeWidget.type == 'pie' && pie == 'pie'" type="pie" height="100%" :options="donutOptions" :series="donutSeries" )
-	VueApexCharts(v-if="store.activeWidget && store.activeWidget.type == 'pie' && pie == 'donut'" type="donut" height="100%" :options="donutOptions" :series="donutSeries" )
+	template(v-if='show')
+		VueApexCharts(v-if="widget.activeWidget.type == 'spark'" type="area" height="100%" :options="sparkOptions" :series="series")
 
-	template(v-if="store.activeWidget.set && store.type !== 'table'")
-		.head(v-if="store.activeWidget.design.title.use")
-			span(v-if="store.activeWidget.design.title.data") 123
-			span(v-else) {{ store.activeWidget.design.title.text}}
-		.subhead(v-if="store.activeWidget.design.subtitle.use")
-			span(v-if="store.activeWidget.design.subtitle.data") 123
-			span(v-else) {{ store.activeWidget.design.subtitle.text}}
+		VueApexCharts(v-if="widget.activeWidget.type == 'chart'" type="area" height="100%" :options="areaOptions" :series="series")
+		VueApexCharts(ref="barChart" v-if="widget.activeWidget.type == 'bar'" type="bar" height="100%" :options="barOptions" :series="barSeries")
+		VueApexCharts(v-if="widget.activeWidget.type == 'pie' && pie == 'pie'" type="pie" height="100%" :options="donutOptions" :series="donutSeries" )
+		VueApexCharts(v-if="widget.activeWidget.type == 'pie' && pie == 'donut'" type="donut" height="100%" :options="donutOptions" :series="donutSeries" )
 
-	template(v-if="store.activeWidget.set && store.type == 'table'")
-		.head1(v-if="store.activeWidget.design.title.use")
-			span(v-if="store.activeWidget.design.title.data") 123
-			span(v-else) {{ store.activeWidget.design.title.text}}
-		.subhead1(v-if="store.activeWidget.design.subtitle.use")
-			span(v-if="store.activeWidget.design.subtitle.data") 123
-			span(v-else) {{ store.activeWidget.design.subtitle.text}}
+	template(v-if="widget.activeWidget.set && widget.activeWidget.type !== 'table'")
+		.head(v-if="widget.activeWidget.design.title.use")
+			span(v-if="widget.activeWidget.design.title.data") 123
+			span(v-else) {{ widget.activeWidget.design.title.text}}
+		.subhead(v-if="widget.activeWidget.design.subtitle.use")
+			span(v-if="widget.activeWidget.design.subtitle.data") 123
+			span(v-else) {{ widget.activeWidget.design.subtitle.text}}
 
-	q-table(v-if="store.active == 'categ' && store.activeWidget.type == 'table'"
+	template(v-if="widget.activeWidget.set && widget.activeWidget.type == 'table'")
+		.head1(v-if="widget.activeWidget.design.title.use")
+			span(v-if="widget.activeWidget.design.title.data") 123
+			span(v-else) {{ widget.activeWidget.design.title.text}}
+		.subhead1(v-if="widget.activeWidget.design.subtitle.use")
+			span(v-if="widget.activeWidget.design.subtitle.data") 123
+			span(v-else) {{ widget.activeWidget.design.subtitle.text}}
+
+	q-table(v-if="widget.active == 'categ' && widget.activeWidget.type == 'table'"
 		flat
 		:rows="rows"
 		:columns="store.cols"
@@ -142,7 +153,7 @@ q-card.preview(:class="{stat: store.type == 'table'}")
 <style scoped lang="scss">
 .preview {
 	height: 100%;
-	overflow: hidden;
+	// overflow: hidden;
 	padding-top: v-bind(padtop);
 	.q-btn {
 		position: absolute;

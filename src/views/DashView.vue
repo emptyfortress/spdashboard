@@ -29,20 +29,13 @@ watch(dialog, (val) => {
 		newpanel.value = false
 	}
 })
-
-const back = () => {
-	router.back()
-}
-
-const toggleEditMode = () => {
-	editMode.value = !editMode.value
-}
 </script>
 
 <template lang="pug">
 q-page
 	.container
 		.save(v-if='dash.editMode')
+			q-btn(flat color="primary" label="Отмена" @click="dash.toggleEditMode") 
 			q-btn(color="primary" icon='mdi-plus' label="Добавить виджет" @click="dash.addWidget") 
 			q-btn(color="primary" label="Сохранить панель" @click="") 
 

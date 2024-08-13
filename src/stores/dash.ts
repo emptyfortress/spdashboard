@@ -23,8 +23,45 @@ export const useDash = defineStore('dash', () => {
 			def: true,
 			to: '/dash/0',
 			widgets: [
-				{ x: 0, y: 0, w: 3, h: 3, i: 0, type: 'spark' },
-				{ x: 3, y: 0, w: 3, h: 3, i: 1, type: 'number' },
+				{
+					x: 0,
+					y: 0,
+					w: 3,
+					h: 3,
+					i: 0,
+					type: 'spark',
+					set: true,
+					name: '',
+					design: {
+						title: {
+							use: true,
+							text: 'Title',
+							data: true,
+							useDefault: true,
+							fontSize: 1.7,
+							fontWeight: 600,
+							fontStyle: 'normal',
+							align: 'left',
+							fontColor: '#333',
+							translateX: 30,
+							translateY: 10,
+						},
+						subtitle: {
+							use: true,
+							text: 'Subtitle',
+							data: false,
+							useDefault: true,
+							fontSize: 0.8,
+							fontWeight: 400,
+							fontStyle: 'normal',
+							align: 'left',
+							fontColor: '#333',
+							translateX: 40,
+							translateY: 35,
+						},
+					},
+				},
+				// { x: 3, y: 0, w: 3, h: 3, i: 1, type: 'number', set: false },
 			],
 		},
 	])
@@ -74,7 +111,7 @@ export const useDash = defineStore('dash', () => {
 		lastRoute.value = activePanel.value.to
 	}
 
-	const editMode = ref(false)
+	const editMode = ref(true)
 	const toggleEditMode = () => {
 		editMode.value = !editMode.value
 	}
@@ -95,6 +132,36 @@ export const useDash = defineStore('dash', () => {
 			h: 3,
 			i: widgetIndex,
 			type: 'none',
+			set: false,
+			name: '',
+			design: {
+				title: {
+					use: true,
+					text: 'Title',
+					data: true,
+					useDefault: true,
+					fontSize: 1.7,
+					fontWeight: 600,
+					fontStyle: 'normal',
+					align: 'left',
+					fontColor: '#333',
+					translateX: 30,
+					translateY: 10,
+				},
+				subtitle: {
+					use: true,
+					text: 'Subtitle',
+					data: false,
+					useDefault: true,
+					fontSize: 0.8,
+					fontWeight: 400,
+					fontStyle: 'normal',
+					align: 'left',
+					fontColor: '#333',
+					translateX: 40,
+					translateY: 35,
+				},
+			},
 		})
 		widgetIndex += 1
 	}
