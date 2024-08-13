@@ -72,6 +72,7 @@ export const useDash = defineStore('dash', () => {
 		activePanel.value.widgets.splice(idx, 1)
 	}
 	let widgetIndex = 2
+
 	const addWidget = () => {
 		activePanel.value.widgets.push({
 			x: (activePanel.value.widgets.length * 3) % 12,
@@ -112,12 +113,12 @@ export const useDash = defineStore('dash', () => {
 			},
 		})
 		widgetIndex += 1
+		editMode.value = false
+		setTimeout(() => {
+			editMode.value = true
+		}, 10)
 	}
 
-	// function $reset() {
-	// 	panels.value = defPanel
-	// }
-	//
 	return {
 		panels,
 		activePanel,
@@ -130,6 +131,5 @@ export const useDash = defineStore('dash', () => {
 		toggleEditMode,
 		removeWidget,
 		addWidget,
-		// $reset,
 	}
 })
