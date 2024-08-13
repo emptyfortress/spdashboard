@@ -20,6 +20,10 @@ export const useWidget = defineStore('widget', () => {
 		type.value = el
 	}
 
+	const setActiveWidgetType = () => {
+		activeWidget.value.type = type.value
+	}
+
 	const pagination = ref({
 		sortBy: 'col1',
 		descending: false,
@@ -37,5 +41,6 @@ export const useWidget = defineStore('widget', () => {
 		setContainer,
 		setActiveWidget,
 		setType,
+		setActiveWidgetType,
 	}
 })

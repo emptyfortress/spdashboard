@@ -4,13 +4,14 @@ import type { Ref } from 'vue'
 import MySelect from '@/components/common/MySelect.vue'
 import ZagSetup from '@/components/dash/ZagSetup.vue'
 import TableSetup from '@/components/dash/TableSetup.vue'
-import { useStore } from '@/stores/store'
 import Filter from '@/components/dash/Filter.vue'
 import Parameter from '@/components/dash/Parameter.vue'
+import { useWidget } from '@/stores/widgets'
 
-const store = useStore()
+const widget = useWidget()
 
 const group = ref(null)
+
 const options = [
 	{
 		label: 'Звонки',
@@ -62,11 +63,13 @@ const options = [
 		],
 	},
 ]
+
 const tab = ref('data')
 
-const action = () => {
-	store.toggleBar()
-}
+// const action = () => {
+// 	store.toggleBar()
+// }
+
 const active = ref()
 
 const types = [
@@ -88,22 +91,22 @@ const calcType = computed(() => {
 
 const setActive = (el: string) => {
 	active.value = el
-	store.active = el
+	widget.active = el
 }
 const setActive1 = (el: string) => {
-	store.setType(el)
+	widget.setType(el)
 }
 const checklist = computed(() => {
-	if (active.value == 'list' && store.type) return true
+	if (active.value == 'list' && widget.type) return true
 })
 const client = computed(() => {
-	if (active.value == 'categ' && store.type == 'bar') return false
+	if (active.value == 'categ' && widget.type == 'bar') return false
 	return true
 })
 const operator = computed(() => {
-	if (active.value == 'categ' && store.type == 'digit') return false
-	if (active.value == 'categ' && store.type == 'spark') return false
-	if (active.value == 'categ' && store.type == 'chart') return false
+	if (active.value == 'categ' && widget.type == 'digit') return false
+	if (active.value == 'categ' && widget.type == 'spark') return false
+	if (active.value == 'categ' && widget.type == 'chart') return false
 	return true
 })
 const category = computed(() => {
@@ -117,31 +120,31 @@ const word = computed(() => {
 })
 
 const quantity = computed(() => {
-	if (active.value == 'calls' && store.type == 'digit') return false
+	if (active.value == 'calls' && widget.type == 'digit') return false
 	if (active.value == 'logic') return false
-	if (active.value == 'categ' && store.type == 'table') return false
+	if (active.value == 'categ' && widget.type == 'table') return false
 	return false
 })
 const percent = computed(() => {
 	if (active.value == 'logic') return false
-	if (active.value == 'categ' && store.type == 'table') return false
+	if (active.value == 'categ' && widget.type == 'table') return false
 	return false
 })
 const param = computed(() => {
 	if (active.value == 'calls') return true
 	if (active.value == 'logic') return false
-	if (active.value == 'categ' && store.type == 'table') return false
+	if (active.value == 'categ' && widget.type == 'table') return false
 	return false
 })
 const top = computed(() => {
-	if (active.value == 'categ' && store.type == 'bar') return true
+	if (active.value == 'categ' && widget.type == 'bar') return true
 	return
 })
 
 const apply = () => {
-	store.activeWidget.set = true
-	store.setActiveWidgetType()
-	if (store.type == 'table') {
+	widget.activeWidget.set = true
+	widget.setActiveWidgetType()
+	if (widget.type == 'table') {
 		tab.value = 'table'
 	}
 }
@@ -152,7 +155,7 @@ const apply = () => {
 	q-tabs(v-model="tab" align="left" active-color="primary" )
 		q-tab(name="data" label="Настройка данных")
 		q-tab(name="zag" label="Заголовок")
-		q-tab(v-if="store.activeWidget.type == 'table'" name="table" label="Таблица")
+		q-tab(v-if="widget.activeWidget.type == 'table'" name="table" label="Таблица")
 		// q-tab(name="style" label="Оформление")
 		// q-tab(name="color" label="Цвет")
 
@@ -171,22 +174,22 @@ const apply = () => {
 					.hd Тип виджета
 					q-list(dense)
 						transition-group(name="slide-right")
-							q-item(clickable v-for="item in calcType" :key="item.id" @click="setActive1(item.val)" :class="{active: item.val == store.type}" ) 
+							q-item(clickable v-for="item in calcType" :key="item.id" @click="setActive1(item.val)" :class="{active: item.val == widget.type}" ) 
 								q-item-section(avatar)
-									q-radio(v-model="store.type" :val="item.val")
+									q-radio(v-model="widget.type" :val="item.val")
 								q-item-section
 									q-item-label {{ item.label }}
 
 				div
 					.hd Фильтры
-					Filter(v-if="active && store.type" :checklist="checklist" :operator="operator" :client="client" :category="category" :word="word")
+					Filter(v-if="active && widget.type" :checklist="checklist" :operator="operator" :client="client" :category="category" :word="word")
 
 				div
 					.hd Доп.параметры
-					Parameter(v-if="active && store.type" :quantity="quantity" :percent="percent" :param="param" :top="top")
+					Parameter(v-if="active && widget.type" :quantity="quantity" :percent="percent" :param="param" :top="top")
 
 			.text-right
-				q-btn(unelevated color='primary' label='Применить' @click='apply' :disable='!store.type') 
+				q-btn(unelevated color='primary' label='Применить' @click='apply' :disable='!widget.type') 
 
 		q-tab-panel(name="zag")
 			ZagSetup
