@@ -41,7 +41,15 @@ const router = createRouter({
 
 router.beforeEach((to) => {
 	const dash = useDash()
-	if (to.path == '/') return dash.lastRoute
+	if (to.path == '/') {
+		let panel = dash.panels.find((item: Panel) => {
+			return item.to == dash.lastRoute
+		})
+		if (!!panel) {
+			dash.setActivePanel(panel)
+		}
+		return dash.lastRoute
+	}
 })
 
 export default router
