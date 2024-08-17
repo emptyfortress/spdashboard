@@ -108,11 +108,11 @@ q-dialog(v-model="modelValue")
 				q-checkbox.q-mt-md(v-model="flat" dense label="Тень от карточек")
 				q-checkbox.q-mt-md(v-model="marg" dense label="Поля на странице (глобальная настройка)")
 
-				q-checkbox.q-mt-md(:model-value="dash.activePanel.def" @update:model-value='dash.setDefaultPanel(dash.activePanel.def)' dense label="Панель по умолчанию" :disable='dash.panels.length == 1')
+				q-checkbox.q-mt-md(:model-value="dash.activePanel.def" @update:model-value='dash.setDefaultPanel(dash.activePanel.def)' dense label="Панель по умолчанию" :disable='dash.activePanel.def')
 
 		q-card-actions.q-ma-md
 			q-btn(v-if='props.newpanel | dash.panels.length == 1' flat color="primary" label="Отмена" v-close-popup) 
-			q-btn(v-else flat color="negative" label="Удалить" @click='remove') 
+			q-btn(v-if='!dash.activePanel.def' flat color="negative" label="Удалить" @click='remove') 
 			q-space
 			q-btn(:disable='props.newpanel' flat color="primary" label="Настроить виджеты" @click='edit') 
 			q-btn(unelevated color="primary" label="Сохранить" @click="save") 
