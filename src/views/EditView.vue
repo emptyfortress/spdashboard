@@ -27,7 +27,7 @@ const back = () => {
 const save = () => {
 	router.back()
 	widget.setType('')
-	widget.activeWidget.set = false
+	// widget.activeWidget.set = false
 }
 </script>
 

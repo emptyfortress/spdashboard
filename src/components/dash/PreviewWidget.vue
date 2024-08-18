@@ -31,6 +31,7 @@ GridLayout(
 		:show-close-button="false"
 		)
 		PreviewCard1(:item='widget.activeWidget')
+		// PreviewCard
 
 </template>
 
