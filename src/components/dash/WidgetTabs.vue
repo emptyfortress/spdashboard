@@ -43,7 +43,6 @@ const options = [
 			{ id: 2, label: 'Area chart', val: 'chart' },
 			{ id: 4, label: 'Pie chart', val: 'pie' },
 			{ id: 5, label: 'Donut chart', val: 'donut' },
-			{ id: 6, label: 'Таблица', val: 'table' },
 		],
 	},
 	{
