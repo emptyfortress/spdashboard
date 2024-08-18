@@ -13,6 +13,9 @@ import {
 import { templateRef } from '@vueuse/core'
 import GistForTable from '@/components/dash/GistForTable.vue'
 import { useWidget } from '@/stores/widgets'
+import { useRoute } from 'vue-router'
+
+const route = useRoute()
 
 const props = defineProps<{
 	item: Widget
@@ -94,17 +97,18 @@ onMounted(() => {
 
 <template lang="pug">
 q-card.preview(:class="{stat: widget.type == 'table'}")
-	// q-icon.resize(name="mdi-resize-bottom-right" dense size="16px") 
+	q-icon.resize(v-if='route.name == "edit" ' name="mdi-resize-bottom-right" dense size="16px") 
 
 	// q-btn(v-if="props.item.type == 'bar'" flat round dense icon="mdi-rotate-left-variant" @click="rotate") 
 
 	// q-btn(v-if="props.item.type == 'pie'" flat round dense @click="switchPie") 
 		q-icon(:name="pie == 'pie' ? 'mdi-chart-donut' : 'mdi-chart-pie'")
 
-	// .cent(v-if="!props.item.set")
-	// 	.empty  Widget preview
+	.cent(v-if="!props.item.set")
+		.empty  Widget preview
 
-	div(v-if="props.item.type == 'digit'")
+
+	div(v-if="props.item.set && props.item.type !== 'table'")
 		.head(v-if="props.item.design.title.use")
 			span(v-if="props.item.design.title.data") 123
 			span(v-else) {{ props.item.design.title.text}}
@@ -121,16 +125,6 @@ q-card.preview(:class="{stat: widget.type == 'table'}")
 		VueApexCharts(ref="barChart" v-if="widget.activeWidget.type == 'bar1'" type="bar" height="100%" :options="barOptions1" :series="barSeries")
 		VueApexCharts(v-if="widget.activeWidget.type == 'pie'" type="pie" height="100%" :options="donutOptions" :series="donutSeries" )
 		VueApexCharts(v-if="widget.activeWidget.type == 'donut'" type="donut" height="100%" :options="donutOptions" :series="donutSeries" )
-		// VueApexCharts(v-if="props.item.type == 'pie' && pie == 'pie'" type="pie" height="100%" :options="donutOptions" :series="donutSeries" )
-		// VueApexCharts(v-if="props.item.type == 'pie' && pie == 'donut'" type="donut" height="100%" :options="donutOptions" :series="donutSeries" )
-
-	template(v-if="props.item.set && props.item.type !== 'table'")
-		.head(v-if="props.item.design.title.use")
-			span(v-if="props.item.design.title.data") 123
-			span(v-else) {{ props.item.design.title.text}}
-		.subhead(v-if="props.item.design.subtitle.use")
-			span(v-if="props.item.design.subtitle.data") 123
-			span(v-else) {{ props.item.design.subtitle.text}}
 
 	template(v-if="props.item.set && props.item.type == 'table'")
 		.head1(v-if="props.item.design.title.use")

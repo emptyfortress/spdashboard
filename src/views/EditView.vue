@@ -34,9 +34,10 @@ const save = () => {
 <template lang="pug">
 q-page
 	.back
-		.cursor-pointer(@click="back")
+		// .cursor-pointer(@click="back")
 			q-btn(flat round dense icon="mdi-arrow-left-circle-outline" size="lg") 
 			span Назад
+		div
 		.zg
 			q-icon(name="mdi-widgets-outline" size="26px")
 			span Конструктор виджетов
