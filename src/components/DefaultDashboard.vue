@@ -35,6 +35,15 @@ const edit = (item: any) => {
 	widget.setActiveWidget(item)
 	router.push('/edit')
 }
+
+const editMode = ref(false)
+
+watch(
+	() => dash.editMode,
+	() => {
+		editMode.value = dash.editMode
+	}
+)
 </script>
 
 <template lang="pug">
@@ -42,8 +51,8 @@ grid-layout(ref='grid'
 	:layout.sync="dash.activePanel.widgets"
 	:col-num="12"
 	:row-height="30"
-	:is-draggable="dash.editMode"
-	:is-resizable="dash.editMode"
+	:is-draggable="editMode"
+	:is-resizable="editMode"
 	:vertical-compact="true"
 	:use-css-transforms="false"
 	)
