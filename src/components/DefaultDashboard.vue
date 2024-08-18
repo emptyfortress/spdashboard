@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, reactive, watch } from 'vue'
+import { ref, onMounted } from 'vue'
 import { GridLayout, GridItem } from 'vue3-grid-layout-next'
 import { useDash } from '@/stores/dash'
 import { useRouter, useRoute } from 'vue-router'
@@ -24,6 +24,7 @@ const show = ref(false)
 onMounted(() => {
 	setTimeout(() => {
 		show.value = true
+		dash.editMode.value = dash.editMode.value
 	}, 10)
 })
 const grid = ref(null)
@@ -34,15 +35,6 @@ const edit = (item: any) => {
 	widget.setActiveWidget(item)
 	router.push('/edit')
 }
-
-const editMode = ref(false)
-
-watch(
-	() => dash.editMode,
-	() => {
-		editMode.value = dash.editMode
-	}
-)
 </script>
 
 <template lang="pug">
@@ -50,8 +42,8 @@ grid-layout(ref='grid'
 	:layout.sync="dash.activePanel.widgets"
 	:col-num="12"
 	:row-height="30"
-	:is-draggable="editMode"
-	:is-resizable="editMode"
+	:is-draggable="dash.editMode"
+	:is-resizable="dash.editMode"
 	:vertical-compact="true"
 	:use-css-transforms="false"
 	)

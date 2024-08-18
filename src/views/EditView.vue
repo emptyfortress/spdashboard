@@ -5,6 +5,7 @@ import WidgetTabs from '@/components/dash/WidgetTabs.vue'
 import { useStore } from '@/stores/store'
 import { useRouter } from 'vue-router'
 import { useWidget } from '@/stores/widgets'
+// import { useDash } from '@/stores/dash'
 
 const widget = useWidget()
 const store = useStore()
@@ -18,16 +19,17 @@ const hei = computed(() => {
 const calcWidth = computed(() => {
 	return 'width: ' + widget.container + 'px'
 })
+
 const back = () => {
 	router.back()
 	widget.setType('')
 	widget.activeWidget.set = false
 }
 
+// const dash = useDash()
 const save = () => {
 	router.back()
 	widget.setType('')
-	// widget.activeWidget.set = false
 }
 </script>
 
