@@ -24,7 +24,6 @@ const show = ref(false)
 onMounted(() => {
 	setTimeout(() => {
 		show.value = true
-		dash.editMode.value = dash.editMode.value
 	}, 10)
 })
 const grid = ref(null)

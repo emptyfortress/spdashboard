@@ -34,7 +34,10 @@ const back = () => {
 	location.reload()
 }
 const save = () => {
-	dash.toggleEditMode()
+	dash.editMode = false
+	setTimeout(() => {
+		dash.editMode = false
+	}, 10)
 }
 </script>
 

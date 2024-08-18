@@ -5,7 +5,7 @@ import WidgetTabs from '@/components/dash/WidgetTabs.vue'
 import { useStore } from '@/stores/store'
 import { useRouter } from 'vue-router'
 import { useWidget } from '@/stores/widgets'
-// import { useDash } from '@/stores/dash'
+import { useDash } from '@/stores/dash'
 
 const widget = useWidget()
 const store = useStore()
