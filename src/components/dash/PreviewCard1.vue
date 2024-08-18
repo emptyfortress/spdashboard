@@ -16,10 +16,10 @@ const store = useStore()
 const widget = useWidget()
 
 const headsize = computed(() => {
-	return widget.activeWidget.design.title.fontSize + 'rem'
+	return props.item.design.title.fontSize + 'rem'
 })
 const subhead = computed(() => {
-	return widget.activeWidget.design.subtitle.fontSize + 'rem'
+	return props.item.design.subtitle.fontSize + 'rem'
 })
 
 const series = ref([{ name: 'Параметр', data: randomArray(7, 80, 5) }])
@@ -62,21 +62,22 @@ const rows = [
 const barChart = ref<any>(null)
 
 const headTranslateX = computed(() => {
-	return widget.activeWidget.design.title.translateX + '%'
+	return props.item.design.title.translateX + '%'
 })
 const headTranslateY = computed(() => {
-	return widget.activeWidget.design.title.translateY + 'px'
+	return props.item.design.title.translateY + 'px'
 })
 const subheadTranslateX = computed(() => {
-	return widget.activeWidget.design.subtitle.translateX + '%'
+	return props.item.design.subtitle.translateX + '%'
 })
 const subheadTranslateY = computed(() => {
-	return widget.activeWidget.design.subtitle.translateY + 'px'
+	return props.item.design.subtitle.translateY + 'px'
 })
 const padtop = computed(() => {
-	if (!widget.activeWidget.set) return '0'
-	if (widget.type == 'table') return '.5rem'
-	return widget.activeWidget.design.title.use ? '2rem' : '0'
+	if (!props.item.set) return '0'
+	if (props.item.type == 'table') return '.5rem'
+	// if (widget.type == 'table') return '.5rem'
+	// return props.item.design.title.use ? '2rem' : '0'
 })
 const show = ref(false)
 onMounted(() => {
@@ -90,13 +91,13 @@ onMounted(() => {
 q-card.preview(:class="{stat: widget.type == 'table'}")
 	// q-icon.resize(name="mdi-resize-bottom-right" dense size="16px") 
 
-	q-btn(v-if="props.item.type == 'bar'" flat round dense icon="mdi-rotate-left-variant" @click="rotate") 
+	// q-btn(v-if="props.item.type == 'bar'" flat round dense icon="mdi-rotate-left-variant" @click="rotate") 
 
-	q-btn(v-if="props.item.type == 'pie'" flat round dense @click="switchPie") 
+	// q-btn(v-if="props.item.type == 'pie'" flat round dense @click="switchPie") 
 		q-icon(:name="pie == 'pie' ? 'mdi-chart-donut' : 'mdi-chart-pie'")
 
 	// .cent(v-if="!props.item.set")
-		.empty  Widget preview
+	// 	.empty  Widget preview
 
 	div(v-if="props.item.type == 'digit'")
 		.head(v-if="props.item.design.title.use")
@@ -138,7 +139,7 @@ q-card.preview(:class="{stat: widget.type == 'table'}")
 		:visible-columns="widget.visible"
 		:pagination="widget.pagination")
 
-	q-table(v-if="widget.active == 'list' && widget.activeWidget.type == 'table'"
+	q-table(v-if="widget.active == 'list' && props.item.type == 'table'"
 		flat
 		:rows="rows"
 		:columns="widget.cols1"
@@ -155,7 +156,7 @@ q-card.preview(:class="{stat: widget.type == 'table'}")
 <style scoped lang="scss">
 .preview {
 	height: 100%;
-	// overflow: hidden;
+	overflow: hidden;
 	padding-top: v-bind(padtop);
 	.q-btn {
 		position: absolute;
@@ -171,20 +172,20 @@ q-card.preview(:class="{stat: widget.type == 'table'}")
 }
 .head1 {
 	font-size: v-bind(headsize);
-	font-weight: v-bind('widget.activeWidget.design.title.fontWeight');
+	font-weight: v-bind('props.item.design.title.fontWeight');
 	line-height: 0.9;
-	text-align: v-bind('widget.activeWidget.design.title.align');
-	font-style: v-bind('widget.activeWidget.design.title.fontStyle');
-	color: v-bind('widget.activeWidget.design.title.fontColor');
+	text-align: v-bind('props.item.design.title.align');
+	font-style: v-bind('props.item.design.title.fontStyle');
+	color: v-bind('props.item.design.title.fontColor');
 	padding-left: 0.4rem;
 }
 .subhead1 {
 	font-size: v-bind(subhead);
-	font-weight: v-bind('widget.activeWidget.design.subtitle.fontWeight');
+	font-weight: v-bind('props.item.design.subtitle.fontWeight');
 	line-height: 0.9;
-	text-align: v-bind('widget.activeWidget.design.subtitle.align');
-	font-style: v-bind('widget.activeWidget.design.subtitle.fontStyle');
-	color: v-bind('widget.activeWidget.design.subtitle.fontColor');
+	text-align: v-bind('props.item.design.subtitle.align');
+	font-style: v-bind('props.item.design.subtitle.fontStyle');
+	color: v-bind('props.item.design.subtitle.fontColor');
 	margin-top: 0.2rem;
 	padding-left: 0.4rem;
 }
@@ -207,20 +208,20 @@ q-card.preview(:class="{stat: widget.type == 'table'}")
 }
 .head {
 	font-size: v-bind(headsize);
-	font-weight: v-bind('widget.activeWidget.design.title.fontWeight');
+	font-weight: v-bind('props.item.design.title.fontWeight');
 	line-height: 0.9;
-	text-align: v-bind('widget.activeWidget.design.title.align');
-	font-style: v-bind('widget.activeWidget.design.title.fontStyle');
-	color: v-bind('widget.activeWidget.design.title.fontColor');
+	text-align: v-bind('props.item.design.title.align');
+	font-style: v-bind('props.item.design.title.fontStyle');
+	color: v-bind('props.item.design.title.fontColor');
 	transform: translate(v-bind(headTranslateX), v-bind(headTranslateY));
 }
 .subhead {
 	font-size: v-bind(subhead);
-	font-weight: v-bind('widget.activeWidget.design.subtitle.fontWeight');
+	font-weight: v-bind('props.item.design.subtitle.fontWeight');
 	line-height: 0.9;
-	text-align: v-bind('widget.activeWidget.design.subtitle.align');
-	font-style: v-bind('widget.activeWidget.design.subtitle.fontStyle');
-	color: v-bind('widget.activeWidget.design.subtitle.fontColor');
+	text-align: v-bind('props.item.design.subtitle.align');
+	font-style: v-bind('props.item.design.subtitle.fontStyle');
+	color: v-bind('props.item.design.subtitle.fontColor');
 	transform: translate(v-bind(subheadTranslateX), v-bind(subheadTranslateY));
 }
 </style>

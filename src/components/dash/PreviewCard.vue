@@ -91,7 +91,7 @@ q-card.preview(:class="{stat: widget.type == 'table'}")
 	q-btn(v-if="widget.activeWidget.type == 'pie'" flat round dense @click="switchPie") 
 		q-icon(:name="pie == 'pie' ? 'mdi-chart-donut' : 'mdi-chart-pie'")
 
-	// .cent(v-if="!widget.activeWidget.set")
+	.cent(v-if="!widget.activeWidget.set")
 		.empty  Widget preview
 
 	div(v-if="widget.activeWidget.type == 'digit'")
