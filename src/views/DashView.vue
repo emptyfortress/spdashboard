@@ -30,14 +30,11 @@ watch(dialog, (val) => {
 	}
 })
 const back = () => {
-	dash.toggleEditMode()
+	dash.exitEditMode()
 	location.reload()
 }
 const save = () => {
 	dash.editMode = false
-	setTimeout(() => {
-		dash.editMode = false
-	}, 10)
 }
 </script>
 

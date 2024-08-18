@@ -60,8 +60,11 @@ export const useDash = defineStore('dash', () => {
 	}
 
 	const editMode = ref(false)
-	const toggleEditMode = () => {
-		editMode.value = !editMode.value
+	const enterEditMode = () => {
+		editMode.value = true
+	}
+	const exitEditMode = () => {
+		editMode.value = false
 	}
 
 	// widget logic *********************************
@@ -129,7 +132,8 @@ export const useDash = defineStore('dash', () => {
 		setDefaultPanel,
 		addPanel,
 		removePanel,
-		toggleEditMode,
+		exitEditMode,
+		enterEditMode,
 		removeWidget,
 		addWidget,
 	}

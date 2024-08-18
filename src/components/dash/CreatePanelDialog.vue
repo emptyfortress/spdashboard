@@ -56,7 +56,7 @@ const remove = () => {
 }
 const def = ref(false)
 const edit = () => {
-	dash.toggleEditMode()
+	dash.enterEditMode()
 	modelValue.value = false
 }
 </script>
