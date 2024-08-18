@@ -11,6 +11,7 @@ interface Panel {
 	widgets: Widget[]
 }
 interface Design {
+	padtop: number
 	title: {
 		use: boolean
 		text: string

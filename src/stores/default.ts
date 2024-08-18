@@ -8,6 +8,7 @@ const defaultWidget = {
 	type: 'table',
 	name: '',
 	design: {
+		padtop: 16,
 		title: {
 			use: true,
 			text: 'Title',

@@ -20,6 +20,7 @@ const defPanel = [
 				set: true,
 				name: '',
 				design: {
+					padtop: 16,
 					title: {
 						use: true,
 						text: 'Title',

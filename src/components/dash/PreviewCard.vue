@@ -70,9 +70,7 @@ const subheadTranslateY = computed(() => {
 	return widget.activeWidget.design.subtitle.translateY + 'px'
 })
 const padtop = computed(() => {
-	if (!widget.activeWidget.set) return '0'
-	if (widget.type == 'table') return '.5rem'
-	return widget.activeWidget.design.title.use ? '2rem' : '0'
+	return widget.activeWidget.design.padtop + 'px'
 })
 const show = ref(false)
 onMounted(() => {

@@ -34,6 +34,9 @@ const calcHeight = computed(() => {
 </script>
 
 <template lang="pug">
+.padtop
+	div Отступ сверху, px:
+	q-slider(v-model="widget.activeWidget.design.padtop" label :min="0" :max="50" :step="0.01")
 .grid2
 	div
 		q-checkbox(v-model="widget.activeWidget.design.title.use" dense label="Заголовок")
@@ -126,5 +129,15 @@ fieldset {
 }
 .small {
 	width: 70px;
+}
+.padtop {
+	width: 500px;
+	display: grid;
+	grid-template-columns: auto 300px;
+	column-gap: 1rem;
+	row-gap: 0.5rem;
+	font-size: 0.9rem;
+	margin-top: 1.2rem;
+	margin-bottom: 1rem;
 }
 </style>

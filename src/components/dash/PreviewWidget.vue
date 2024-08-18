@@ -2,6 +2,7 @@
 import { ref, computed, reactive } from 'vue'
 import { useWidget } from '@/stores/widgets'
 import { GridItem, GridLayout } from 'vue-ts-responsive-grid-layout'
+import PreviewCard1 from '@/components/dash/PreviewCard1.vue'
 import PreviewCard from '@/components/dash/PreviewCard.vue'
 
 const widget = useWidget()

@@ -73,12 +73,11 @@ const subheadTranslateX = computed(() => {
 const subheadTranslateY = computed(() => {
 	return props.item.design.subtitle.translateY + 'px'
 })
+
 const padtop = computed(() => {
-	if (!props.item.set) return '0'
-	if (props.item.type == 'table') return '.5rem'
-	// if (widget.type == 'table') return '.5rem'
-	// return props.item.design.title.use ? '2rem' : '0'
+	return props.item.design.padtop + 'px'
 })
+
 const show = ref(false)
 onMounted(() => {
 	setTimeout(() => {
