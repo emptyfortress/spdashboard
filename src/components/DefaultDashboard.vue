@@ -2,7 +2,6 @@
 import { ref, onMounted, reactive, watch } from 'vue'
 import { GridLayout, GridItem } from 'vue3-grid-layout-next'
 import { useDash } from '@/stores/dash'
-import Chart from '@/components/dash/Chart.vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useElementSize } from '@vueuse/core'
 import { useWidget } from '@/stores/widgets'

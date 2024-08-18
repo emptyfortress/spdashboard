@@ -6,7 +6,7 @@ import PreviewCard1 from '@/components/dash/PreviewCard1.vue'
 import PreviewCard from '@/components/dash/PreviewCard.vue'
 
 const widget = useWidget()
-const layout = ref([])
+const layout = ref<Widget[]>([])
 layout.value.push(widget.activeWidget)
 </script>
 

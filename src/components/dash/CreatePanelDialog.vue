@@ -86,8 +86,6 @@ q-dialog(v-model="modelValue")
 				q-checkbox.q-mt-md(v-model="flat" dense label="Тень от виджетов")
 				q-checkbox.q-mt-md(v-model="marg" dense label="Поля на странице (глобальная настройка)")
 
-				q-checkbox.q-mt-md(v-model="def" dense label="Панель по умолчанию")
-
 		template(v-else)
 			q-card-section.row.items-top.q-pb-none
 				div

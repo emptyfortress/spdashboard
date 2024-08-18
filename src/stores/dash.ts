@@ -83,8 +83,8 @@ export const useDash = defineStore('dash', () => {
 			type: 'none',
 			set: false,
 			name: '',
-			padtop: 16,
 			design: {
+				padtop: 16,
 				title: {
 					use: true,
 					text: 'Title',
