@@ -120,7 +120,7 @@ export const useDash = defineStore('dash', () => {
 		editMode.value = false
 		setTimeout(() => {
 			editMode.value = true
-		}, 10)
+		}, 1000)
 	}
 
 	return {

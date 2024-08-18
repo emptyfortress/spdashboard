@@ -6,6 +6,7 @@ import { useRouter, useRoute } from 'vue-router'
 import { useElementSize } from '@vueuse/core'
 import { useWidget } from '@/stores/widgets'
 import PreviewCard1 from '@/components/dash/PreviewCard1.vue'
+import { useKeyModifier } from '@vueuse/core'
 
 const props = defineProps({
 	id: {
@@ -34,6 +35,7 @@ const edit = (item: any) => {
 	widget.setActiveWidget(item)
 	router.push('/edit')
 }
+const editMode = useKeyModifier('Alt')
 </script>
 
 <template lang="pug">
@@ -41,8 +43,8 @@ grid-layout(ref='grid'
 	:layout.sync="dash.activePanel.widgets"
 	:col-num="12"
 	:row-height="30"
-	:is-draggable="dash.editMode"
-	:is-resizable="dash.editMode"
+	:is-draggable="editMode"
+	:is-resizable="editMode"
 	:vertical-compact="true"
 	:use-css-transforms="false"
 	)
