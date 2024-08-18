@@ -3,7 +3,13 @@ import { ref, computed, watch, onMounted } from 'vue'
 import { useStore } from '@/stores/store'
 import VueApexCharts from 'vue3-apexcharts'
 import { randomArray, randomNumber } from '@/utils/utils'
-import { sparkOptions, areaOptions, barOptions, donutOptions } from '@/stores/graphOptions'
+import {
+	sparkOptions,
+	areaOptions,
+	barOptions,
+	barOptions1,
+	donutOptions,
+} from '@/stores/graphOptions'
 import { templateRef } from '@vueuse/core'
 import GistForTable from '@/components/dash/GistForTable.vue'
 import { useWidget } from '@/stores/widgets'
@@ -106,8 +112,10 @@ q-card.preview(:class="{stat: widget.type == 'table'}")
 
 		VueApexCharts(v-if="widget.activeWidget.type == 'chart'" type="area" height="100%" :options="areaOptions" :series="series")
 		VueApexCharts(ref="barChart" v-if="widget.activeWidget.type == 'bar'" type="bar" height="100%" :options="barOptions" :series="barSeries")
-		VueApexCharts(v-if="widget.activeWidget.type == 'pie' && pie == 'pie'" type="pie" height="100%" :options="donutOptions" :series="donutSeries" )
-		VueApexCharts(v-if="widget.activeWidget.type == 'pie' && pie == 'donut'" type="donut" height="100%" :options="donutOptions" :series="donutSeries" )
+		VueApexCharts(ref="barChart" v-if="widget.activeWidget.type == 'bar1'" type="bar" height="100%" :options="barOptions1" :series="barSeries")
+
+		VueApexCharts(v-if="widget.activeWidget.type == 'pie'" type="pie" height="100%" :options="donutOptions" :series="donutSeries" )
+		VueApexCharts(v-if="widget.activeWidget.type == 'donut'" type="donut" height="100%" :options="donutOptions" :series="donutSeries" )
 
 	template(v-if="widget.activeWidget.set && widget.activeWidget.type !== 'table'")
 		.head(v-if="widget.activeWidget.design.title.use")

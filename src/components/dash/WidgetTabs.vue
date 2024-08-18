@@ -29,7 +29,8 @@ const options = [
 			{ id: 0, label: 'Число', val: 'digit' },
 			{ id: 1, label: 'Sparkline', val: 'spark' },
 			{ id: 2, label: 'Area chart', val: 'chart' },
-			{ id: 3, label: 'Bar chart', val: 'bar' },
+			{ id: 3, label: 'Bar chart vertical', val: 'bar' },
+			{ id: 4, label: 'Bar chart horizontal', val: 'bar1' },
 			{ id: 5, label: 'Таблица', val: 'table' },
 		],
 	},
@@ -41,7 +42,8 @@ const options = [
 			{ id: 1, label: 'Sparkline', val: 'spark' },
 			{ id: 2, label: 'Area chart', val: 'chart' },
 			{ id: 4, label: 'Pie chart', val: 'pie' },
-			{ id: 5, label: 'Таблица', val: 'table' },
+			{ id: 5, label: 'Donut chart', val: 'donut' },
+			{ id: 6, label: 'Таблица', val: 'table' },
 		],
 	},
 	{
@@ -59,7 +61,8 @@ const options = [
 		types: [
 			{ id: 3, label: 'Bar chart', val: 'bar' },
 			{ id: 4, label: 'Pie chart', val: 'pie' },
-			{ id: 5, label: 'Таблица', val: 'table' },
+			{ id: 5, label: 'Donut chart', val: 'donut' },
+			{ id: 6, label: 'Таблица', val: 'table' },
 		],
 	},
 ]

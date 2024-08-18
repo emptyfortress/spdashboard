@@ -72,6 +72,13 @@ const barOptions = {
 		},
 	},
 }
+const barOptions1 = {
+	plotOptions: {
+		bar: {
+			horizontal: true,
+		},
+	},
+}
 const donutOptions = {}
 
-export { sparkOptions, sparkOptions1, areaOptions, barOptions, donutOptions }
+export { sparkOptions, sparkOptions1, areaOptions, barOptions, barOptions1, donutOptions }

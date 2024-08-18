@@ -30,7 +30,7 @@ GridLayout(
 		:i="widget.activeWidget.i"
 		:show-close-button="false"
 		)
-		PreviewCard
+		PreviewCard1(:item='widget.activeWidget')
 
 </template>
 
