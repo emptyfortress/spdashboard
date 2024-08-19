@@ -117,10 +117,6 @@ export const useDash = defineStore('dash', () => {
 			},
 		})
 		widgetIndex += 1
-		editMode.value = false
-		setTimeout(() => {
-			editMode.value = true
-		}, 1000)
 	}
 
 	return {
